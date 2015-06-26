@@ -19,12 +19,89 @@ android {
 }
 
 dependencies {
-    // compile 'com.android.support:appcompat-v7:22.2.0'
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.hamcrest:hamcrest-all:1.3'
-    testCompile 'net.vidageek:mirror:1.6.1'
-    testCompile('org.robolectric:robolectric:3.0-rc3') {
-        exclude group: 'commons-logging', module: 'commons-logging'
-        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+}
+
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    classifier = 'javadoc'
+    from androidJavadocs.destinationDir
+}
+
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+}
+
+def library = "0.0.1"
+
+def isReleaseBuild() {
+    return VERSION_NAME.contains("SNAPSHOT") == false
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+            pom.project {
+
+                groupId = 'br.com.concretesolutions'
+                artifactId = 'canarinho'
+                version = library
+
+                name 'Android Canarinho'
+                description 'Utiliários de Android para padrões Brasileiros'
+                url = 'https://github.com/cs-victor-nascimento/canarinho'
+
+                inceptionYear '2015'
+
+                issueManagement {
+                    system 'Github Issues'
+                    url 'https://github.com/cs-victor-nascimento/canarinho/issues'
+                }
+
+                scm {
+                    url 'https://github.com/cs-victor-nascimento/canarinho'
+                    connection 'https://github.com/cs-victor-nascimento/canarinho.git'
+                    developerConnection 'https://github.com/cs-victor-nascimento/canarinho.git'
+                }
+
+                organization {
+                    name 'Concrete Solutions'
+                    url 'http://www.concretesolutions.com.br'
+                }
+
+                developers {
+
+                    developer {
+                        id 'cs-victor-nascimento'
+                        name 'Victor Oliveira Nascimento'
+                    }
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution 'repo'
+                    }
+                }
+
+            }
+//            repository url: 'file://' + new File(System.getProperty('user.home'), '.m2/repository').absolutePath
+        }
     }
 }
+
+artifacts {
+    archives androidSourcesJar
+    archives androidJavadocsJar
+}
+
+task install(dependsOn: uploadArchives)

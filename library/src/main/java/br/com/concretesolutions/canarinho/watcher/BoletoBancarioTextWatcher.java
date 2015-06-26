@@ -26,7 +26,7 @@ public final class BoletoBancarioTextWatcher implements TextWatcher {
     private boolean mudancaInterna = false;
     private int tamanhoAnterior = 0;
 
-    private final Validador validador = new ValidadorBoleto();
+    private final Validador validador = ValidadorBoleto.getInstance();
     private final Validador.ResultadoParcial resultadoParcial = new Validador.ResultadoParcial();
     private final EventoDeValidacao callbackErros;
 
