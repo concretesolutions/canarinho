@@ -43,7 +43,7 @@ Backlog
 ATENÇÃO
 -------
 
-Este projeto é desenvolvido de boa vontade e
+Este projeto é desenvolvido de boa vontade e com o intuito de ajudar. No entanto, todo o desenvolvimento é feito SEM GARANTIAS.
 
 LICENÇA
 -------
