@@ -13,7 +13,6 @@ import br.com.concretesolutions.canarinho.watcher.evento.EventoDeValidacao;
 
 /**
  * {@link TextWatcher} responsável por formatar e validar um {@link android.widget.EditText} para boletos.
- * <p/>
  * Para usar este componente basta criar uma instância e chamar {@link android.widget.EditText#addTextChangedListener(TextWatcher)}.
  */
 public final class BoletoBancarioTextWatcher implements TextWatcher {

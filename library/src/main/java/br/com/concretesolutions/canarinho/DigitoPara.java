@@ -11,28 +11,29 @@ import java.util.List;
 /**
  * Uma fluent interface para o cálculo de dígitos, que é usado em diversos boletos e
  * documentos.
- * <p/>
+ * <p>
  * Para exemplificar, o dígito do trecho 0000039104766 para os multiplicadores indo de
  * 2 a 7 e usando módulo 11 é a seguinte:
- * <p/>
+ * </p>
  * <pre>
  * 	0  0  0  0  0  3  9  1  0  4  7  6  6 (trecho numérico)
  * 	2  7  6  5  4  3  2  7  6  5  4  3  2 (multiplicadores, da direita para a esquerda e ciclando)
  * 	----------------------------------------- multiplicações algarismo a algarismo
  * 	 0  0  0  0  0  9 18  7  0 20 28 18 12 -- soma = 112
  * </pre>
- * <p/>
+ * <p>
  * Tira-se o módulo dessa soma e, então, calcula-se o complementar do módulo e, se o número
  * for 0, 10 ou 11, o dígito passa a ser 1.
- * <p/>
+ * </p>
  * <pre>
  * 		soma = 112
  * 		soma % 11 = 2
  * 		11 - (soma % 11) = 9
  * </pre>
- * <p/>
+ * <p>
  * NOTE: Esta é uma versão otimizada para Android inspirada em
  * https://github.com/caelum/caelum-stella/blob/master/stella-core/src/main/java/br/com/caelum/stella/DigitoPara.java
+ * </p>
  */
 public final class DigitoPara {
 
@@ -56,6 +57,7 @@ public final class DigitoPara {
      * Faz a soma geral das multiplicações dos algarismos pelos multiplicadores, tira o
      * módulo e devolve seu complementar.
      *
+     * @param trecho Bloco para calcular o dígito
      * @return String o dígito vindo do módulo com o número passado e configurações extra.
      */
     public final String calcula(String trecho) {
@@ -157,9 +159,10 @@ public final class DigitoPara {
         }
 
         /**
+         * <p>
          * Indica se, ao calcular o módulo, a soma dos resultados da multiplicação deve ser
          * considerado digito a dígito.
-         * <p/>
+         * </p>
          * Ex: 2 X 9 = 18, irá somar 9 (1 + 8) invés de 18 ao total.
          *
          * @return this
@@ -183,9 +186,11 @@ public final class DigitoPara {
         }
 
         /**
-         * @param substituto
-         * @param i
-         * @return
+         * Troca por uma String caso encontre qualquer dos inteiros passados como argumento
+         *
+         * @param substituto String para substituir
+         * @param i          varargs de inteiros a serem substituídos
+         * @return this
          */
         public final Builder trocandoPorSeEncontrar(String substituto, Integer... i) {
 
@@ -213,11 +218,10 @@ public final class DigitoPara {
 
         /**
          * Método responsável por criar o DigitoPara.
-         * <p/>
          * Este método inicializará os seguintes valores padrões:
          * <ul>
-         * <li>multiplicadores -> 2 a 9</li>
-         * <li>modulo -> 11</li>
+         * <li>multiplicadores:  2 a 9</li>
+         * <li>módulo: 11</li>
          * </ul>
          *
          * @return A instância imutável de DigitoPara

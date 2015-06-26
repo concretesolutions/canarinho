@@ -3,13 +3,11 @@ package br.com.concretesolutions.canarinho.validator;
 import android.text.Editable;
 
 /**
- * <p/>
  * Interface de validação de campos. Há basicamente duas formas de validação:
  * <ul>
  * <li>Uma {@link String} completa</li>
  * <li>Um {@link Editable} e um {@link br.com.concretesolutions.canarinho.validator.Validador.ResultadoParcial}</li>
  * </ul>
- * <p/>
  * No primeiro caso o retorno será: true ou false. No segundo caso, o resultado será sempre
  * atualizado no objeto {@link br.com.concretesolutions.canarinho.validator.Validador.ResultadoParcial} passado.
  */
