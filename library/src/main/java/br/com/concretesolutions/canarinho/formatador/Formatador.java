@@ -13,6 +13,7 @@ public interface Formatador {
     Formatador CNPJ = new FormatadorBase(Padroes.CNPJ_FORMATADO, "$1.$2.$3/$4-$5", Padroes.CNPJ_DESFORMATADO, "$1$2$3$4$5");
     Formatador VALOR = FormatadorValor.getInstance();
     Formatador BOLETO = FormatadorBoleto.getInstance();
+    Formatador TELEFONE = FormatadorTelefone.getInstance();
 
     interface Padroes {
         // Patterns

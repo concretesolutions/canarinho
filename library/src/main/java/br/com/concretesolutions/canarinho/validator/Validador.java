@@ -25,6 +25,10 @@ public interface Validador {
      * Referência para o singleton de validação de boleto
      */
     Validador BOLETO = ValidadorBoleto.getInstance();
+    /**
+     * Referência para o singleton de validação de telefone
+     */
+    Validador TELFONE = ValidadorTelefone.getInstance();
 
     /**
      * Valida uma {@link String} completa

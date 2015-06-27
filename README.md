@@ -10,6 +10,7 @@ Entre os padrões implementados temos:
 - Formatadores e validadores de CPF
 - Formatadores e validadores de CNPJ
 - Formatadores e validadores de boleto bancário
+- Formatadores de telefone
 
 Estes são utilizados para implementar `TextWatcher`s que formatam e validam a digitação do usuário.
 
@@ -17,14 +18,14 @@ Para exemplos de uso, veja os testes na aplicação de exemplo (pasta sample).
 
 Changelog
 ---------
-
+- 0.0.2:
+    - Formatadores de telefone
 - 0.0.1:
     - Release inicial
 
 Backlog
 -------
 
-- Incluir formatadores e watchers para telefones.
 - Incluir validadores e formatadores para inscrições estaduais.
 - Incluir formatador e watcher para CEP.
 - Melhorar o Sample para ser publicado.
