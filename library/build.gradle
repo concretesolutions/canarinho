@@ -1,24 +1,43 @@
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'canarinho'
+
+    publishedGroupId = 'br.com.concretesolutions'
+    libraryName = 'Android Canarinho'
+    artifact = 'canarinho'
+
+    libraryDescription = 'Utilitários Android para padrões Brasileiros'
+    siteUrl = 'https://github.com/cs-victor-nascimento/canarinho'
+    gitUrl = 'https://github.com/cs-victor-nascimento/canarinho.git'
+    libraryVersion = '0.0.3'
+
+    developerId = 'cs-victor-nascimento'
+    developerName = 'Victor Oliveira Nascimento'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
 android {
     compileSdkVersion 22
-    buildToolsVersion "23.0.0 rc2"
+    buildToolsVersion "22.0.1"
 
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 2
-        versionName "1.1"
     }
     buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
+        release {}
     }
 }
 
 dependencies {
 }
 
-apply from: 'publica.gradle'
+if (new File('../local.properties').exists()) {
+    apply from: 'publica.gradle'
+}
+

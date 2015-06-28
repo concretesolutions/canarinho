@@ -1,110 +1,90 @@
-def libraryVersion = '0.0.2'
-def siteUrl = 'https://github.com/cs-victor-nascimento/canarinho'
-def gitUrl = 'https://github.com/cs-victor-nascimento/canarinho.git'
-def group = 'br.com.concretesolutions'
-def artifact = 'canarinho'
-def libName = 'Android Canarinho'
-def libDescription = 'Utilitários Android para padrões Brasileiros'
+apply plugin: 'com.github.dcendents.android-maven'
 
-apply plugin: 'maven'
-apply plugin: 'com.jfrog.bintray'
+group = publishedGroupId                               // Maven Group ID for the artifact
 
-project.version = libraryVersion
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom.project {
+            packaging 'aar'
+            groupId publishedGroupId
+            artifactId artifact
 
-task androidJavadocs(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
+            // Add your description here
+            name libraryName
+            description libraryDescription
+            url siteUrl
 
-task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
-    classifier = 'javadoc'
-    from androidJavadocs.destinationDir
-}
-
-task androidSourcesJar(type: Jar) {
-    classifier = 'sources'
-    from android.sourceSets.main.java.srcDirs
-}
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            pom.project {
-
-                groupId = group
-                artifactId = artifact
-                version = libraryVersion
-
-                name libName
-                description libDescription
-                url = siteUrl
-
-                inceptionYear '2015'
-
-                issueManagement {
-                    system 'Github Issues'
-                    url 'https://github.com/cs-victor-nascimento/canarinho/issues'
+            // Set your license
+            licenses {
+                license {
+                    name licenseName
+                    url licenseUrl
                 }
-
-                scm {
-                    url siteUrl
-                    connection gitUrl
-                    developerConnection gitUrl
+            }
+            developers {
+                developer {
+                    id developerId
+                    name developerName
                 }
-
-                organization {
-                    name 'Concrete Solutions'
-                    url 'http://www.concretesolutions.com.br'
-                }
-
-                developers {
-
-                    developer {
-                        id 'cs-victor-nascimento'
-                        name 'Victor Oliveira Nascimento'
-                    }
-                }
-
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                        distribution 'repo'
-                    }
-                }
+            }
+            scm {
+                connection gitUrl
+                developerConnection gitUrl
+                url siteUrl
 
             }
         }
     }
 }
 
-artifacts {
-    archives androidSourcesJar
-    archives androidJavadocsJar
+apply plugin: 'com.jfrog.bintray'
+
+version = libraryVersion
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
 }
 
-task install(dependsOn: uploadArchives)
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+// Bintray
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 bintray {
-    user = System.getenv("BINTRAY_USER")
-    key = System.getenv("BINTRAY_KEY")
-
-    dryRun = false
-    publish = true
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
 
     configurations = ['archives']
     pkg {
-        repo = "maven"
-        name = artifact
-        desc = libDescription
+        repo = bintrayRepo
+        name = bintrayName
+        desc = libraryDescription
         websiteUrl = siteUrl
         vcsUrl = gitUrl
-        licenses = ["Apache-2.0"]
+        licenses = allLicenses
         publish = true
-
+        publicDownloadNumbers = true
         version {
-            name = libraryVersion
-            vcsTag = libraryVersion
+            desc = libraryDescription
+            gpg {
+                sign = true //Determines whether to GPG sign the files. The default is false
+                passphrase = properties.getProperty("bintray.gpg.password")
+            }
         }
     }
 }
