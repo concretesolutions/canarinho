@@ -1,5 +1,5 @@
-Android Canarinho
-=================
+# Android Canarinho [![Build Status](https://travis-ci.org/cs-victor-nascimento/canarinho.svg?branch=master)](https://travis-ci.org/cs-victor-nascimento/canarinho)
+
 
 Esta biblioteca é um conjunto de utilitários para trabalhar com padrões brasileiros no Android. Inspirado em: https://github.com/caelum/caelum-stella.
 
@@ -16,15 +16,14 @@ Estes são utilizados para implementar `TextWatcher`s que formatam e validam a d
 
 Para exemplos de uso, veja os testes na aplicação de exemplo (pasta sample).
 
-Changelog
----------
+## Changelog
+
 - 0.0.2:
     - Formatadores de telefone
 - 0.0.1:
     - Release inicial
 
-Backlog
--------
+## Backlog
 
 - Incluir watcher para valores financeiros.
 - Incluir validadores e formatadores para inscrições estaduais.
@@ -42,12 +41,10 @@ Backlog
 - Incluir mais testes de JVM (Watchers estão apenas como testes instrumentados e dependem da interface).
 - Incluir uma tradução para o inglês das interfaces públicas apenas na documentação.
 
-ATENÇÃO
--------
+## ATENÇÃO
 
 Este projeto é desenvolvido de boa vontade e com o intuito de ajudar. No entanto, todo o desenvolvimento é feito SEM GARANTIAS.
 
-LICENÇA
--------
+## LICENÇA
 
 Este projeto é disponibilizado sob a licença Apache vesão 2.0. Ver declaração no arquivo LICENSE.txt
