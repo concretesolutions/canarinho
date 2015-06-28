@@ -26,6 +26,7 @@ Changelog
 Backlog
 -------
 
+- Incluir watcher para valores financeiros.
 - Incluir validadores e formatadores para inscrições estaduais.
 - Incluir formatador e watcher para CEP.
 - Melhorar o Sample para ser publicado.
