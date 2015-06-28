@@ -10,13 +10,12 @@ import org.junit.runner.RunWith;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.pressBack;
-import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
 public class DemoWatchersInstrumentationTest {
@@ -102,4 +101,20 @@ public class DemoWatchersInstrumentationTest {
         onView(withId(R.id.edit_cnpj)).perform(typeText("95621433000180"));
         onView(withText("CNPJ inválido")).check(matches(isDisplayed()));
     }
+
+    @Test
+    public void consegueDigitarUmTelefoneValido() {
+        onView(withId(R.id.edit_telefone)).perform(typeText("1112345678"));
+
+        onView(withText("Campo válido!"))
+                .check(matches(isDisplayed()))
+                .perform(pressBack());
+
+        onView(withId(R.id.edit_telefone)).perform(typeText("11123456789"));
+
+        onView(withText("Campo válido!"))
+                .check(matches(isDisplayed()))
+                .perform(pressBack());
+    }
+
 }

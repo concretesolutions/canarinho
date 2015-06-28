@@ -115,4 +115,14 @@ public class TesteValidadores {
         assertThat(Validador.BOLETO
                 .ehValido("826100000007 265400971429 620232390612 725103150621"), is(true));
     }
+
+    @Test
+    public void consegueValidarTelefone() {
+        assertThat(Validador.TELFONE.ehValido("1112345678"), is(true));
+        assertThat(Validador.TELFONE.ehValido("11123456789"), is(true));
+        assertThat(Validador.TELFONE.ehValido("(11) 12345-6789"), is(true));
+        assertThat(Validador.TELFONE.ehValido("111234567890"), is(false));
+        assertThat(Validador.TELFONE.ehValido("1112345"), is(false));
+    }
+
 }

@@ -10,6 +10,7 @@ import android.widget.EditText;
 import br.com.concretesolutions.canarinho.validator.Validador;
 import br.com.concretesolutions.canarinho.watcher.BoletoBancarioTextWatcher;
 import br.com.concretesolutions.canarinho.watcher.MascaraNumericaTextWatcher;
+import br.com.concretesolutions.canarinho.watcher.TelefoneTextWatcher;
 import br.com.concretesolutions.canarinho.watcher.evento.EventoDeValidacao;
 
 /** */
@@ -18,9 +19,11 @@ public class DemoWatchersActivity extends AppCompatActivity {
     private EditText editBoleto;
     private EditText editCPF;
     private EditText editCNPJ;
+    private EditText editTelefone;
     private TextInputLayout editLayoutBoleto;
     private TextInputLayout editLayoutCPF;
     private TextInputLayout editLayoutCNPJ;
+    private TextInputLayout editLayoutTelefone;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,10 +36,12 @@ public class DemoWatchersActivity extends AppCompatActivity {
         editBoleto = (EditText) findViewById(R.id.edit_boleto);
         editCPF = (EditText) findViewById(R.id.edit_cpf);
         editCNPJ = (EditText) findViewById(R.id.edit_cnpj);
+        editTelefone = (EditText) findViewById(R.id.edit_telefone);
 
         editLayoutBoleto = (TextInputLayout) findViewById(R.id.edit_layout_boleto);
         editLayoutCPF = (TextInputLayout) findViewById(R.id.edit_layout_cpf);
         editLayoutCNPJ = (TextInputLayout) findViewById(R.id.edit_layout_cnpj);
+        editLayoutTelefone = (TextInputLayout) findViewById(R.id.edit_layout_telefone);
 
         editBoleto.addTextChangedListener(new BoletoBancarioTextWatcher(geraParaCampo(editLayoutBoleto)));
         editCPF.addTextChangedListener(new MascaraNumericaTextWatcher.Builder()
@@ -49,6 +54,7 @@ public class DemoWatchersActivity extends AppCompatActivity {
                 .comCallbackDeValidacao(geraParaCampo(editLayoutCNPJ))
                 .comValidador(Validador.CNPJ)
                 .build());
+        editTelefone.addTextChangedListener(new TelefoneTextWatcher(geraParaCampo(editLayoutTelefone)));
     }
 
     private EventoDeValidacao geraParaCampo(final TextInputLayout campo) {
