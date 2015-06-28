@@ -5,7 +5,7 @@ android:
     - tools
     - extra
     - build-tools-22.0.1
-    - android-21
+    - android-22
     - extra-android-m2repository
     - sys-img-armeabi-v7a-android-19
     - sys-img-x86-android-18
