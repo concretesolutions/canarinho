@@ -28,7 +28,7 @@ public class DemoWatchersActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.boleto_watcher_activity);
+        setContentView(R.layout.demo_watcher_activity);
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
