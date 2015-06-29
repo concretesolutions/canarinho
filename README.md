@@ -1,6 +1,5 @@
 # Android Canarinho [![Build Status](https://travis-ci.org/cs-victor-nascimento/canarinho.svg?branch=master)](https://travis-ci.org/cs-victor-nascimento/canarinho)
 
-
 Esta biblioteca é um conjunto de utilitários para trabalhar com padrões brasileiros no Android. Inspirado em: https://github.com/caelum/caelum-stella.
 
 O foco aqui é o Android. Portanto, não é compatível com aplicações Java puras.
@@ -14,18 +13,20 @@ Entre os padrões implementados temos:
 
 Estes são utilizados para implementar `TextWatcher`s que formatam e validam a digitação do usuário.
 
-Para exemplos de uso, veja os testes na aplicação de exemplo (pasta sample).
-
 ## Changelog
 
-- 0.0.2:
-    - Formatadores de telefone
-- 0.0.1:
-    - Release inicial
+Ver CHANGELOG.md
+
+## Arquitetura
+
+- `Formatador`: Formata, desformata e verifica se um valor está formatado e se pode ser formatado. Opera com valores completos.
+- `Validador`: Valida de duas formas: absoluta (true ou false) e atualizando um objeto de validação (`ResultadoParcial`).
+- Watchers: implementações de `TextWatcher`s para formatação e validação contínua (conforme a digitação do usuário.
+
+Para exemplos, verifique os testes na pasta sample.
 
 ## Backlog
 
-- Incluir watcher para valores financeiros.
 - Incluir validadores e formatadores para inscrições estaduais.
 - Incluir formatador e watcher para CEP.
 - Melhorar o Sample para ser publicado.
@@ -40,6 +41,7 @@ Para exemplos de uso, veja os testes na aplicação de exemplo (pasta sample).
 - Analisar a viabilidade de rodar os testes de JVM no Travis.
 - Incluir mais testes de JVM (Watchers estão apenas como testes instrumentados e dependem da interface).
 - Incluir uma tradução para o inglês das interfaces públicas apenas na documentação.
+
 
 ## ATENÇÃO
 

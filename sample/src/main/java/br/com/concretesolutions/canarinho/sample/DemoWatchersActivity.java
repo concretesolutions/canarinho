@@ -11,6 +11,7 @@ import br.com.concretesolutions.canarinho.validator.Validador;
 import br.com.concretesolutions.canarinho.watcher.BoletoBancarioTextWatcher;
 import br.com.concretesolutions.canarinho.watcher.MascaraNumericaTextWatcher;
 import br.com.concretesolutions.canarinho.watcher.TelefoneTextWatcher;
+import br.com.concretesolutions.canarinho.watcher.ValorMonetarioWatcher;
 import br.com.concretesolutions.canarinho.watcher.evento.EventoDeValidacao;
 
 /** */
@@ -20,6 +21,9 @@ public class DemoWatchersActivity extends AppCompatActivity {
     private EditText editCPF;
     private EditText editCNPJ;
     private EditText editTelefone;
+
+    private EditText editValor;
+
     private TextInputLayout editLayoutBoleto;
     private TextInputLayout editLayoutCPF;
     private TextInputLayout editLayoutCNPJ;
@@ -37,6 +41,7 @@ public class DemoWatchersActivity extends AppCompatActivity {
         editCPF = (EditText) findViewById(R.id.edit_cpf);
         editCNPJ = (EditText) findViewById(R.id.edit_cnpj);
         editTelefone = (EditText) findViewById(R.id.edit_telefone);
+        editValor = (EditText) findViewById(R.id.edit_valor);
 
         editLayoutBoleto = (TextInputLayout) findViewById(R.id.edit_layout_boleto);
         editLayoutCPF = (TextInputLayout) findViewById(R.id.edit_layout_cpf);
@@ -55,6 +60,7 @@ public class DemoWatchersActivity extends AppCompatActivity {
                 .comValidador(Validador.CNPJ)
                 .build());
         editTelefone.addTextChangedListener(new TelefoneTextWatcher(geraParaCampo(editLayoutTelefone)));
+        editValor.addTextChangedListener(new ValorMonetarioWatcher());
     }
 
     private EventoDeValidacao geraParaCampo(final TextInputLayout campo) {

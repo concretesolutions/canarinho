@@ -14,9 +14,11 @@ public class TesteFormatadorValor {
     @Test
     public void consegueFormatar() {
         assertThat(Formatador.VALOR.formata("1.00"), is("1,00"));
+        assertThat(Formatador.VALOR.formata("1.0"), is("1,00"));
         assertThat(Formatador.VALOR.formata("1"), is("1,00"));
         assertThat(Formatador.VALOR.formata("1000"), is("1.000,00"));
         assertThat(Formatador.VALOR.formata("1.23"), is("1,23"));
+        assertThat(Formatador.VALOR.formata("1.233"), is("1,23"));
         assertThat(Formatador.VALOR.formata("1.01"), is("1,01"));
         assertThat(Formatador.VALOR.formata("1.1"), is("1,10"));
         assertThat(Formatador.VALOR.formata("1234.56"), is("1.234,56"));

@@ -2,6 +2,8 @@ package br.com.concretesolutions.canarinho.sample;
 
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v4.widget.NestedScrollView;
+import android.view.View;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -15,7 +17,6 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
 public class DemoWatchersInstrumentationTest {
@@ -117,4 +118,38 @@ public class DemoWatchersInstrumentationTest {
                 .perform(pressBack());
     }
 
+    @Test
+    public void consegueDigitarUmValorMonetarioFormatado() throws Throwable {
+
+        final NestedScrollView scroll = (NestedScrollView) rule.getActivity().findViewById(R.id.container);
+
+        rule.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                scroll.fullScroll(View.FOCUS_DOWN);
+            }
+        });
+
+        Thread.sleep(2000L);
+
+        onView(withId(R.id.edit_valor))
+                .perform( typeText("1"))
+                .check(matches(withText("0,01"))) // inicia com 0,0X
+                .perform(typeText("2"))
+                .check(matches(withText("0,12"))) // 0,XY
+                .perform(typeText("3"))
+                .check(matches(withText("1,23"))) // X,YZ
+                .perform(typeText("4"))
+                .check(matches(withText("12,34"))) // etc, etc, etc
+                .perform(typeText("5"))
+                .check(matches(withText("123,45")))
+                .perform(typeText("6"))
+                .check(matches(withText("1.234,56")))
+                .perform(typeText("7"))
+                .check(matches(withText("12.345,67")))
+                .perform(typeText("8"))
+                .check(matches(withText("123.456,78")))
+                .perform(typeText("9"))
+                .check(matches(withText("1.234.567,89")));
+    }
 }

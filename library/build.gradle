@@ -11,7 +11,7 @@ ext {
     libraryDescription = 'Utilitários Android para padrões Brasileiros'
     siteUrl = 'https://github.com/cs-victor-nascimento/canarinho'
     gitUrl = 'https://github.com/cs-victor-nascimento/canarinho.git'
-    libraryVersion = '0.0.3'
+    libraryVersion = '0.0.4'
 
     developerId = 'cs-victor-nascimento'
     developerName = 'Victor Oliveira Nascimento'
@@ -37,7 +37,5 @@ android {
 dependencies {
 }
 
-if (new File('../local.properties').exists()) {
-    apply from: 'publica.gradle'
-}
+apply from: '../publica.gradle'
 
