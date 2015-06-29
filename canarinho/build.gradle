@@ -37,6 +37,5 @@ android {
 dependencies {
 }
 
-if (project.file('local.properties').exists()) {
-    apply from: 'publica.gradle'
-}
+// Não aplicar este arquivo em releases! Isso quebra o Travis.
+// apply from: 'publica.gradle'
