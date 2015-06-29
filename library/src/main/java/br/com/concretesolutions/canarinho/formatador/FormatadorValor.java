@@ -18,6 +18,7 @@ public final class FormatadorValor implements Formatador {
     static {
         final DecimalFormatSymbols decimalFormatSymbols = FORMATADOR_MOEDA.getDecimalFormatSymbols();
         decimalFormatSymbols.setCurrencySymbol("");
+        FORMATADOR_MOEDA.setMinimumFractionDigits(2);
         FORMATADOR_MOEDA.setDecimalFormatSymbols(decimalFormatSymbols);
         FORMATADOR_MOEDA.setNegativePrefix("-");
         FORMATADOR_MOEDA.setNegativeSuffix("");
