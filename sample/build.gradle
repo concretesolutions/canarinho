@@ -31,7 +31,7 @@ def supportLibsVersion = '22.2.0'
 
 dependencies {
 
-    compile project(':library')
+    compile project(':canarinho')
 
     compile "com.android.support:appcompat-v7:$supportLibsVersion"
     compile "com.android.support:cardview-v7:22.2.0"

@@ -37,5 +37,6 @@ android {
 dependencies {
 }
 
-apply from: '../publica.gradle'
-
+if (project.file('local.properties').exists()) {
+    apply from: 'publica.gradle'
+}
