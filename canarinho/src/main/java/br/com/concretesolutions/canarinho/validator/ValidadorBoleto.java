@@ -15,10 +15,10 @@ import br.com.concretesolutions.canarinho.formatador.Formatador;
  */
 public final class ValidadorBoleto implements Validador {
 
-    private static final Pattern PADRAO_PARA_LIMPAR = Pattern.compile("[\\s.]");
-    private static final Pattern PADRAO_APENAS_NUMEROS = Pattern.compile("[\\d]*");
-
-    private static final DigitoPara MOD_10 = new DigitoPara.Builder()
+    /**
+     * Instância de módulo 10 para cálculo de digito verificador de boleto
+     */
+    public static final DigitoPara MOD_10 = new DigitoPara.Builder()
             .mod(10)
             .comMultiplicadores(2, 1)
             .somandoIndividualmente()
@@ -26,10 +26,16 @@ public final class ValidadorBoleto implements Validador {
             .complementarAoModulo()
             .build();
 
-    private static final DigitoPara MOD_11 = new DigitoPara.Builder()
+    /**
+     * Instância de módulo 11 para cálculo de digito verificador de boleto
+     */
+    public static final DigitoPara MOD_11 = new DigitoPara.Builder()
             .trocandoPorSeEncontrar("0", 10, 11)
             .complementarAoModulo()
             .build();
+
+    private static final Pattern PADRAO_PARA_LIMPAR = Pattern.compile("[\\s.]");
+    private static final Pattern PADRAO_APENAS_NUMEROS = Pattern.compile("[\\d]*");
 
     private static class SingletonHolder {
         private static final ValidadorBoleto INSTANCE = new ValidadorBoleto();

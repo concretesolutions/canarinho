@@ -209,11 +209,8 @@ public final class MascaraNumericaTextWatcher implements TextWatcher {
             if (mascara == null || mascara.isEmpty() || !mascara.contains("#"))
                 throw new IllegalArgumentException("Máscara precisa conter ao menos um caracter '#'");
 
-            if (callbackErros != null && validador == null)
-                throw new IllegalArgumentException("Por favor, defina um validador.");
-
-            if (validador != null && callbackErros == null)
-                throw new IllegalArgumentException("Se definir um validador, defina um callback também.");
+            if (validador == null || callbackErros == null)
+                throw new IllegalArgumentException("Por favor, defina um validador e um callback de erros.");
 
             return new MascaraNumericaTextWatcher(this);
         }

@@ -35,6 +35,11 @@ public interface Formatador {
     Formatador TELEFONE = FormatadorTelefone.getInstance();
 
     /**
+     * Singleton de formatação de linha digitável. Transforma números do código de barras em linha digitável.
+     */
+    Formatador LINHA_DIGITAVEL = FormatadorLinhaDigitavel.getInstance();
+
+    /**
      * Interface para guardar os padrões de experssões regulares usados no framework
      */
     interface Padroes {

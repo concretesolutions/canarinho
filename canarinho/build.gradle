@@ -38,4 +38,4 @@ dependencies {
 }
 
 // Não aplicar este arquivo em releases! Isso quebra o Travis.
-// apply from: 'publica.gradle'
+//apply from: 'publica.gradle'
