@@ -30,7 +30,6 @@ Para exemplos, verifique os testes na pasta sample.
 - Incluir validadores e formatadores para inscrições estaduais.
 - Incluir formatador e watcher para CEP.
 - Melhorar o Sample para ser publicado.
-- Adicionar o logotipo.
 - Criar uma página gh-pages que tenha um link para Javadoc.
 - Criar GIFs do uso.
 - Aumentar a documentação do projeto sobre o uso.
