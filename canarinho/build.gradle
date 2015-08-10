@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply from: 'tools/tools.gradle'
 
 ext {
     bintrayRepo = 'maven'
