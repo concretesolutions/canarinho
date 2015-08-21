@@ -40,7 +40,9 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2') {
         exclude group: 'com.android.support'
     }
-    androidTestCompile 'com.android.support.test:rules:0.3'
+    androidTestCompile('com.android.support.test:rules:0.3') {
+        exclude group: 'com.android.support'
+    }
 //    androidTestCompile 'net.vidageek:mirror:1.6.1'
 
     testCompile 'junit:junit:4.12'
