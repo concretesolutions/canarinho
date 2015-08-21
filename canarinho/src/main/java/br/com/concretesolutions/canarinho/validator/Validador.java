@@ -39,7 +39,8 @@ public interface Validador {
     boolean ehValido(String valor);
 
     /**
-     * Valida um {@link Editable} retornando o {@link br.com.concretesolutions.canarinho.validator.Validador.ResultadoParcial}
+     * Valida um {@link Editable} retornando o
+     * {@link br.com.concretesolutions.canarinho.validator.Validador.ResultadoParcial}
      *
      * @param valor            Editable
      * @param resultadoParcial Objeto com o estado da validação
