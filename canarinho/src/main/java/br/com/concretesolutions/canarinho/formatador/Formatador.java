@@ -20,6 +20,11 @@ public interface Formatador {
     Formatador CNPJ = new FormatadorBase(Padroes.CNPJ_FORMATADO, "$1.$2.$3/$4-$5", Padroes.CNPJ_DESFORMATADO, "$1$2$3$4$5");
 
     /**
+     * Singleton de formatação de CPF e CNPJ
+     */
+    Formatador CPF_CNPJ = FormatadorCPFCNPJ.getInstance();
+
+    /**
      * Singleton de formatação de valores monetários
      */
     Formatador VALOR = FormatadorValor.getInstance();
@@ -40,7 +45,7 @@ public interface Formatador {
     Formatador LINHA_DIGITAVEL = FormatadorLinhaDigitavel.getInstance();
 
     /**
-     * Interface para guardar os padrões de experssões regulares usados no framework
+     * Interface para guardar os padrões de expressões regulares usados no framework
      */
     interface Padroes {
         // Patterns
