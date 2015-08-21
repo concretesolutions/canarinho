@@ -7,18 +7,14 @@ import br.com.concretesolutions.canarinho.formatador.Formatador;
 /**
  * Created by tpinho on 8/20/15.
  */
-public class ValidadorCPFCNPJ implements Validador {
+public final class ValidadorCPFCNPJ implements Validador {
 
-    private static class SingletonHolder {
-        private static final ValidadorCPFCNPJ INSTANCE = new ValidadorCPFCNPJ();
+    // No instance creation
+    private ValidadorCPFCNPJ() {
     }
 
     public static ValidadorCPFCNPJ getInstance() {
         return SingletonHolder.INSTANCE;
-    }
-
-    // No instance creation
-    private ValidadorCPFCNPJ() {
     }
 
     @Override
@@ -51,4 +47,7 @@ public class ValidadorCPFCNPJ implements Validador {
         return desformatado.length() < 12;
     }
 
+    private static class SingletonHolder {
+        private static final ValidadorCPFCNPJ INSTANCE = new ValidadorCPFCNPJ();
+    }
 }

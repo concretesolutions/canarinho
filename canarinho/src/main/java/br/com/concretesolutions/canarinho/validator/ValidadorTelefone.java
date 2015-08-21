@@ -9,16 +9,12 @@ import br.com.concretesolutions.canarinho.formatador.Formatador;
  */
 public final class ValidadorTelefone implements Validador {
 
-    private static class SingletonHolder {
-        private static final ValidadorTelefone INSTANCE = new ValidadorTelefone();
+    // No instance creation
+    private ValidadorTelefone() {
     }
 
     public static ValidadorTelefone getInstance() {
         return SingletonHolder.INSTANCE;
-    }
-
-    // No instance creation
-    private ValidadorTelefone() {
     }
 
     @Override
@@ -49,4 +45,7 @@ public final class ValidadorTelefone implements Validador {
                 .totalmenteValido(true);
     }
 
+    private static class SingletonHolder {
+        private static final ValidadorTelefone INSTANCE = new ValidadorTelefone();
+    }
 }

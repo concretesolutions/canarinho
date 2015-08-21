@@ -18,16 +18,12 @@ public final class ValidadorCPF implements Validador {
             .trocandoPorSeEncontrar("0", 10, 11)
             .build();
 
-    private static class SingletonHolder {
-        private static final ValidadorCPF INSTANCE = new ValidadorCPF();
+    // No instance creation
+    private ValidadorCPF() {
     }
 
     static ValidadorCPF getInstance() {
         return SingletonHolder.INSTANCE;
-    }
-
-    // No instance creation
-    private ValidadorCPF() {
     }
 
     @Override
@@ -72,7 +68,8 @@ public final class ValidadorCPF implements Validador {
                 .totalmenteValido(true);
     }
 
-    // De acordo ao cálculo dos digitos verificadores, os CPFs abaixo são válidos, entretanto os mesmo são considerados inválidos pela Receita Federal
+    // De acordo ao cálculo dos digitos verificadores, os CPFs abaixo são válidos, entretanto os mesmo
+    // são considerados inválidos pela Receita Federal
     // 00000000000, 11111111111, 22222222222, 33333333333, 44444444444, 55555555555,
     // 66666666666, 77777777777, 88888888888, 99999999999, 12345678909
     private boolean estaNaListaNegra(String valor) {
@@ -86,4 +83,7 @@ public final class ValidadorCPF implements Validador {
         return igual || valor.equals("12345678909");
     }
 
+    private static class SingletonHolder {
+        private static final ValidadorCPF INSTANCE = new ValidadorCPF();
+    }
 }

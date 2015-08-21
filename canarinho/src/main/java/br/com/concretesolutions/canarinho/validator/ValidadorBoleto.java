@@ -37,16 +37,12 @@ public final class ValidadorBoleto implements Validador {
     private static final Pattern PADRAO_PARA_LIMPAR = Pattern.compile("[\\s.]");
     private static final Pattern PADRAO_APENAS_NUMEROS = Pattern.compile("[\\d]*");
 
-    private static class SingletonHolder {
-        private static final ValidadorBoleto INSTANCE = new ValidadorBoleto();
+    // No instance creation
+    private ValidadorBoleto() {
     }
 
     public static ValidadorBoleto getInstance() {
         return SingletonHolder.INSTANCE;
-    }
-
-    // No instance creation
-    private ValidadorBoleto() {
     }
 
     @Override
@@ -55,8 +51,8 @@ public final class ValidadorBoleto implements Validador {
         if (valor == null)
             throw new IllegalArgumentException("Campos não podem ser nulos");
 
-        valor = Formatador.Padroes.PADRAO_SOMENTE_NUMEROS.matcher(valor).replaceAll("");
-        return ehValido(new SpannableStringBuilder(valor), new ResultadoParcial()).isValido();
+        String valorSemFormatacao = Formatador.Padroes.PADRAO_SOMENTE_NUMEROS.matcher(valor).replaceAll("");
+        return ehValido(new SpannableStringBuilder(valorSemFormatacao), new ResultadoParcial()).isValido();
     }
 
     @Override
@@ -120,7 +116,8 @@ public final class ValidadorBoleto implements Validador {
         return valor.charAt(0) == '8';
     }
 
-    private boolean validaBloco(String valor, ResultadoParcial resultadoParcial, DigitoPara mod, int tamanhoMinimo, int st, String mensagem) {
+    private boolean validaBloco(String valor, ResultadoParcial resultadoParcial, DigitoPara mod,
+                                int tamanhoMinimo, int st, String mensagem) {
 
         if (valor.length() < tamanhoMinimo) {
             resultadoParcial.parcialmenteValido(true);
@@ -138,5 +135,9 @@ public final class ValidadorBoleto implements Validador {
                     .isParcialmenteValido();
 
         return true;
+    }
+
+    private static class SingletonHolder {
+        private static final ValidadorBoleto INSTANCE = new ValidadorBoleto();
     }
 }

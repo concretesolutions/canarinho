@@ -17,16 +17,12 @@ public final class ValidadorCNPJ implements Validador {
             .trocandoPorSeEncontrar("0", 10, 11)
             .build();
 
-    private static class SingletonHolder {
-        private static final ValidadorCNPJ INSTANCE = new ValidadorCNPJ();
+    // No instance creation
+    private ValidadorCNPJ() {
     }
 
     public static ValidadorCNPJ getInstance() {
         return SingletonHolder.INSTANCE;
-    }
-
-    // No instance creation
-    private ValidadorCNPJ() {
     }
 
     @Override
@@ -66,5 +62,9 @@ public final class ValidadorCNPJ implements Validador {
         return resultadoParcial
                 .parcialmenteValido(true)
                 .totalmenteValido(true);
+    }
+
+    private static class SingletonHolder {
+        private static final ValidadorCNPJ INSTANCE = new ValidadorCNPJ();
     }
 }

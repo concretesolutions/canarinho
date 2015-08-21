@@ -69,16 +69,31 @@ public interface Validador {
             return mensagem;
         }
 
+        /**
+         * TODO Javadoc pendente
+         * @param valido a definir
+         * @return a definir
+         */
         public ResultadoParcial totalmenteValido(boolean valido) {
             this.valido = valido;
             return this;
         }
 
+        /**
+         * TODO Javadoc pendente
+         * @param parcialmenteValido a definir
+         * @return a definir
+         */
         public ResultadoParcial parcialmenteValido(boolean parcialmenteValido) {
             this.parcialmenteValido = parcialmenteValido;
             return this;
         }
 
+        /**
+         * TODO Javadoc pendente
+         * @param mensagem a definir
+         * @return a definir
+         */
         public ResultadoParcial mensagem(String mensagem) {
             this.mensagem = mensagem;
             return this;
