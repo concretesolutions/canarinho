@@ -1,7 +1,10 @@
 package br.com.concretesolutions.canarinho.formatador;
 
 /**
- * Created by tpinho on 8/20/15.
+ * Formatador para CPF e CNPJ no mesmo campo. Formata como CPF até 11 dígitos numéricos.
+ * Depois formata como CNPJ.
+ * <p/>
+ * Ver exemplos no Sample.
  */
 public final class FormatadorCPFCNPJ implements Formatador {
 
@@ -41,6 +44,10 @@ public final class FormatadorCPFCNPJ implements Formatador {
 
     @Override
     public boolean podeSerFormatado(final String value) {
+        if (value == null) {
+            return false;
+        }
+
         if (ehCpf(value)) {
             return Formatador.CPF.podeSerFormatado(value);
         }

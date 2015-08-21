@@ -48,7 +48,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-all:1.3'
     testCompile 'net.vidageek:mirror:1.6.1'
-    testCompile('org.robolectric:robolectric:3.0-rc3') {
+    testCompile('org.robolectric:robolectric:3.0') {
         exclude group: 'commons-logging', module: 'commons-logging'
         exclude group: 'org.apache.httpcomponents', module: 'httpclient'
     }

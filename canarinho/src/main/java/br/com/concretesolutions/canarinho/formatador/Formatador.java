@@ -21,6 +21,11 @@ public interface Formatador {
             "$1$2$3$4$5");
 
     /**
+     * Singleton de formatação de CPF e CNPJ
+     */
+    Formatador CPF_CNPJ = FormatadorCPFCNPJ.getInstance();
+
+    /**
      * Singleton de formatação de valores monetários
      */
     Formatador VALOR = FormatadorValor.getInstance();
@@ -73,7 +78,7 @@ public interface Formatador {
     boolean podeSerFormatado(String value);
 
     /**
-     * Interface para guardar os padrões de experssões regulares usados no framework
+     * Classe para guardar os padrões de experssões regulares usados no framework
      */
     abstract class Padroes {
         // Patterns
