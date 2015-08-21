@@ -16,19 +16,19 @@ import java.util.List;
  * 2 a 7 e usando módulo 11 é a seguinte:
  * </p>
  * <pre>
- * 	0  0  0  0  0  3  9  1  0  4  7  6  6 (trecho numérico)
- * 	2  7  6  5  4  3  2  7  6  5  4  3  2 (multiplicadores, da direita para a esquerda e ciclando)
- * 	----------------------------------------- multiplicações algarismo a algarismo
- * 	 0  0  0  0  0  9 18  7  0 20 28 18 12 -- soma = 112
+ *  0  0  0  0  0  3  9  1  0  4  7  6  6 (trecho numérico)
+ *  2  7  6  5  4  3  2  7  6  5  4  3  2 (multiplicadores, da direita para a esquerda e ciclando)
+ *  ----------------------------------------- multiplicações algarismo a algarismo
+ *   0  0  0  0  0  9 18  7  0 20 28 18 12 -- soma = 112
  * </pre>
  * <p>
  * Tira-se o módulo dessa soma e, então, calcula-se o complementar do módulo e, se o número
  * for 0, 10 ou 11, o dígito passa a ser 1.
  * </p>
  * <pre>
- * 		soma = 112
- * 		soma % 11 = 2
- * 		11 - (soma % 11) = 9
+ *      soma = 112
+ *      soma % 11 = 2
+ *      11 - (soma % 11) = 9
  * </pre>
  * <p>
  * NOTE: Esta é uma versão otimizada para Android inspirada em
@@ -108,12 +108,12 @@ public final class DigitoPara {
      */
     private int proximoMultiplicador(int multiplicadorDaVez) {
 
-        multiplicadorDaVez++;
+        int multiplicador = multiplicadorDaVez + 1;
 
-        if (multiplicadorDaVez == multiplicadores.size())
-            multiplicadorDaVez = 0;
+        if (multiplicador == multiplicadores.size())
+            multiplicador = 0;
 
-        return multiplicadorDaVez;
+        return multiplicador;
     }
 
     /**

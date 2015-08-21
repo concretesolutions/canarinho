@@ -14,6 +14,13 @@ final class FormatadorBase implements Formatador {
 
     private final String unformattedReplacement;
 
+    /**
+     * TODO adicionar JavaDoc
+     * @param formatted descrever conteúdo
+     * @param formattedReplacement descrever conteúdo
+     * @param unformatted descrever conteúdo
+     * @param unformattedReplacement descrever conteúdo
+     */
     FormatadorBase(Pattern formatted, String formattedReplacement, Pattern unformatted, String unformattedReplacement) {
         this.formatted = formatted;
         this.formattedReplacement = formattedReplacement;
