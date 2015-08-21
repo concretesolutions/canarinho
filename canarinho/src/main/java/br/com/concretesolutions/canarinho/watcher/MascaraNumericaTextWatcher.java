@@ -55,9 +55,7 @@ public final class MascaraNumericaTextWatcher implements TextWatcher {
         final boolean apagou = tamanhoAnterior > s.length();
 
         // Trata deleção e adição de forma diferente (só formata em adições)
-        final StringBuilder builder =
-                apagou ? trataRemocaoDeCaracter(s)
-                        : trataAdicaoDeCaracter(s);
+        final StringBuilder builder = apagou ? trataRemocaoDeCaracter(s) : trataAdicaoDeCaracter(s);
 
         tamanhoAnterior = builder.length();
         atualizaTexto(s, builder);

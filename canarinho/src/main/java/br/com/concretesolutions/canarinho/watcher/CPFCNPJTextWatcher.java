@@ -12,7 +12,8 @@ import br.com.concretesolutions.canarinho.watcher.evento.EventoDeValidacao;
 
 /**
  * {@link TextWatcher} responsável por formatar e validar um {@link android.widget.EditText} para CPF / CNPJ.
- * Para usar este componente basta criar uma instância e chamar {@link android.widget.EditText#addTextChangedListener(TextWatcher)}.
+ * Para usar este componente basta criar uma instância e chamar
+ * {@link android.widget.EditText#addTextChangedListener(TextWatcher)}.
  */
 public class CPFCNPJTextWatcher implements TextWatcher {
 
@@ -27,10 +28,17 @@ public class CPFCNPJTextWatcher implements TextWatcher {
     private boolean mudancaInterna = false;
     private int tamanhoAnterior = 0;
 
+    /**
+     * TODO Javadoc pendente
+     */
     public CPFCNPJTextWatcher() {
 
     }
 
+    /**
+     * TODO Javadoc pendente
+     * @param callbackErros a descrever
+     */
     public CPFCNPJTextWatcher(EventoDeValidacao callbackErros) {
         this.callbackErros = callbackErros;
     }
@@ -154,9 +162,9 @@ public class CPFCNPJTextWatcher implements TextWatcher {
             builder.deleteCharAt(builder.length() - 1);
 
         String value = builder.toString();
-        mascara = ehCpf(value) ? CPF : CNPJ;
+        char[] mascaraSelecionada = ehCpf(value) ? CPF : CNPJ;
 
-        return carregarMascara(value, mascara);
+        return carregarMascara(value, mascaraSelecionada);
     }
 
     // Verifica se o valor informado é cpf

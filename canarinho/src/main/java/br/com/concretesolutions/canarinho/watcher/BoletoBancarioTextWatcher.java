@@ -13,14 +13,17 @@ import br.com.concretesolutions.canarinho.watcher.evento.EventoDeValidacao;
 
 /**
  * {@link TextWatcher} responsável por formatar e validar um {@link android.widget.EditText} para boletos.
- * Para usar este componente basta criar uma instância e chamar {@link android.widget.EditText#addTextChangedListener(TextWatcher)}.
+ * Para usar este componente basta criar uma instância e chamar
+ * {@link android.widget.EditText#addTextChangedListener(TextWatcher)}.
  */
 public final class BoletoBancarioTextWatcher implements TextWatcher {
 
     private static final char[] BOLETO_NORMAL = "#####.##### #####.###### #####.###### # ##############".toCharArray();
     private static final char[] BOLETO_TRIBUTO = "############ ############ ############ ############".toCharArray();
-    private static final InputFilter[] FILTRO_TRIBUTO = new InputFilter[]{new InputFilter.LengthFilter(BOLETO_TRIBUTO.length)};
-    private static final InputFilter[] FILTRO_NORMAL = new InputFilter[]{new InputFilter.LengthFilter(BOLETO_NORMAL.length)};
+    private static final InputFilter[] FILTRO_TRIBUTO = new InputFilter[]{
+            new InputFilter.LengthFilter(BOLETO_TRIBUTO.length)};
+    private static final InputFilter[] FILTRO_NORMAL = new InputFilter[]{
+            new InputFilter.LengthFilter(BOLETO_NORMAL.length)};
 
     private boolean mudancaInterna = false;
     private int tamanhoAnterior = 0;
@@ -29,6 +32,10 @@ public final class BoletoBancarioTextWatcher implements TextWatcher {
     private final Validador.ResultadoParcial resultadoParcial = new Validador.ResultadoParcial();
     private final EventoDeValidacao callbackErros;
 
+    /**
+     * TODO Javadoc pendente
+     * @param callbackErros a descrever
+     */
     public BoletoBancarioTextWatcher(EventoDeValidacao callbackErros) {
         this.callbackErros = callbackErros;
     }

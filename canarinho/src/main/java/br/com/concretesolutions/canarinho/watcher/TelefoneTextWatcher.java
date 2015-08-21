@@ -12,13 +12,15 @@ import br.com.concretesolutions.canarinho.watcher.evento.EventoDeValidacao;
 
 /**
  * {@link TextWatcher} responsável por formatar e validar um {@link android.widget.EditText} para telefones.
- * Para usar este componente basta criar uma instância e chamar {@link android.widget.EditText#addTextChangedListener(TextWatcher)}.
+ * Para usar este componente basta criar uma instância e chamar
+ * {@link android.widget.EditText#addTextChangedListener(TextWatcher)}.
  */
 public final class TelefoneTextWatcher implements TextWatcher {
 
     private static final char[] TELEFONE_OITO_DIGITOS = "(##) ####-####".toCharArray();
     private static final char[] TELEFONE_NOVE_DIGITOS = "(##) #####-####".toCharArray();
-    private static final InputFilter[] FILTRO_NOVE_DIGITOS = new InputFilter[]{new InputFilter.LengthFilter(TELEFONE_NOVE_DIGITOS.length)};
+    private static final InputFilter[] FILTRO_NOVE_DIGITOS = new InputFilter[]{
+            new InputFilter.LengthFilter(TELEFONE_NOVE_DIGITOS.length)};
 
     private final Validador validador = ValidadorTelefone.getInstance();
     private final Validador.ResultadoParcial resultadoParcial = new Validador.ResultadoParcial();
@@ -27,10 +29,17 @@ public final class TelefoneTextWatcher implements TextWatcher {
     private boolean mudancaInterna = false;
     private int tamanhoAnterior = 0;
 
+    /**
+     * TODO Javadoc pendente
+     */
     public TelefoneTextWatcher() {
 
     }
 
+    /**
+     * TODO Javadoc pendente
+     * @param callbackErros a descrever
+     */
     public TelefoneTextWatcher(EventoDeValidacao callbackErros) {
         this.callbackErros = callbackErros;
     }

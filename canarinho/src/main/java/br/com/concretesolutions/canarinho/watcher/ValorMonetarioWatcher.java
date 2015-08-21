@@ -36,7 +36,8 @@ public final class ValorMonetarioWatcher implements TextWatcher {
             return;
 
         final String somenteNumeros = Formatador.Padroes.PADRAO_SOMENTE_NUMEROS.matcher(s.toString()).replaceAll("");
-        final BigDecimal resultado = new BigDecimal(somenteNumeros).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_DOWN);
+        final BigDecimal resultado = new BigDecimal(somenteNumeros).divide(new BigDecimal(100))
+                .setScale(2, RoundingMode.HALF_DOWN);
 
         atualizaTexto(s, Formatador.VALOR.formata(resultado.toPlainString()));
     }
