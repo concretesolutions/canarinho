@@ -66,8 +66,9 @@ public final class DigitoPara {
 
         final char[] digitos = trecho.toCharArray();
 
-        for (int i = 0; i < digitos.length; i++)
+        for (int i = 0; i < digitos.length; i++) {
             numero.add(Character.getNumericValue(digitos[i]));
+        }
 
         Collections.reverse(numero);
 
@@ -83,11 +84,13 @@ public final class DigitoPara {
 
         int resultado = soma % modulo;
 
-        if (complementar)
+        if (complementar) {
             resultado = modulo - resultado;
+        }
 
-        if (substituicoes.get(resultado) != null)
+        if (substituicoes.get(resultado) != null) {
             return substituicoes.get(resultado);
+        }
 
         return String.valueOf(resultado);
     }
