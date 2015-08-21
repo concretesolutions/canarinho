@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import br.com.concretesolutions.canarinho.validator.Validador;
 import br.com.concretesolutions.canarinho.watcher.BoletoBancarioTextWatcher;
+import br.com.concretesolutions.canarinho.watcher.CPFCNPJTextWatcher;
 import br.com.concretesolutions.canarinho.watcher.MascaraNumericaTextWatcher;
 import br.com.concretesolutions.canarinho.watcher.TelefoneTextWatcher;
 import br.com.concretesolutions.canarinho.watcher.ValorMonetarioWatcher;
@@ -21,13 +22,14 @@ public class DemoWatchersActivity extends AppCompatActivity {
     private EditText editCPF;
     private EditText editCNPJ;
     private EditText editTelefone;
-
     private EditText editValor;
+    private EditText editCPFCNPJ;
 
     private TextInputLayout editLayoutBoleto;
     private TextInputLayout editLayoutCPF;
     private TextInputLayout editLayoutCNPJ;
     private TextInputLayout editLayoutTelefone;
+    private TextInputLayout editLayoutCPFCNPJ;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,11 +44,13 @@ public class DemoWatchersActivity extends AppCompatActivity {
         editCNPJ = (EditText) findViewById(R.id.edit_cnpj);
         editTelefone = (EditText) findViewById(R.id.edit_telefone);
         editValor = (EditText) findViewById(R.id.edit_valor);
+        editCPFCNPJ = (EditText) findViewById(R.id.edit_cpf_cnpj);
 
         editLayoutBoleto = (TextInputLayout) findViewById(R.id.edit_layout_boleto);
         editLayoutCPF = (TextInputLayout) findViewById(R.id.edit_layout_cpf);
         editLayoutCNPJ = (TextInputLayout) findViewById(R.id.edit_layout_cnpj);
         editLayoutTelefone = (TextInputLayout) findViewById(R.id.edit_layout_telefone);
+        editLayoutCPFCNPJ = (TextInputLayout) findViewById(R.id.edit_layout_cpf_cnpj);
 
         editBoleto.addTextChangedListener(new BoletoBancarioTextWatcher(geraParaCampo(editLayoutBoleto)));
         editCPF.addTextChangedListener(new MascaraNumericaTextWatcher.Builder()
@@ -61,6 +65,7 @@ public class DemoWatchersActivity extends AppCompatActivity {
                 .build());
         editTelefone.addTextChangedListener(new TelefoneTextWatcher(geraParaCampo(editLayoutTelefone)));
         editValor.addTextChangedListener(new ValorMonetarioWatcher());
+        editCPFCNPJ.addTextChangedListener(new CPFCNPJTextWatcher(geraParaCampo(editLayoutCPFCNPJ)));
     }
 
     private EventoDeValidacao geraParaCampo(final TextInputLayout campo) {

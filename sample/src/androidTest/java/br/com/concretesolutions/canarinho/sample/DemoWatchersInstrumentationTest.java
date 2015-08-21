@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.pressBack;
+import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -152,4 +153,52 @@ public class DemoWatchersInstrumentationTest {
                 .perform(typeText("9"))
                 .check(matches(withText("1.234.567,89")));
     }
+
+    @Test
+    public void consegueDigitarCPFCNPJValido() throws Throwable {
+        final NestedScrollView scroll = (NestedScrollView) rule.getActivity().findViewById(R.id.container);
+
+        rule.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                scroll.fullScroll(View.FOCUS_DOWN);
+            }
+        });
+
+        Thread.sleep(2000L);
+
+
+        onView(withId(R.id.edit_cpf_cnpj)).perform(typeText("46574356636"));
+
+        onView(withText("Campo válido!"))
+                .check(matches(isDisplayed()))
+                .perform(pressBack());
+
+        onView(withId(R.id.edit_cpf_cnpj)).perform(clearText(), typeText("95621433000170"));
+
+        onView(withText("Campo válido!"))
+                .check(matches(isDisplayed()))
+                .perform(pressBack());
+    }
+
+    @Test
+    public void consegueDigitarCPFCNPJInvalido() throws Throwable {
+        final NestedScrollView scroll = (NestedScrollView) rule.getActivity().findViewById(R.id.container);
+
+        rule.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                scroll.fullScroll(View.FOCUS_DOWN);
+            }
+        });
+
+        Thread.sleep(2000L);
+
+        onView(withId(R.id.edit_cpf_cnpj)).perform(typeText("46574356637"));
+        onView(withText("CPF inválido")).check(matches(isDisplayed())).perform(pressBack());
+
+        onView(withId(R.id.edit_cpf_cnpj)).perform(clearText(), typeText("95621433000180"));
+        onView(withText("CNPJ inválido")).check(matches(isDisplayed())).perform(pressBack());
+    }
+
 }
