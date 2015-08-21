@@ -3,7 +3,7 @@ package br.com.concretesolutions.canarinho.formatador;
 /**
  * Created by tpinho on 8/20/15.
  */
-public class FormatadorCPFCNPJ implements Formatador {
+public final class FormatadorCPFCNPJ implements Formatador {
 
     private FormatadorCPFCNPJ() {
     }

@@ -5,13 +5,19 @@ import java.util.regex.Pattern;
 /** */
 public final class FormatadorTelefone implements Formatador {
 
-    private static final Pattern NOVE_DIGITOS_FORMATADO = Pattern.compile("\\((\\d{2})\\)\\s(\\d{5})-(\\d{4})");
-    private static final Pattern NOVE_DIGITOS_DESFORMATADO = Pattern.compile("(\\d{2})(\\d{5})(\\d{4})");
-    private static final FormatadorBase FORMATADOR_NOVE_DIGITOS = new FormatadorBase(NOVE_DIGITOS_FORMATADO, "($1) $2-$3", NOVE_DIGITOS_DESFORMATADO, "$1$2$3");
+    private static final Pattern NOVE_DIGITOS_FORMATADO = Pattern
+            .compile("\\((\\d{2})\\)\\s(\\d{5})-(\\d{4})");
+    private static final Pattern NOVE_DIGITOS_DESFORMATADO = Pattern
+            .compile("(\\d{2})(\\d{5})(\\d{4})");
+    private static final FormatadorBase FORMATADOR_NOVE_DIGITOS = new FormatadorBase(NOVE_DIGITOS_FORMATADO,
+            "($1) $2-$3", NOVE_DIGITOS_DESFORMATADO, "$1$2$3");
 
-    private static final Pattern OITO_DIGITOS_FORMATADO = Pattern.compile("\\((\\d{2})\\)\\s(\\d{4})-(\\d{4})");
-    private static final Pattern OITO_DIGITOS_DESFORMATADO = Pattern.compile("(\\d{2})(\\d{4})(\\d{4})");
-    private static final FormatadorBase FORMATADOR_OITO_DIGITOS = new FormatadorBase(OITO_DIGITOS_FORMATADO, "($1) $2-$3", OITO_DIGITOS_DESFORMATADO, "$1$2$3");
+    private static final Pattern OITO_DIGITOS_FORMATADO = Pattern
+            .compile("\\((\\d{2})\\)\\s(\\d{4})-(\\d{4})");
+    private static final Pattern OITO_DIGITOS_DESFORMATADO = Pattern
+            .compile("(\\d{2})(\\d{4})(\\d{4})");
+    private static final FormatadorBase FORMATADOR_OITO_DIGITOS = new FormatadorBase(OITO_DIGITOS_FORMATADO,
+            "($1) $2-$3", OITO_DIGITOS_DESFORMATADO, "$1$2$3");
 
     private FormatadorTelefone() {
     }

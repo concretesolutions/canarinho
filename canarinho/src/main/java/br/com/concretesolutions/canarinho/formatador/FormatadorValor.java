@@ -11,9 +11,12 @@ import java.util.regex.Pattern;
 /** */
 public final class FormatadorValor implements Formatador {
 
-    private static final DecimalFormat FORMATADOR_MOEDA = (DecimalFormat) NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-    private static final Pattern PADRAO_DECIMAL = Pattern.compile("^\\d+(\\.\\d{1,2})?$");
-    private static final Pattern PADRAO_MOEDA = Pattern.compile("\\d{1,3}(\\.\\d{3})*(,\\d{2})?");
+    private static final DecimalFormat FORMATADOR_MOEDA = (DecimalFormat)
+            NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+    private static final Pattern PADRAO_DECIMAL = Pattern
+            .compile("^\\d+(\\.\\d{1,2})?$");
+    private static final Pattern PADRAO_MOEDA = Pattern
+            .compile("\\d{1,3}(\\.\\d{3})*(,\\d{2})?");
 
     static {
         final DecimalFormatSymbols decimalFormatSymbols = FORMATADOR_MOEDA.getDecimalFormatSymbols();
@@ -26,16 +29,12 @@ public final class FormatadorValor implements Formatador {
         FORMATADOR_MOEDA.setParseBigDecimal(true);
     }
 
-    private static class SingletonHolder {
-        private static final FormatadorValor INSTANCE = new FormatadorValor();
+    // No instance creation
+    private FormatadorValor() {
     }
 
     static FormatadorValor getInstance() {
         return SingletonHolder.INSTANCE;
-    }
-
-    // No instance creation
-    private FormatadorValor() {
     }
 
     @Override
@@ -65,5 +64,9 @@ public final class FormatadorValor implements Formatador {
             throw new IllegalArgumentException("Valor não pode ser nulo");
 
         return PADRAO_DECIMAL.matcher(value).matches();
+    }
+
+    private static class SingletonHolder {
+        private static final FormatadorValor INSTANCE = new FormatadorValor();
     }
 }
