@@ -113,8 +113,9 @@ public final class DigitoPara {
 
         int multiplicador = multiplicadorDaVez + 1;
 
-        if (multiplicador == multiplicadores.size())
+        if (multiplicador == multiplicadores.size()) {
             multiplicador = 0;
+        }
 
         return multiplicador;
     }
@@ -155,8 +156,9 @@ public final class DigitoPara {
 
             this.multiplicadores.clear();
 
-            for (int i = inicio; i <= fim; i++)
+            for (int i = inicio; i <= fim; i++) {
                 multiplicadores.add(i);
+            }
 
             return this;
         }
@@ -199,8 +201,9 @@ public final class DigitoPara {
 
             substituicoes.clear();
 
-            for (Integer integer : i)
+            for (Integer integer : i) {
                 substituicoes.put(integer, substituto);
+            }
 
             return this;
         }
@@ -231,11 +234,13 @@ public final class DigitoPara {
          */
         public final DigitoPara build() {
 
-            if (multiplicadores.size() == 0)
+            if (multiplicadores.size() == 0) {
                 comMultiplicadoresDeAte(2, 9);
+            }
 
-            if (modulo == 0)
+            if (modulo == 0) {
                 mod(11);
+            }
 
             return new DigitoPara(this);
         }

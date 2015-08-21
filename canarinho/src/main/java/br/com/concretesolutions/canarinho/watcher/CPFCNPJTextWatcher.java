@@ -55,8 +55,9 @@ public class CPFCNPJTextWatcher implements TextWatcher {
 
     @Override
     public void afterTextChanged(final Editable s) {
-        if (mudancaInterna)
+        if (mudancaInterna) {
             return;
+        }
 
         s.setFilters(FILTRO_CPF_CNPJ);
 
@@ -75,19 +76,19 @@ public class CPFCNPJTextWatcher implements TextWatcher {
     private void efetuaValidacao(Editable s) {
         validador.ehValido(s, resultadoParcial);
 
-        if (callbackErros == null)
+        if (callbackErros == null) {
             return;
+        }
 
-        if (!resultadoParcial.isParcialmenteValido())
+        if (!resultadoParcial.isParcialmenteValido()) {
             callbackErros.invalido(s.toString(), resultadoParcial.getMensagem());
+        } else {
 
-        else {
-
-            if (!resultadoParcial.isValido())
+            if (!resultadoParcial.isValido()) {
                 callbackErros.parcialmenteValido(s.toString());
-
-            else
+            } else {
                 callbackErros.totalmenteValido(s.toString());
+            }
         }
     }
 
@@ -97,9 +98,10 @@ public class CPFCNPJTextWatcher implements TextWatcher {
         mudancaInterna = true;
         s.replace(0, s.length(), builder, 0, builder.length());
 
-        if (builder.toString().equals(s.toString()))
+        if (builder.toString().equals(s.toString())) {
             // TODO: estudar implantar a manutenção da posição do cursor
             Selection.setSelection(s, builder.length());
+        }
 
         efetuaValidacao(s);
 
@@ -126,8 +128,9 @@ public class CPFCNPJTextWatcher implements TextWatcher {
                 continue;
             }
 
-            if (j >= str.length())
+            if (j >= str.length()) {
                 break;
+            }
 
             builder.append(str.charAt(j));
             j++;
@@ -158,8 +161,9 @@ public class CPFCNPJTextWatcher implements TextWatcher {
 
         // Caso haja mais de um caracter de formatação (da máscara) faz um loop
         // até chegar em um caracter que não seja de formatação
-        while (builder.length() > 0 && mascara[builder.length() - 1] != '#')
+        while (builder.length() > 0 && mascara[builder.length() - 1] != '#') {
             builder.deleteCharAt(builder.length() - 1);
+        }
 
         String value = builder.toString();
         char[] mascaraSelecionada = ehCpf(value) ? CPF : CNPJ;
@@ -176,5 +180,4 @@ public class CPFCNPJTextWatcher implements TextWatcher {
     private boolean ehCpf(String valor) {
         return Formatador.Padroes.PADRAO_SOMENTE_NUMEROS.matcher(valor).replaceAll("").length() < 12;
     }
-
 }

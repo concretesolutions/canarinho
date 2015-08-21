@@ -48,8 +48,9 @@ public final class ValidadorBoleto implements Validador {
     @Override
     public boolean ehValido(String valor) {
 
-        if (valor == null)
+        if (valor == null) {
             throw new IllegalArgumentException("Campos não podem ser nulos");
+        }
 
         String valorSemFormatacao = Formatador.Padroes.PADRAO_SOMENTE_NUMEROS.matcher(valor).replaceAll("");
         return ehValido(new SpannableStringBuilder(valorSemFormatacao), new ResultadoParcial()).isValido();
@@ -58,13 +59,15 @@ public final class ValidadorBoleto implements Validador {
     @Override
     public ResultadoParcial ehValido(Editable valor, ResultadoParcial resultadoParcial) {
 
-        if (resultadoParcial == null || valor == null)
+        if (resultadoParcial == null || valor == null) {
             throw new IllegalArgumentException("Campos não podem ser nulos");
+        }
 
         final String valorDesformatado = PADRAO_PARA_LIMPAR.matcher(valor).replaceAll("");
 
-        if (!PADRAO_APENAS_NUMEROS.matcher(valorDesformatado).matches())
+        if (!PADRAO_APENAS_NUMEROS.matcher(valorDesformatado).matches()) {
             throw new IllegalArgumentException("Apenas números, '.' e espaços são válidos");
+        }
 
         resultadoParcial.totalmenteValido(false);
 
@@ -75,17 +78,21 @@ public final class ValidadorBoleto implements Validador {
 
     private ResultadoParcial validaNormal(String valor, ResultadoParcial rParcial) {
 
-        if (!validaBloco(valor, rParcial, MOD_10, 10, 0, "Primeiro"))
+        if (!validaBloco(valor, rParcial, MOD_10, 10, 0, "Primeiro")) {
             return rParcial;
+        }
 
-        if (!validaBloco(valor, rParcial, MOD_10, 21, 10, "Segundo"))
+        if (!validaBloco(valor, rParcial, MOD_10, 21, 10, "Segundo")) {
             return rParcial;
+        }
 
-        if (!validaBloco(valor, rParcial, MOD_10, 32, 21, "Terceiro"))
+        if (!validaBloco(valor, rParcial, MOD_10, 32, 21, "Terceiro")) {
             return rParcial;
+        }
 
-        if (valor.length() < 47)
+        if (valor.length() < 47) {
             return rParcial;
+        }
 
         return rParcial.totalmenteValido(true);
     }
@@ -96,17 +103,21 @@ public final class ValidadorBoleto implements Validador {
         final boolean ehMod10 = valor.charAt(2) == '6' || valor.charAt(2) == '7';
         final DigitoPara digitoPara = ehMod10 ? MOD_10 : MOD_11;
 
-        if (!validaBloco(valor, rParcial, digitoPara, 12, 0, "Primeiro"))
+        if (!validaBloco(valor, rParcial, digitoPara, 12, 0, "Primeiro")) {
             return rParcial;
+        }
 
-        if (!validaBloco(valor, rParcial, digitoPara, 24, 12, "Segundo"))
+        if (!validaBloco(valor, rParcial, digitoPara, 24, 12, "Segundo")) {
             return rParcial;
+        }
 
-        if (!validaBloco(valor, rParcial, digitoPara, 36, 24, "Terceiro"))
+        if (!validaBloco(valor, rParcial, digitoPara, 36, 24, "Terceiro")) {
             return rParcial;
+        }
 
-        if (!validaBloco(valor, rParcial, digitoPara, 48, 36, "Quarto"))
+        if (!validaBloco(valor, rParcial, digitoPara, 48, 36, "Quarto")) {
             return rParcial;
+        }
 
         // Retorna bloco válido
         return rParcial.totalmenteValido(true);
@@ -128,11 +139,12 @@ public final class ValidadorBoleto implements Validador {
         // Valida primeiro bloco
         final char digito = mod.calcula(valor.subSequence(st, end).toString()).charAt(0);
 
-        if (digito != valor.charAt(end))
+        if (digito != valor.charAt(end)) {
             return resultadoParcial
                     .mensagem(mensagem + " bloco inválido")
                     .parcialmenteValido(false)
                     .isParcialmenteValido();
+        }
 
         return true;
     }

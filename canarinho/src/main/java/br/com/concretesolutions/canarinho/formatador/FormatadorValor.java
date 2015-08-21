@@ -51,8 +51,9 @@ public final class FormatadorValor implements Formatador {
     @Override
     public boolean estaFormatado(String value) {
 
-        if (value == null)
+        if (value == null) {
             throw new IllegalArgumentException("Valor não pode ser nulo");
+        }
 
         return PADRAO_MOEDA.matcher(value).matches();
     }
@@ -60,8 +61,9 @@ public final class FormatadorValor implements Formatador {
     @Override
     public boolean podeSerFormatado(String value) {
 
-        if (value == null)
+        if (value == null) {
             throw new IllegalArgumentException("Valor não pode ser nulo");
+        }
 
         return PADRAO_DECIMAL.matcher(value).matches();
     }

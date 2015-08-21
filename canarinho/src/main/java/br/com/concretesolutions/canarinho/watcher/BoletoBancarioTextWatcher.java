@@ -56,15 +56,17 @@ public final class BoletoBancarioTextWatcher implements TextWatcher {
         // retorna se a String é menor que o mínimo de caracteres
         // para haver uma formatação ou se a mudança foi disparada
         // pelo método atualizaTexto
-        if (mudancaInterna)
+        if (mudancaInterna) {
             return;
+        }
 
 
         // Trata o caso em que tudo é apagado em lote
         if (s.length() < 3) {
             resultadoParcial.mensagem(null).parcialmenteValido(false).totalmenteValido(false);
-            if (callbackErros != null)
+            if (callbackErros != null) {
                 callbackErros.parcialmenteValido("");
+            }
             return;
         }
 
@@ -89,19 +91,18 @@ public final class BoletoBancarioTextWatcher implements TextWatcher {
     private void efetuaValidacao(Editable s) {
         validador.ehValido(s, resultadoParcial);
 
-        if (callbackErros == null)
+        if (callbackErros == null) {
             return;
+        }
 
-        if (!resultadoParcial.isParcialmenteValido())
+        if (!resultadoParcial.isParcialmenteValido()) {
             callbackErros.invalido(s.toString(), resultadoParcial.getMensagem());
-
-        else {
-
-            if (!resultadoParcial.isValido())
+        } else {
+            if (!resultadoParcial.isValido()) {
                 callbackErros.parcialmenteValido(s.toString());
-
-            else
+            } else {
                 callbackErros.totalmenteValido(s.toString());
+            }
         }
     }
 
@@ -115,9 +116,10 @@ public final class BoletoBancarioTextWatcher implements TextWatcher {
 
         // The text could be changed by other TextWatcher after we changed it. If we found the
         // text is not the one we were expecting, just give up calling setSelection().
-        if (builder.toString().equals(s.toString()))
+        if (builder.toString().equals(s.toString())) {
             // TODO: estudar implantar a manutenção da posição do cursor
             Selection.setSelection(s, builder.length());
+        }
 
         // Atualiza as validações com o valor atual do Editable.
         efetuaValidacao(s);
@@ -144,8 +146,9 @@ public final class BoletoBancarioTextWatcher implements TextWatcher {
                 continue;
             }
 
-            if (j >= str.length())
+            if (j >= str.length()) {
                 break;
+            }
 
             builder.append(str.charAt(j));
             j++;
@@ -162,24 +165,26 @@ public final class BoletoBancarioTextWatcher implements TextWatcher {
         final boolean ultimoCaracterEraMascara = mascara[s.length()] != '#';
 
         // Se o caracter a frente do último atual era de formatação, apaga o último atual
-        if (ultimoCaracterEraMascara)
+        if (ultimoCaracterEraMascara) {
             builder.deleteCharAt(builder.length() - 1);
+        }
 
         // Caso haja mais de um caracter de formatação (da máscara) faz um loop
         // até chegar em um caracter que não seja de formatação
-        while (builder.length() > 0 && mascara[builder.length() - 1] != '#')
+        while (builder.length() > 0 && mascara[builder.length() - 1] != '#') {
             builder.deleteCharAt(builder.length() - 1);
+        }
 
         return builder;
     }
 
     private void verificaFiltro(final Editable s, final boolean tributo) {
         // Filtro de tamanho
-        if (tributo && !Arrays.equals(s.getFilters(), FILTRO_TRIBUTO))
+        if (tributo && !Arrays.equals(s.getFilters(), FILTRO_TRIBUTO)) {
             s.setFilters(FILTRO_TRIBUTO);
-
-        else if (!tributo && !Arrays.equals(s.getFilters(), FILTRO_NORMAL))
+        } else if (!tributo && !Arrays.equals(s.getFilters(), FILTRO_NORMAL)) {
             s.setFilters(FILTRO_NORMAL);
+        }
     }
 
     // Boletos iniciados com 8 são tributos ou de concessionárias

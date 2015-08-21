@@ -28,39 +28,44 @@ public final class FormatadorTelefone implements Formatador {
 
     @Override
     public String formata(String value) {
-        if (ehNoveDigitos(value))
+        if (ehNoveDigitos(value)) {
             return FORMATADOR_NOVE_DIGITOS.formata(value);
+        }
 
         return FORMATADOR_OITO_DIGITOS.formata(value);
     }
 
     @Override
     public String desformata(String value) {
-        if (ehNoveDigitos(value))
+        if (ehNoveDigitos(value)) {
             return FORMATADOR_NOVE_DIGITOS.desformata(value);
+        }
 
         return FORMATADOR_OITO_DIGITOS.desformata(value);
     }
 
     @Override
     public boolean estaFormatado(String value) {
-        if (ehNoveDigitos(value))
+        if (ehNoveDigitos(value)) {
             return FORMATADOR_NOVE_DIGITOS.estaFormatado(value);
+        }
 
         return FORMATADOR_OITO_DIGITOS.estaFormatado(value);
     }
 
     @Override
     public boolean podeSerFormatado(String value) {
-        if (ehNoveDigitos(value))
+        if (ehNoveDigitos(value)) {
             return FORMATADOR_NOVE_DIGITOS.podeSerFormatado(value);
+        }
 
         return FORMATADOR_OITO_DIGITOS.podeSerFormatado(value);
     }
 
     private boolean ehNoveDigitos(String value) {
-        if (value == null)
+        if (value == null) {
             throw new IllegalArgumentException("Valor não pode ser nulo");
+        }
 
         final String desformatado = Formatador.Padroes.PADRAO_SOMENTE_NUMEROS.matcher(value).replaceAll("");
         return desformatado.length() > 10;

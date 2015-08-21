@@ -19,8 +19,9 @@ public final class ValidadorTelefone implements Validador {
 
     @Override
     public boolean ehValido(String valor) {
-        if (valor == null || valor.length() < 10)
+        if (valor == null || valor.length() < 10) {
             return false;
+        }
 
         final String desformatado = Formatador.Padroes.PADRAO_SOMENTE_NUMEROS.matcher(valor).replaceAll("");
 
@@ -29,16 +30,18 @@ public final class ValidadorTelefone implements Validador {
 
     @Override
     public ResultadoParcial ehValido(Editable valor, ResultadoParcial resultadoParcial) {
-        if (resultadoParcial == null || valor == null)
+        if (resultadoParcial == null || valor == null) {
             throw new IllegalArgumentException("Valores não podem ser nulos");
+        }
 
         final String desformatado = Formatador.Padroes.PADRAO_SOMENTE_NUMEROS.matcher(valor).replaceAll("");
 
-        if (!ehValido(desformatado))
+        if (!ehValido(desformatado)) {
             return resultadoParcial
                     .parcialmenteValido(desformatado.length() < 11)
                     .mensagem("Telefone inválido")
                     .totalmenteValido(false);
+        }
 
         return resultadoParcial
                 .parcialmenteValido(true)

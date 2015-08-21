@@ -26,8 +26,9 @@ public final class FormatadorBoleto implements Formatador {
     @Override
     public String formata(String value) {
 
-        if (ehTributo(value))
+        if (ehTributo(value)) {
             return FORMATADOR_TRIBUTOS.formata(value);
+        }
 
         return FORMATADOR_NORMAL.formata(value);
     }
@@ -35,8 +36,9 @@ public final class FormatadorBoleto implements Formatador {
     @Override
     public String desformata(String value) {
 
-        if (ehTributo(value))
+        if (ehTributo(value)) {
             return FORMATADOR_TRIBUTOS.desformata(value);
+        }
 
         return FORMATADOR_NORMAL.desformata(value);
     }
@@ -44,8 +46,9 @@ public final class FormatadorBoleto implements Formatador {
     @Override
     public boolean estaFormatado(String value) {
 
-        if (ehTributo(value))
+        if (ehTributo(value)) {
             return FORMATADOR_TRIBUTOS.estaFormatado(value);
+        }
 
         return FORMATADOR_NORMAL.estaFormatado(value);
     }
@@ -53,16 +56,18 @@ public final class FormatadorBoleto implements Formatador {
     @Override
     public boolean podeSerFormatado(String value) {
 
-        if (ehTributo(value))
+        if (ehTributo(value)) {
             return FORMATADOR_TRIBUTOS.podeSerFormatado(value);
+        }
 
         return FORMATADOR_NORMAL.podeSerFormatado(value);
     }
 
     private boolean ehTributo(String value) {
 
-        if (value == null)
+        if (value == null) {
             throw new IllegalArgumentException("Valor não pode ser nulo");
+        }
 
         return value.charAt(0) == '8';
     }

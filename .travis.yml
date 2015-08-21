@@ -4,12 +4,12 @@ android:
     - platform-tools
     - tools
     - extra
-    - build-tools-22.0.1
-    - android-22
+    - build-tools-23.0.0
+    - android-23
     - extra-android-m2repository
     - sys-img-armeabi-v7a-android-19
     - sys-img-x86-android-18
 
 script:
-  - ./gradlew assemble :sample:test
+  - ./gradlew check assemble :sample:test
 

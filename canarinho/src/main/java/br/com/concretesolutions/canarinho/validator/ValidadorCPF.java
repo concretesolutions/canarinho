@@ -29,16 +29,19 @@ public final class ValidadorCPF implements Validador {
     @Override
     public boolean ehValido(String value) {
 
-        if (value == null || value.length() < 11)
+        if (value == null || value.length() < 11) {
             return false;
+        }
 
         final String desformatado = Formatador.Padroes.PADRAO_SOMENTE_NUMEROS.matcher(value).replaceAll("");
 
-        if (desformatado.length() != 11)
+        if (desformatado.length() != 11) {
             return false;
+        }
 
-        if (estaNaListaNegra(desformatado))
+        if (estaNaListaNegra(desformatado)) {
             return false;
+        }
 
         final String cpfSemDigito = desformatado.substring(0, desformatado.length() - 2);
         final String digitos = desformatado.substring(desformatado.length() - 2);
@@ -52,16 +55,18 @@ public final class ValidadorCPF implements Validador {
     @Override
     public ResultadoParcial ehValido(Editable valor, ResultadoParcial resultadoParcial) {
 
-        if (resultadoParcial == null || valor == null)
+        if (resultadoParcial == null || valor == null) {
             throw new IllegalArgumentException("Valores não podem ser nulos");
+        }
 
         final String desformatado = Formatador.Padroes.PADRAO_SOMENTE_NUMEROS.matcher(valor).replaceAll("");
 
-        if (!ehValido(desformatado))
+        if (!ehValido(desformatado)) {
             return resultadoParcial
                     .parcialmenteValido(desformatado.length() < 11)
                     .mensagem("CPF inválido")
                     .totalmenteValido(false);
+        }
 
         return resultadoParcial
                 .parcialmenteValido(true)
@@ -76,9 +81,11 @@ public final class ValidadorCPF implements Validador {
 
         boolean igual = true;
 
-        for (int i = 1; i < 11 && igual; i++)
-            if (valor.charAt(i) != valor.charAt(0))
+        for (int i = 1; i < 11 && igual; i++) {
+            if (valor.charAt(i) != valor.charAt(0)) {
                 igual = false;
+            }
+        }
 
         return igual || valor.equals("12345678909");
     }
