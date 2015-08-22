@@ -17,28 +17,26 @@ public final class ValidadorCNPJ implements Validador {
             .trocandoPorSeEncontrar("0", 10, 11)
             .build();
 
-    private static class SingletonHolder {
-        private static final ValidadorCNPJ INSTANCE = new ValidadorCNPJ();
+    // No instance creation
+    private ValidadorCNPJ() {
     }
 
     public static ValidadorCNPJ getInstance() {
         return SingletonHolder.INSTANCE;
     }
 
-    // No instance creation
-    private ValidadorCNPJ() {
-    }
-
     @Override
     public boolean ehValido(String value) {
 
-        if (value == null || value.length() < 14)
+        if (value == null || value.length() < 14) {
             return false;
+        }
 
         final String desformatado = Formatador.Padroes.PADRAO_SOMENTE_NUMEROS.matcher(value).replaceAll("");
 
-        if (desformatado.length() != 14)
+        if (desformatado.length() != 14) {
             return false;
+        }
 
         final String cnpjSemDigitos = desformatado.substring(0, desformatado.length() - 2);
         final String digitos = desformatado.substring(desformatado.length() - 2);
@@ -52,19 +50,25 @@ public final class ValidadorCNPJ implements Validador {
     @Override
     public ResultadoParcial ehValido(Editable valor, ResultadoParcial resultadoParcial) {
 
-        if (resultadoParcial == null || valor == null)
+        if (resultadoParcial == null || valor == null) {
             throw new IllegalArgumentException("Valores não podem ser nulos");
+        }
 
         final String desformatado = Formatador.Padroes.PADRAO_SOMENTE_NUMEROS.matcher(valor).replaceAll("");
 
-        if (!ehValido(desformatado))
+        if (!ehValido(desformatado)) {
             return resultadoParcial
                     .parcialmenteValido(desformatado.length() < 14)
                     .mensagem("CNPJ inválido")
                     .totalmenteValido(false);
+        }
 
         return resultadoParcial
                 .parcialmenteValido(true)
                 .totalmenteValido(true);
+    }
+
+    private static class SingletonHolder {
+        private static final ValidadorCNPJ INSTANCE = new ValidadorCNPJ();
     }
 }

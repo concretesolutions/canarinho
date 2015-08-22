@@ -16,19 +16,19 @@ import java.util.List;
  * 2 a 7 e usando módulo 11 é a seguinte:
  * </p>
  * <pre>
- * 	0  0  0  0  0  3  9  1  0  4  7  6  6 (trecho numérico)
- * 	2  7  6  5  4  3  2  7  6  5  4  3  2 (multiplicadores, da direita para a esquerda e ciclando)
- * 	----------------------------------------- multiplicações algarismo a algarismo
- * 	 0  0  0  0  0  9 18  7  0 20 28 18 12 -- soma = 112
+ *  0  0  0  0  0  3  9  1  0  4  7  6  6 (trecho numérico)
+ *  2  7  6  5  4  3  2  7  6  5  4  3  2 (multiplicadores, da direita para a esquerda e ciclando)
+ *  ----------------------------------------- multiplicações algarismo a algarismo
+ *   0  0  0  0  0  9 18  7  0 20 28 18 12 -- soma = 112
  * </pre>
  * <p>
  * Tira-se o módulo dessa soma e, então, calcula-se o complementar do módulo e, se o número
  * for 0, 10 ou 11, o dígito passa a ser 1.
  * </p>
  * <pre>
- * 		soma = 112
- * 		soma % 11 = 2
- * 		11 - (soma % 11) = 9
+ *      soma = 112
+ *      soma % 11 = 2
+ *      11 - (soma % 11) = 9
  * </pre>
  * <p>
  * NOTE: Esta é uma versão otimizada para Android inspirada em
@@ -66,8 +66,9 @@ public final class DigitoPara {
 
         final char[] digitos = trecho.toCharArray();
 
-        for (int i = 0; i < digitos.length; i++)
+        for (int i = 0; i < digitos.length; i++) {
             numero.add(Character.getNumericValue(digitos[i]));
+        }
 
         Collections.reverse(numero);
 
@@ -83,11 +84,13 @@ public final class DigitoPara {
 
         int resultado = soma % modulo;
 
-        if (complementar)
+        if (complementar) {
             resultado = modulo - resultado;
+        }
 
-        if (substituicoes.get(resultado) != null)
+        if (substituicoes.get(resultado) != null) {
             return substituicoes.get(resultado);
+        }
 
         return String.valueOf(resultado);
     }
@@ -108,12 +111,13 @@ public final class DigitoPara {
      */
     private int proximoMultiplicador(int multiplicadorDaVez) {
 
-        multiplicadorDaVez++;
+        int multiplicador = multiplicadorDaVez + 1;
 
-        if (multiplicadorDaVez == multiplicadores.size())
-            multiplicadorDaVez = 0;
+        if (multiplicador == multiplicadores.size()) {
+            multiplicador = 0;
+        }
 
-        return multiplicadorDaVez;
+        return multiplicador;
     }
 
     /**
@@ -152,8 +156,9 @@ public final class DigitoPara {
 
             this.multiplicadores.clear();
 
-            for (int i = inicio; i <= fim; i++)
+            for (int i = inicio; i <= fim; i++) {
                 multiplicadores.add(i);
+            }
 
             return this;
         }
@@ -196,8 +201,9 @@ public final class DigitoPara {
 
             substituicoes.clear();
 
-            for (Integer integer : i)
+            for (Integer integer : i) {
                 substituicoes.put(integer, substituto);
+            }
 
             return this;
         }
@@ -228,11 +234,13 @@ public final class DigitoPara {
          */
         public final DigitoPara build() {
 
-            if (multiplicadores.size() == 0)
+            if (multiplicadores.size() == 0) {
                 comMultiplicadoresDeAte(2, 9);
+            }
 
-            if (modulo == 0)
+            if (modulo == 0) {
                 mod(11);
+            }
 
             return new DigitoPara(this);
         }

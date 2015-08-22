@@ -49,15 +49,14 @@ public final class MascaraNumericaTextWatcher implements TextWatcher {
     public void afterTextChanged(Editable s) {
 
         // retorna se a mudança foi disparada pelo método atualizaTexto
-        if (mudancaInterna)
+        if (mudancaInterna) {
             return;
+        }
 
         final boolean apagou = tamanhoAnterior > s.length();
 
         // Trata deleção e adição de forma diferente (só formata em adições)
-        final StringBuilder builder =
-                apagou ? trataRemocaoDeCaracter(s)
-                        : trataAdicaoDeCaracter(s);
+        final StringBuilder builder = apagou ? trataRemocaoDeCaracter(s) : trataAdicaoDeCaracter(s);
 
         tamanhoAnterior = builder.length();
         atualizaTexto(s, builder);
@@ -73,9 +72,10 @@ public final class MascaraNumericaTextWatcher implements TextWatcher {
 
         // The text could be changed by other TextWatcher after we changed it. If we found the
         // text is not the one we were expecting, just give up calling setSelection().
-        if (builder.toString().equals(s.toString()))
+        if (builder.toString().equals(s.toString())) {
             // TODO: estudar implantar a manutenção da posição do cursor
             Selection.setSelection(s, builder.length());
+        }
 
         // Atualiza as validações com o valor atual do Editable.
         efetuaValidacao(s);
@@ -86,17 +86,17 @@ public final class MascaraNumericaTextWatcher implements TextWatcher {
     private void efetuaValidacao(Editable s) {
         validador.ehValido(s, resultadoParcial);
 
-        if (callbackErros == null)
+        if (callbackErros == null) {
             return;
+        }
 
-        if (!resultadoParcial.isParcialmenteValido())
+        if (!resultadoParcial.isParcialmenteValido()) {
             callbackErros.invalido(s.toString(), resultadoParcial.getMensagem());
-
-        else if (!resultadoParcial.isValido())
+        } else if (!resultadoParcial.isValido()) {
             callbackErros.parcialmenteValido(s.toString());
-
-        else
+        } else {
             callbackErros.totalmenteValido(s.toString());
+        }
     }
 
     private StringBuilder trataAdicaoDeCaracter(Editable s) {
@@ -118,8 +118,9 @@ public final class MascaraNumericaTextWatcher implements TextWatcher {
                 continue;
             }
 
-            if (j >= str.length())
+            if (j >= str.length()) {
                 break;
+            }
 
             builder.append(str.charAt(j));
             j++;
@@ -136,21 +137,24 @@ public final class MascaraNumericaTextWatcher implements TextWatcher {
         final boolean ultimoCaracterEraMascara = mascara[s.length()] != '#';
 
         // Se o caracter a frente do último atual era de formatação, apaga o último atual
-        if (ultimoCaracterEraMascara)
+        if (ultimoCaracterEraMascara) {
             builder.deleteCharAt(builder.length() - 1);
+        }
 
         // Caso haja mais de um caracter de formatação (da máscara) faz um loop
         // até chegar em um caracter que não seja de formatação
-        while (builder.length() > 0 && mascara[builder.length() - 1] != '#')
+        while (builder.length() > 0 && mascara[builder.length() - 1] != '#') {
             builder.deleteCharAt(builder.length() - 1);
+        }
 
         return builder;
     }
 
     private void verificaFiltro(final Editable s) {
         // Filtro de tamanho
-        if (!Arrays.equals(s.getFilters(), filtroNumerico))
+        if (!Arrays.equals(s.getFilters(), filtroNumerico)) {
             s.setFilters(filtroNumerico);
+        }
     }
 
     /**
@@ -206,11 +210,13 @@ public final class MascaraNumericaTextWatcher implements TextWatcher {
          */
         public final MascaraNumericaTextWatcher build() {
 
-            if (mascara == null || mascara.isEmpty() || !mascara.contains("#"))
+            if (mascara == null || mascara.isEmpty() || !mascara.contains("#")) {
                 throw new IllegalArgumentException("Máscara precisa conter ao menos um caracter '#'");
+            }
 
-            if (validador == null || callbackErros == null)
+            if (validador == null || callbackErros == null) {
                 throw new IllegalArgumentException("Por favor, defina um validador e um callback de erros.");
+            }
 
             return new MascaraNumericaTextWatcher(this);
         }

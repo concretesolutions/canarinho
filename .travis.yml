@@ -11,5 +11,5 @@ android:
     - sys-img-x86-android-18
 
 script:
-  - ./gradlew assemble :sample:test
+  - ./gradlew check assemble :sample:test
 

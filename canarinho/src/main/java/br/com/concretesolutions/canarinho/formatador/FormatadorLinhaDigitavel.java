@@ -23,15 +23,12 @@ public final class FormatadorLinhaDigitavel implements Formatador {
         return SingletonHolder.INSTANCE;
     }
 
-    private static class SingletonHolder {
-        private static final FormatadorLinhaDigitavel INSTANCE = new FormatadorLinhaDigitavel();
-    }
-
     @Override
     public String formata(String value) {
 
-        if (value == null || value.length() != 44)
+        if (value == null || value.length() != 44) {
             throw new IllegalArgumentException("Linha digitável deve conter 44 caracteres. " + value);
+        }
 
         if (value.startsWith("8")) {
 
@@ -82,17 +79,19 @@ public final class FormatadorLinhaDigitavel implements Formatador {
     @Override
     public String desformata(String valor) {
 
-        if (valor == null || "".equals(valor))
+        if (valor == null || "".equals(valor)) {
             throw new IllegalArgumentException("Valor não pode estar nulo.");
+        }
 
-        valor = Padroes.PADRAO_SOMENTE_NUMEROS.matcher(valor).replaceAll("");
+        String valorDesformatadao = Padroes.PADRAO_SOMENTE_NUMEROS.matcher(valor).replaceAll("");
 
-        if (valor.charAt(0) == '8') {
+        if (valorDesformatadao.charAt(0) == '8') {
 
-            if (valor.length() != 48)
+            if (valorDesformatadao.length() != 48) {
                 throw new IllegalArgumentException("Valor para boletos que iniciam com 8 deve conter 48 dígitos");
+            }
 
-            final StringBuilder builder = new StringBuilder(valor);
+            final StringBuilder builder = new StringBuilder(valorDesformatadao);
 
             final String primeiroBloco = builder.substring(0, 11);
             final String segundoBloco = builder.substring(12, 23);
@@ -102,13 +101,14 @@ public final class FormatadorLinhaDigitavel implements Formatador {
             return "" + primeiroBloco + segundoBloco + terceiroBloco + quartoBloco;
         }
 
-        if (valor.length() != 47)
+        if (valorDesformatadao.length() != 47) {
             throw new IllegalArgumentException("Valor para boletos deve conter 47 digitos");
+        }
 
-        String primeiroBloco = valor.substring(0, 9);
-        String segundoBloco = valor.substring(10, 20);
-        String terceiroBloco = valor.substring(21, 31);
-        String quartoBloco = valor.substring(32, valor.length());
+        String primeiroBloco = valorDesformatadao.substring(0, 9);
+        String segundoBloco = valorDesformatadao.substring(10, 20);
+        String terceiroBloco = valorDesformatadao.substring(21, 31);
+        String quartoBloco = valorDesformatadao.substring(32, valorDesformatadao.length());
 
         final StringBuilder boletoOrdenado = new StringBuilder(primeiroBloco)
                 .append(segundoBloco)
@@ -134,5 +134,9 @@ public final class FormatadorLinhaDigitavel implements Formatador {
     public boolean podeSerFormatado(String value) {
         final String sanitizado = Padroes.PADRAO_SOMENTE_NUMEROS.matcher(value).replaceAll("");
         return sanitizado.length() == 44;
+    }
+
+    private static class SingletonHolder {
+        private static final FormatadorLinhaDigitavel INSTANCE = new FormatadorLinhaDigitavel();
     }
 }

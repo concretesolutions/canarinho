@@ -32,11 +32,13 @@ public final class ValorMonetarioWatcher implements TextWatcher {
     @Override
     public void afterTextChanged(Editable s) {
 
-        if (mudancaInterna)
+        if (mudancaInterna) {
             return;
+        }
 
         final String somenteNumeros = Formatador.Padroes.PADRAO_SOMENTE_NUMEROS.matcher(s.toString()).replaceAll("");
-        final BigDecimal resultado = new BigDecimal(somenteNumeros).divide(new BigDecimal(100)).setScale(2, RoundingMode.HALF_DOWN);
+        final BigDecimal resultado = new BigDecimal(somenteNumeros).divide(new BigDecimal(100))
+                .setScale(2, RoundingMode.HALF_DOWN);
 
         atualizaTexto(s, Formatador.VALOR.formata(resultado.toPlainString()));
     }
@@ -47,9 +49,10 @@ public final class ValorMonetarioWatcher implements TextWatcher {
         final InputFilter[] filters = s.getFilters();
         s.replace(0, s.length(), valor);
 
-        if (valor.equals(s.toString()))
+        if (valor.equals(s.toString())) {
             // TODO: estudar implantar a manutenção da posição do cursor
             Selection.setSelection(s, valor.length());
+        }
 
         mudancaInterna = false;
     }
