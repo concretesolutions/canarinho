@@ -1,5 +1,7 @@
 # Changelog
 
+- 0.0.7:
+    - Correção de validador de boleto quando setando o código de boleto inteiro (caso de uso: recebendo de um leitor de imagens)
 - 0.0.6:
     - Watcher de CPF/CNPJ simultâneos
 - 0.0.5:

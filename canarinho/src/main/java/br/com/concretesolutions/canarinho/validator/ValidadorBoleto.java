@@ -94,7 +94,7 @@ public final class ValidadorBoleto implements Validador {
             return rParcial;
         }
 
-        return rParcial.totalmenteValido(true);
+        return rParcial.parcialmenteValido(true).totalmenteValido(true);
     }
 
     private ResultadoParcial validaTributo(String valor, ResultadoParcial rParcial) {

@@ -4,6 +4,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v4.widget.NestedScrollView;
 import android.view.View;
+import android.widget.TextView;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -13,7 +14,9 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.pressBack;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
+import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.action.ViewActions.typeTextIntoFocusedView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -26,11 +29,33 @@ public class DemoWatchersInstrumentationTest {
     public ActivityTestRule<DemoWatchersActivity> rule = new ActivityTestRule<>(DemoWatchersActivity.class);
 
     @Test
-    public void consegueDigitarUmBoletoNormalValido() {
+    public void consegueDigitarUmBoletoNormalValido() throws InterruptedException {
+
+        final TextView viewById = (TextView) rule.getActivity().findViewById(R.id.edit_boleto);
+
+        Thread.sleep(2000L);
 
         // Boleto válido
         onView(withId(R.id.edit_boleto))
                 .perform(typeText("23790123016000000005325000456704964680000013580"));
+
+        onView(withText("Campo válido!")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void consegueValidarUmBoletoSetandoOCodigoInteiro() throws InterruptedException {
+
+        final DemoWatchersActivity activity = rule.getActivity();
+        final TextView viewById = (TextView) activity.findViewById(R.id.edit_boleto);
+
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                viewById.setText("34199310130010011560900500990007800000000000000");
+            }
+        });
+
+        Thread.sleep(1500L);
 
         onView(withText("Campo válido!")).check(matches(isDisplayed()));
     }
@@ -134,7 +159,7 @@ public class DemoWatchersInstrumentationTest {
         Thread.sleep(2000L);
 
         onView(withId(R.id.edit_valor))
-                .perform( typeText("1"))
+                .perform(typeText("1"))
                 .check(matches(withText("0,01"))) // inicia com 0,0X
                 .perform(typeText("2"))
                 .check(matches(withText("0,12"))) // 0,XY
@@ -167,18 +192,10 @@ public class DemoWatchersInstrumentationTest {
 
         Thread.sleep(2000L);
 
-
-        onView(withId(R.id.edit_cpf_cnpj)).perform(typeText("46574356636"));
-
-        onView(withText("Campo válido!"))
-                .check(matches(isDisplayed()))
-                .perform(pressBack());
-
+        onView(withId(R.id.edit_cpf_cnpj)).perform(swipeUp(), typeText("46574356636"));
+        onView(withText("Campo válido!")).check(matches(isDisplayed())).perform(pressBack());
         onView(withId(R.id.edit_cpf_cnpj)).perform(clearText(), typeText("95621433000170"));
-
-        onView(withText("Campo válido!"))
-                .check(matches(isDisplayed()))
-                .perform(pressBack());
+        onView(withText("Campo válido!")).check(matches(isDisplayed()));
     }
 
     @Test
@@ -194,11 +211,11 @@ public class DemoWatchersInstrumentationTest {
 
         Thread.sleep(2000L);
 
-        onView(withId(R.id.edit_cpf_cnpj)).perform(typeText("46574356637"));
-        onView(withText("CPF inválido")).check(matches(isDisplayed())).perform(pressBack());
+        onView(withId(R.id.edit_cpf_cnpj)).perform(swipeUp(), typeText("46574356637"));
+        onView(withText("CPF inválido")).check(matches(isDisplayed()));
 
         onView(withId(R.id.edit_cpf_cnpj)).perform(clearText(), typeText("95621433000180"));
-        onView(withText("CNPJ inválido")).check(matches(isDisplayed())).perform(pressBack());
+        onView(withText("CNPJ inválido")).check(matches(isDisplayed()));
     }
 
 }
