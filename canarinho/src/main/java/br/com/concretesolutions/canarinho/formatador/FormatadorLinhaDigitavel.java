@@ -6,13 +6,11 @@ import br.com.concretesolutions.canarinho.validator.ValidadorBoleto;
 /**
  * Transforma a linha digitável de um boleto em um código de boleto e vice-versa. Use o metodo {@link #formata(String)}
  * para transformar a linha digitavel em boleto e {@link #desformata(String)}.
- * <p>
  * Para verificar se um valor esta em linha digitável ou em boleto, usar os métodos:
  * <ul>
  * <li>{@link #estaFormatado(String)}: indicará se está em formata de boleto</li>
  * <li>{@link #podeSerFormatado(String)}: indicará se é uma linha digitável</li>
  * </ul>
- * </p>
  */
 public final class FormatadorLinhaDigitavel implements Formatador {
 
