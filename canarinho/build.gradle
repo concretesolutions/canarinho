@@ -38,5 +38,10 @@ android {
 dependencies {
 }
 
-// Não aplicar este arquivo em releases! Isso quebra o Travis.
-//apply from: 'publica.gradle'
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def user = properties.getProperty('bintray.user')
+def apikey = properties.getProperty('bintray.apikey')
+
+if (user && apikey)
+    apply from: 'publica.gradle'
