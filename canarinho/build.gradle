@@ -38,10 +38,15 @@ android {
 dependencies {
 }
 
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-def user = properties.getProperty('bintray.user')
-def apikey = properties.getProperty('bintray.apikey')
+// Configura publicação
+def localProps = project.rootProject.file('local.properties')
 
-if (user && apikey)
-    apply from: 'publica.gradle'
+if (localProps.exists()) {
+    Properties properties = new Properties()
+    properties.load(localProps.newDataInputStream())
+    def user = properties.getProperty('bintray.user')
+    def apikey = properties.getProperty('bintray.apikey')
+
+    if (user && apikey)
+        apply from: 'publica.gradle'
+}
