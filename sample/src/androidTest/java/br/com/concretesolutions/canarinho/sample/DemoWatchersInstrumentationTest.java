@@ -13,10 +13,8 @@ import org.junit.runner.RunWith;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.pressBack;
-import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.swipeUp;
 import static android.support.test.espresso.action.ViewActions.typeText;
-import static android.support.test.espresso.action.ViewActions.typeTextIntoFocusedView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -31,13 +29,11 @@ public class DemoWatchersInstrumentationTest {
     @Test
     public void consegueDigitarUmBoletoNormalValido() throws InterruptedException {
 
-        final TextView viewById = (TextView) rule.getActivity().findViewById(R.id.edit_boleto);
-
-        Thread.sleep(2000L);
-
         // Boleto válido
         onView(withId(R.id.edit_boleto))
                 .perform(typeText("23790123016000000005325000456704964680000013580"));
+
+        Thread.sleep(1500L);
 
         onView(withText("Campo válido!")).check(matches(isDisplayed()));
     }
@@ -159,7 +155,7 @@ public class DemoWatchersInstrumentationTest {
         Thread.sleep(2000L);
 
         onView(withId(R.id.edit_valor))
-                .perform(typeText("1"))
+                .perform(swipeUp(), typeText("1"))
                 .check(matches(withText("0,01"))) // inicia com 0,0X
                 .perform(typeText("2"))
                 .check(matches(withText("0,12"))) // 0,XY
@@ -181,6 +177,7 @@ public class DemoWatchersInstrumentationTest {
 
     @Test
     public void consegueDigitarCPFCNPJValido() throws Throwable {
+
         final NestedScrollView scroll = (NestedScrollView) rule.getActivity().findViewById(R.id.container);
 
         rule.runOnUiThread(new Runnable() {
