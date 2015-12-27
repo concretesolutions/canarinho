@@ -14,6 +14,7 @@ public interface Formatador {
      */
     Formatador CEP = new FormatadorBase(Padroes.CEP_FORMATADO, "$1-$2", Padroes.CEP_DESFORMATADO, "$1$2");
 
+
     /**
      * Singleton de formatação de CPF
      */
