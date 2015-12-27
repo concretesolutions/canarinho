@@ -17,6 +17,11 @@ public interface Formatador {
     /**
      * Singleton de formatação de CPF
      */
+    Formatador CEP = new FormatadorBase(Padroes.CEP_FORMATADO, "$1-$2", Padroes.CEP_DESFORMATADO, "$1$2");
+
+    /**
+     * Singleton de formatação de CPF
+     */
     Formatador CPF = new FormatadorBase(Padroes.CPF_FORMATADO, "$1.$2.$3-$4", Padroes.CPF_DESFORMATADO, "$1$2$3$4");
 
     /**
