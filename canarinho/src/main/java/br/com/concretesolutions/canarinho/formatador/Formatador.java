@@ -10,6 +10,11 @@ public interface Formatador {
 
     // Formatadores
     /**
+     * Singleton de formatação de CEP
+     */
+    Formatador CEP = new FormatadorBase(Padroes.CEP_FORMATADO, "$1-$2", Padroes.CEP_DESFORMATADO, "$1$2");
+
+    /**
      * Singleton de formatação de CPF
      */
     Formatador CPF = new FormatadorBase(Padroes.CPF_FORMATADO, "$1.$2.$3-$4", Padroes.CPF_DESFORMATADO, "$1$2$3$4");
@@ -82,6 +87,10 @@ public interface Formatador {
      */
     abstract class Padroes {
         // Patterns
+        public static final Pattern CEP_FORMATADO = Pattern
+                .compile("(\\d{5})-(\\d{3})");
+        public static final Pattern CEP_DESFORMATADO = Pattern
+                .compile("(\\d{5})(\\d{3})");
         public static final Pattern CNPJ_FORMATADO = Pattern
                 .compile("(\\d{2})[.](\\d{3})[.](\\d{3})/(\\d{4})-(\\d{2})");
         public static final Pattern CNPJ_DESFORMATADO = Pattern
