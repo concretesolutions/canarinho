@@ -215,4 +215,23 @@ public class DemoWatchersInstrumentationTest {
         onView(withText("CNPJ inválido")).check(matches(isDisplayed()));
     }
 
+    @Test
+    public void consegueDigitarUmCEPValido() throws Throwable {
+        final NestedScrollView scroll = (NestedScrollView) rule.getActivity().findViewById(R.id.container);
+
+        rule.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                scroll.fullScroll(View.FOCUS_DOWN);
+            }
+        });
+
+        Thread.sleep(2000L);
+        onView(withId(R.id.edit_cep)).perform(typeText("49025090"));
+
+        onView(withText("Campo válido!"))
+                .check(matches(isDisplayed()))
+                .perform(pressBack());
+    }
+
 }
