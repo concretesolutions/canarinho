@@ -17,18 +17,26 @@ public interface Validador {
      * Referência para o singleton de validação de CPF
      */
     Validador CPF = ValidadorCPF.getInstance();
+
     /**
      * Referência para o singleton de validação de CNPJ
      */
     Validador CNPJ = ValidadorCNPJ.getInstance();
+
     /**
      * Referência para o singleton de validação de boleto
      */
     Validador BOLETO = ValidadorBoleto.getInstance();
+
     /**
      * Referência para o singleton de validação de telefone
      */
     Validador TELFONE = ValidadorTelefone.getInstance();
+
+    /**
+     * Referência para o singleton de validação de CEP
+     */
+    Validador CEP = ValidadorCEP.getInstance();
 
     /**
      * Valida uma {@link String} completa
@@ -70,9 +78,10 @@ public interface Validador {
         }
 
         /**
-         * TODO Javadoc pendente
-         * @param valido a definir
-         * @return a definir
+         * Ajusta a validação com o valor de "totalmente válido".
+         *
+         * @param valido Flag totalmenteValido
+         * @return Fluent Interface "this"
          */
         public ResultadoParcial totalmenteValido(boolean valido) {
             this.valido = valido;
@@ -80,9 +89,10 @@ public interface Validador {
         }
 
         /**
-         * TODO Javadoc pendente
-         * @param parcialmenteValido a definir
-         * @return a definir
+         * Ajusta a validação com o valor de "totalmente válido".
+         *
+         * @param parcialmenteValido Flag parcialmenteValido
+         * @return Fluent Interface "this"
          */
         public ResultadoParcial parcialmenteValido(boolean parcialmenteValido) {
             this.parcialmenteValido = parcialmenteValido;
@@ -90,9 +100,10 @@ public interface Validador {
         }
 
         /**
-         * TODO Javadoc pendente
-         * @param mensagem a definir
-         * @return a definir
+         * Ajusta a mensagem de erro
+         *
+         * @param mensagem Mensagem usada na apresentação do erro.
+         * @return Fluent Interface "this"
          */
         public ResultadoParcial mensagem(String mensagem) {
             this.mensagem = mensagem;

@@ -29,17 +29,13 @@ public final class CEPTextWatcher implements TextWatcher {
     private boolean mudancaInterna = false;
     private int tamanhoAnterior = 0;
 
-    /**
-     * TODO Javadoc pendente
-     */
     public CEPTextWatcher() {
-
     }
 
     /**
-     * TODO Javadoc pendente
+     * Inicializa o validador com um callback de erros.
      *
-     * @param callbackErros a descrever
+     * @param callbackErros Instância que será chamada quando houverem erros.
      */
     public CEPTextWatcher(EventoDeValidacao callbackErros) {
         this.callbackErros = callbackErros;

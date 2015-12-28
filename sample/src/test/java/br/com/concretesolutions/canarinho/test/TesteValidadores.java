@@ -125,4 +125,12 @@ public class TesteValidadores {
         assertThat(Validador.TELFONE.ehValido("1112345"), is(false));
     }
 
+    @Test
+    public void consegueValidarCEP() {
+        assertThat(Validador.CEP.ehValido("12345678"), is(true));
+        assertThat(Validador.CEP.ehValido("12345-678"), is(true));
+        assertThat(Validador.CEP.ehValido("12345-67"), is(false));
+        assertThat(Validador.CEP.ehValido("1234-678"), is(false));
+        assertThat(Validador.CEP.ehValido(""), is(false));
+    }
 }

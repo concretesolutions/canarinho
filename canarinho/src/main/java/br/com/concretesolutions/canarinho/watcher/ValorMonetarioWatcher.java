@@ -12,6 +12,7 @@ import br.com.concretesolutions.canarinho.formatador.Formatador;
 /**
  */
 public final class ValorMonetarioWatcher implements TextWatcher {
+
     private boolean mudancaInterna;
 
     @Override

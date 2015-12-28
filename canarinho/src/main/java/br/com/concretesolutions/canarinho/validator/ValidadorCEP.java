@@ -5,7 +5,9 @@ import android.text.Editable;
 import br.com.concretesolutions.canarinho.formatador.Formatador;
 
 /**
- * Created by eduardo on 12/26/15.
+ * Implementação de @{link Validador} para CEP (Código de endereçamento Postal)
+ *
+ * @see Validador
  */
 public final class ValidadorCEP implements Validador {
 
@@ -30,6 +32,7 @@ public final class ValidadorCEP implements Validador {
 
     @Override
     public ResultadoParcial ehValido(Editable valor, ResultadoParcial resultadoParcial) {
+
         if (resultadoParcial == null || valor == null) {
             throw new IllegalArgumentException("Valores não podem ser nulos");
         }

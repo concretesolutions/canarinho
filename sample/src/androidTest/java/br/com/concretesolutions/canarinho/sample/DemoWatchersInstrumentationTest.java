@@ -217,6 +217,7 @@ public class DemoWatchersInstrumentationTest {
 
     @Test
     public void consegueDigitarUmCEPValido() throws Throwable {
+
         final NestedScrollView scroll = (NestedScrollView) rule.getActivity().findViewById(R.id.container);
 
         rule.runOnUiThread(new Runnable() {
@@ -230,8 +231,6 @@ public class DemoWatchersInstrumentationTest {
         onView(withId(R.id.edit_cep)).perform(typeText("49025090"));
 
         onView(withText("Campo válido!"))
-                .check(matches(isDisplayed()))
-                .perform(pressBack());
+                .check(matches(isDisplayed()));
     }
-
 }

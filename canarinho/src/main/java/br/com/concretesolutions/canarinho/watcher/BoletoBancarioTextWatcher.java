@@ -34,6 +34,7 @@ public final class BoletoBancarioTextWatcher implements TextWatcher {
 
     /**
      * TODO Javadoc pendente
+     *
      * @param callbackErros a descrever
      */
     public BoletoBancarioTextWatcher(EventoDeValidacao callbackErros) {
