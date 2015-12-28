@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import br.com.concretesolutions.canarinho.validator.Validador;
 import br.com.concretesolutions.canarinho.watcher.BoletoBancarioTextWatcher;
+import br.com.concretesolutions.canarinho.watcher.CEPTextWatcher;
 import br.com.concretesolutions.canarinho.watcher.CPFCNPJTextWatcher;
 import br.com.concretesolutions.canarinho.watcher.MascaraNumericaTextWatcher;
 import br.com.concretesolutions.canarinho.watcher.TelefoneTextWatcher;
@@ -24,12 +25,14 @@ public class DemoWatchersActivity extends AppCompatActivity {
     private EditText editTelefone;
     private EditText editValor;
     private EditText editCPFCNPJ;
+    private EditText editCEP;
 
     private TextInputLayout editLayoutBoleto;
     private TextInputLayout editLayoutCPF;
     private TextInputLayout editLayoutCNPJ;
     private TextInputLayout editLayoutTelefone;
     private TextInputLayout editLayoutCPFCNPJ;
+    private TextInputLayout editLayoutCEP;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,12 +48,14 @@ public class DemoWatchersActivity extends AppCompatActivity {
         editTelefone = (EditText) findViewById(R.id.edit_telefone);
         editValor = (EditText) findViewById(R.id.edit_valor);
         editCPFCNPJ = (EditText) findViewById(R.id.edit_cpf_cnpj);
+        editCEP = (EditText) findViewById(R.id.edit_cep);
 
         editLayoutBoleto = (TextInputLayout) findViewById(R.id.edit_layout_boleto);
         editLayoutCPF = (TextInputLayout) findViewById(R.id.edit_layout_cpf);
         editLayoutCNPJ = (TextInputLayout) findViewById(R.id.edit_layout_cnpj);
         editLayoutTelefone = (TextInputLayout) findViewById(R.id.edit_layout_telefone);
         editLayoutCPFCNPJ = (TextInputLayout) findViewById(R.id.edit_layout_cpf_cnpj);
+        editLayoutCEP = (TextInputLayout) findViewById(R.id.edit_layout_cep);
 
         editBoleto.addTextChangedListener(new BoletoBancarioTextWatcher(geraParaCampo(editLayoutBoleto)));
         editCPF.addTextChangedListener(new MascaraNumericaTextWatcher.Builder()
@@ -66,6 +71,7 @@ public class DemoWatchersActivity extends AppCompatActivity {
         editTelefone.addTextChangedListener(new TelefoneTextWatcher(geraParaCampo(editLayoutTelefone)));
         editValor.addTextChangedListener(new ValorMonetarioWatcher());
         editCPFCNPJ.addTextChangedListener(new CPFCNPJTextWatcher(geraParaCampo(editLayoutCPFCNPJ)));
+        editCEP.addTextChangedListener(new CEPTextWatcher(geraParaCampo(editLayoutCEP)));
     }
 
     private EventoDeValidacao geraParaCampo(final TextInputLayout campo) {
