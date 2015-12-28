@@ -29,6 +29,9 @@ public final class CEPTextWatcher implements TextWatcher {
     private boolean mudancaInterna = false;
     private int tamanhoAnterior = 0;
 
+    /**
+     * Construtor default
+     */
     public CEPTextWatcher() {
     }
 
