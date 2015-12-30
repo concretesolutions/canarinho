@@ -120,7 +120,7 @@ public final class ValidadorBoleto implements Validador {
         }
 
         // Retorna bloco válido
-        return rParcial.totalmenteValido(true);
+        return rParcial.parcialmenteValido(true).totalmenteValido(true);
     }
 
     private boolean ehTributo(CharSequence valor) {

@@ -57,6 +57,24 @@ public class DemoWatchersInstrumentationTest {
     }
 
     @Test
+    public void consegueValidarUmBoletoTributoSetandoOCodigoInteiro() throws InterruptedException {
+
+        final DemoWatchersActivity activity = rule.getActivity();
+        final TextView viewById = (TextView) activity.findViewById(R.id.edit_boleto);
+
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                viewById.setText("812345678901812345678901812345678901812345678901");
+            }
+        });
+
+        Thread.sleep(1500L);
+
+        onView(withText("Campo válido!")).check(matches(isDisplayed()));
+    }
+
+    @Test
     public void consegueDigitarUmBoletoNormalComBlocosInvalidos() throws InterruptedException {
 
         // primeiro

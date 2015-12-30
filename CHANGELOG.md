@@ -1,5 +1,10 @@
 # Changelog
 
+- 0.0.9:
+    - Correção final para o formatador/validador de boleto. Tanto normal quanto tributo.
+- 0.0.8:
+    - Adição de formatdor/validador de CEP
+    - Correção de formatdor monetário ao rotacionar a tela
 - 0.0.7:
     - Correção de validador de boleto quando setando o código de boleto inteiro (caso de uso: recebendo de um leitor de imagens)
 - 0.0.6:
