@@ -9,6 +9,7 @@ Entre os padrões implementados temos:
 - Formatador e validador de CPF
 - Formatador e validador de CNPJ
 - Formatador e validador de boleto bancário (e linha digitável)
+- Formatador e validador de CEP
 - Formatador de telefone
 - Formatador de valores financeiros no padrão Real (vírgula para milhares e ponto para decimais com duas casas)
 
@@ -28,14 +29,10 @@ Para exemplos, verifique os testes na pasta sample.
 
 ## Backlog para 1.0.0
 
-- [x] Incluir Checkstyle, PMD e FindBugs (com refinamento se não todos endoidamos).
-- [x] Analisar a viabilidade de rodar os testes de JVM no Travis.
-- [ ] Incluir formatador e watcher para CEP.
 - [ ] Melhorar a forma de expor utilitários da biblioteca para criação de Watchers.
 - [ ] Estudar formas de manter a posição do cursor quando clicar no meio da String.
 - [ ] Incluir validadores e formatadores para inscrições estaduais.
 - [ ] Publicar o Sample.
-- [ ] Incluir mais testes de JVM (Watchers estão apenas como testes instrumentados e dependem da interface).
 - [ ] Criar uma página gh-pages que tenha um link para Javadoc.
     - [ ] Criar GIFs do uso.
     - [ ] Terminar de documentar com Javadoc e publicar.
