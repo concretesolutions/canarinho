@@ -8,6 +8,11 @@ import br.com.concretesolutions.canarinho.formatador.Formatador;
 import br.com.concretesolutions.canarinho.validator.Validador;
 import br.com.concretesolutions.canarinho.watcher.evento.EventoDeValidacao;
 
+/**
+ * Classe base para Watchers que possuem máscara e efetuam validação.
+ *
+ * @see Validador
+ */
 public abstract class BaseCanarinhoTextWatcher implements TextWatcher {
 
     private boolean mudancaInterna = false;
@@ -24,10 +29,28 @@ public abstract class BaseCanarinhoTextWatcher implements TextWatcher {
         // Não faz nada aqui
     }
 
+    /**
+     * Utilitário para implementações de Watcher customizadas.
+     * <p/>
+     * Verifica se a ação foi de apagar um caracter
+     *
+     * @param s o Editable em uso
+     * @return True case a ação foi uma deleção e false caso contrário
+     */
     protected boolean isApagouCaracter(Editable s) {
         return tamanhoAnterior > s.length();
     }
 
+    /**
+     * Utilitário para implementações de Watcher customizadas.
+     * <p/>
+     * Utilitário para atualizar o Editable com flags de atualização.
+     *
+     * @param validador        Validador utilizado para verificar o input
+     * @param resultadoParcial Objeto de validação
+     * @param s                Editable em uso
+     * @param builder          Valor atual da string
+     */
     // Usa o Editable para atualizar o Editable
     // O cursor SEMPRE sera posicionado no final do conteúdo
     protected void atualizaTexto(Validador validador, Validador.ResultadoParcial resultadoParcial,
@@ -46,6 +69,13 @@ public abstract class BaseCanarinhoTextWatcher implements TextWatcher {
         mudancaInterna = false;
     }
 
+    /**
+     * Método que efetua a validação em si.
+     *
+     * @param validador        Validador utilizado para verificar o input
+     * @param resultadoParcial Objeto de validação
+     * @param s                Editable em uso
+     */
     // CUIDADO AO ATUALIZAR O Editable AQUI!!!
     protected void efetuaValidacao(Validador validador, Validador.ResultadoParcial resultadoParcial, Editable s) {
         validador.ehValido(s, resultadoParcial);
@@ -63,6 +93,13 @@ public abstract class BaseCanarinhoTextWatcher implements TextWatcher {
         }
     }
 
+    /**
+     * Implementação genérica para adição ou remoção de caracter.
+     *
+     * @param s       Editable em uso
+     * @param mascara máscara do Watcher
+     * @return Builder com o valor final
+     */
     protected StringBuilder trataAdicaoRemocaoDeCaracter(Editable s, char[] mascara) {
         return isApagouCaracter(s)
                 ? trataRemocaoDeCaracter(s, mascara)

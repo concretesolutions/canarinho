@@ -2,16 +2,15 @@ package br.com.concretesolutions.canarinho.watcher;
 
 import android.text.Editable;
 import android.text.InputFilter;
-import android.text.TextWatcher;
 
 import br.com.concretesolutions.canarinho.validator.Validador;
 import br.com.concretesolutions.canarinho.validator.ValidadorCEP;
 import br.com.concretesolutions.canarinho.watcher.evento.EventoDeValidacao;
 
 /**
- * {@link TextWatcher} responsável por formatar e validar um {@link android.widget.EditText} para CEPs.
+ * {@link android.text.TextWatcher} responsável por formatar e validar um {@link android.widget.EditText} para CEPs.
  * Para usar este componente basta criar uma instância e chamar
- * {@link android.widget.EditText#addTextChangedListener(TextWatcher)}.
+ * {@link android.widget.EditText#addTextChangedListener(android.text.TextWatcher)}.
  */
 public final class CEPTextWatcher extends BaseCanarinhoTextWatcher {
 

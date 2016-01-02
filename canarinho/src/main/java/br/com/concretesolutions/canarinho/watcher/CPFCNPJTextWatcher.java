@@ -2,7 +2,6 @@ package br.com.concretesolutions.canarinho.watcher;
 
 import android.text.Editable;
 import android.text.InputFilter;
-import android.text.TextWatcher;
 
 import br.com.concretesolutions.canarinho.formatador.Formatador;
 import br.com.concretesolutions.canarinho.validator.Validador;
@@ -10,9 +9,10 @@ import br.com.concretesolutions.canarinho.validator.ValidadorCPFCNPJ;
 import br.com.concretesolutions.canarinho.watcher.evento.EventoDeValidacao;
 
 /**
- * {@link TextWatcher} responsável por formatar e validar um {@link android.widget.EditText} para CPF / CNPJ.
+ * {@link android.text.TextWatcher} responsável por formatar e validar um
+ * {@link android.widget.EditText} para CPF / CNPJ.
  * Para usar este componente basta criar uma instância e chamar
- * {@link android.widget.EditText#addTextChangedListener(TextWatcher)}.
+ * {@link android.widget.EditText#addTextChangedListener(android.text.TextWatcher)}.
  */
 public class CPFCNPJTextWatcher extends BaseCanarinhoTextWatcher {
 

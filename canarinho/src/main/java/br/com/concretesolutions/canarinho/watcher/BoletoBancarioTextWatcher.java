@@ -2,7 +2,6 @@ package br.com.concretesolutions.canarinho.watcher;
 
 import android.text.Editable;
 import android.text.InputFilter;
-import android.text.TextWatcher;
 
 import java.util.Arrays;
 
@@ -12,9 +11,9 @@ import br.com.concretesolutions.canarinho.watcher.evento.EventoDeValidacao;
 import br.com.concretesolutions.canarinho.watcher.evento.EventoDeValidacaoDeBoleto;
 
 /**
- * {@link TextWatcher} responsável por formatar e validar um {@link android.widget.EditText} para boletos.
+ * {@link android.text.TextWatcher} responsável por formatar e validar um {@link android.widget.EditText} para boletos.
  * Para usar este componente basta criar uma instância e chamar
- * {@link android.widget.EditText#addTextChangedListener(TextWatcher)}.
+ * {@link android.widget.EditText#addTextChangedListener(android.text.TextWatcher)}.
  */
 public final class BoletoBancarioTextWatcher extends BaseCanarinhoTextWatcher {
 
@@ -90,16 +89,17 @@ public final class BoletoBancarioTextWatcher extends BaseCanarinhoTextWatcher {
 
                 final int bloco;
 
-                if (mensagem.startsWith("Primeiro"))
+                if (mensagem.startsWith("Primeiro")) {
                     bloco = 1;
-                else if (mensagem.startsWith("Segundo"))
+                } else if (mensagem.startsWith("Segundo")) {
                     bloco = 2;
-                else if (mensagem.startsWith("Terceiro"))
+                } else if (mensagem.startsWith("Terceiro")) {
                     bloco = 3;
-                else if (mensagem.startsWith("Quarto"))
+                } else if (mensagem.startsWith("Quarto")) {
                     bloco = 4;
-                else
+                } else {
                     throw new IllegalArgumentException("Valor não reconhecido para bloco");
+                }
 
                 ((EventoDeValidacaoDeBoleto) callbackErros).invalido(valorAtual, bloco);
             }

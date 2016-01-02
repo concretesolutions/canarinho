@@ -36,8 +36,9 @@ public final class ValorMonetarioWatcher implements TextWatcher {
 
         // afterTextChanged é chamado ao rotacionar o dispositivo,
         // essa condição evita que ao rotacionar a tela com o campo vazio ocorra NumberFormatException
-        if (somenteNumeros.length() == 0)
+        if (somenteNumeros.length() == 0) {
             return;
+        }
 
         final BigDecimal resultado = new BigDecimal(somenteNumeros).divide(new BigDecimal(100))
                 .setScale(2, RoundingMode.HALF_DOWN);
