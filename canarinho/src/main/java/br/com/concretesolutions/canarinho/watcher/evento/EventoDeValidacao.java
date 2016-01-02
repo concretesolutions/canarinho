@@ -2,7 +2,7 @@ package br.com.concretesolutions.canarinho.watcher.evento;
 
 /**
  * Interface para quem estiver usando este TextWatcher poder ter uma ação quando um erro de validação acontecer.
- * <p>
+ * <p/>
  * Os métodos desta interface serão chamados quando for digitado um NOVO caracter e quando for APAGADO um caracter.
  */
 public interface EventoDeValidacao {

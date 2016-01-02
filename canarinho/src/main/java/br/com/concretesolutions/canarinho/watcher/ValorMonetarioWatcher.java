@@ -36,12 +36,13 @@ public final class ValorMonetarioWatcher implements TextWatcher {
 
         // afterTextChanged é chamado ao rotacionar o dispositivo,
         // essa condição evita que ao rotacionar a tela com o campo vazio ocorra NumberFormatException
-        if (somenteNumeros.length() != 0) {
-            final BigDecimal resultado = new BigDecimal(somenteNumeros).divide(new BigDecimal(100))
-                    .setScale(2, RoundingMode.HALF_DOWN);
+        if (somenteNumeros.length() == 0)
+            return;
 
-            atualizaTexto(s, Formatador.VALOR.formata(resultado.toPlainString()));
-        }
+        final BigDecimal resultado = new BigDecimal(somenteNumeros).divide(new BigDecimal(100))
+                .setScale(2, RoundingMode.HALF_DOWN);
+
+        atualizaTexto(s, Formatador.VALOR.formata(resultado.toPlainString()));
     }
 
     private void atualizaTexto(Editable s, String valor) {
