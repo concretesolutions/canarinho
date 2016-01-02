@@ -31,7 +31,6 @@ public abstract class BaseCanarinhoTextWatcher implements TextWatcher {
 
     /**
      * Utilitário para implementações de Watcher customizadas.
-     * <p/>
      * Verifica se a ação foi de apagar um caracter
      *
      * @param s o Editable em uso
@@ -43,7 +42,6 @@ public abstract class BaseCanarinhoTextWatcher implements TextWatcher {
 
     /**
      * Utilitário para implementações de Watcher customizadas.
-     * <p/>
      * Utilitário para atualizar o Editable com flags de atualização.
      *
      * @param validador        Validador utilizado para verificar o input
