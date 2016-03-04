@@ -27,6 +27,10 @@ Ver [CHANGELOG.md](CHANGELOG.md)
 
 Para exemplos, verifique os testes na pasta sample.
 
+## Gradle
+
+- compile 'br.com.concretesolutions:canarinho:X.Y.Z'
+
 ## Backlog para 1.0.0
 
 - [ ] Melhorar a forma de expor utilitários da biblioteca para criação de Watchers.
