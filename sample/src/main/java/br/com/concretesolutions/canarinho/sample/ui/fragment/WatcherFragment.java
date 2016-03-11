@@ -48,8 +48,10 @@ public abstract class WatcherFragment extends BaseWatcherFragment {
 
         if (currentWatcher instanceof BaseCanarinhoTextWatcher) {
             final BaseCanarinhoTextWatcher canarinhoWatcher = (BaseCanarinhoTextWatcher) currentWatcher;
-            final Watchers.SampleEventoDeValidacao eventoDeValidacao = (Watchers.SampleEventoDeValidacao) canarinhoWatcher.getEventoDeValidacao();
-            eventoDeValidacao.setTextInputLayout(watcherInputLayout);
+            if (canarinhoWatcher.getEventoDeValidacao() != null) {
+                final Watchers.SampleEventoDeValidacao eventoDeValidacao = (Watchers.SampleEventoDeValidacao) canarinhoWatcher.getEventoDeValidacao();
+                eventoDeValidacao.setTextInputLayout(watcherInputLayout);
+            }
         }
 
         return this;

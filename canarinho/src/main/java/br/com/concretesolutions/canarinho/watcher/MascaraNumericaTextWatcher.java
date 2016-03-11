@@ -21,13 +21,13 @@ public final class MascaraNumericaTextWatcher extends BaseCanarinhoTextWatcher {
     private final InputFilter[] filtroNumerico;
 
     private MascaraNumericaTextWatcher(Builder builder) {
-        this.validador = builder.validador;
         this.mascara = builder.mascara.toCharArray();
+        this.validador = builder.validador;
 
         final int length = mascara.length;
         this.filtroNumerico = new InputFilter[]{new InputFilter.LengthFilter(length)};
 
-        setEventoDeValidacao(builder.callbackErros);
+        setEventoDeValidacao(builder.eventoDeValidacao);
     }
 
     @Override
@@ -54,7 +54,7 @@ public final class MascaraNumericaTextWatcher extends BaseCanarinhoTextWatcher {
     public static final class Builder {
 
         private Validador validador;
-        private EventoDeValidacao callbackErros;
+        private EventoDeValidacao eventoDeValidacao;
         private String mascara;
 
         /**
@@ -77,7 +77,7 @@ public final class MascaraNumericaTextWatcher extends BaseCanarinhoTextWatcher {
          * @return this para interface fluente
          */
         public Builder comCallbackDeValidacao(EventoDeValidacao callbackErros) {
-            this.callbackErros = callbackErros;
+            this.eventoDeValidacao = callbackErros;
             return this;
         }
 
@@ -103,10 +103,6 @@ public final class MascaraNumericaTextWatcher extends BaseCanarinhoTextWatcher {
 
             if (mascara == null || mascara.isEmpty() || !mascara.contains("#")) {
                 throw new IllegalArgumentException("Máscara precisa conter ao menos um caracter '#'");
-            }
-
-            if (validador == null || callbackErros == null) {
-                throw new IllegalArgumentException("Por favor, defina um validador e um callback de erros.");
             }
 
             return new MascaraNumericaTextWatcher(this);

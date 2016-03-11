@@ -21,9 +21,9 @@ public final class ValidadorCEP implements Validador {
 
     @Override
     public boolean ehValido(String valor) {
-        if (valor == null || valor.length() < 8) {
+
+        if (valor == null || valor.length() < 8)
             return false;
-        }
 
         final String desformatado = Formatador.Padroes.PADRAO_SOMENTE_NUMEROS.matcher(valor).replaceAll("");
 

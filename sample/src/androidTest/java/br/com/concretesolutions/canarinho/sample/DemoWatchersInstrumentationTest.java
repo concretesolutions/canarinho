@@ -245,7 +245,7 @@ public class DemoWatchersInstrumentationTest {
         onView(allOf(withId(R.id.edit_text), isDisplayed())).perform(typeText("46574356637"));
         onView(withText("CPF inválido")).check(matches(isDisplayed()));
 
-        onView(allOf(withId(R.id.edit_text), isDisplayed())).perform(clearText(), typeText("95621433000180"));
+        onView(allOf(withId(R.id.edit_text), isDisplayed())).perform(clearText(), typeText("15621433000180"));
         onView(withText("CNPJ inválido")).check(matches(isDisplayed()));
     }
 
@@ -258,6 +258,16 @@ public class DemoWatchersInstrumentationTest {
 
         onView(withText("Campo válido!"))
                 .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void consegueUtilizarUmaMascaraGenericaSemValidadorOuEvento() throws Throwable {
+
+        navigateToTab(Watchers.MASCARA_GENERICA);
+
+        onView(allOf(withId(R.id.edit_text), isDisplayed()))
+                .perform(typeText("12345"))
+                .check(matches(withText("1-2-3-4-5")));
     }
 
     private void navigateToTab(Watchers watcher) throws InterruptedException {

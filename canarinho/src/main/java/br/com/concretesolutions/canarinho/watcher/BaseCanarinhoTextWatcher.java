@@ -76,11 +76,16 @@ public abstract class BaseCanarinhoTextWatcher implements TextWatcher {
      */
     // CUIDADO AO ATUALIZAR O Editable AQUI!!!
     protected void efetuaValidacao(Validador validador, Validador.ResultadoParcial resultadoParcial, Editable s) {
-        validador.ehValido(s, resultadoParcial);
+
+        if (validador == null)
+            return;
 
         if (eventoDeValidacao == null) {
+            validador.ehValido(s.toString());
             return;
         }
+
+        validador.ehValido(s, resultadoParcial);
 
         if (!resultadoParcial.isParcialmenteValido()) {
             eventoDeValidacao.invalido(s.toString(), resultadoParcial.getMensagem());

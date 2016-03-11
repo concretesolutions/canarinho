@@ -113,6 +113,20 @@ public enum Watchers {
         }
     },
 
+    MASCARA_GENERICA("Máscara genérica", "5 números") {
+        @Override
+        public WatcherFragment buildFragment() {
+            return new WatcherFragment() {
+                @Override
+                protected TextWatcher getWatcher(FragmentActivity activity) {
+                    return new MascaraNumericaTextWatcher.Builder()
+                            .paraMascara("#-#-#-#-#")
+                            .build();
+                }
+            };
+        }
+    },
+
     VALOR_MONETARIO("Valor monetário", "Digite um valor monetário") {
         @Override
         public CanarinhoValorMonetarioWatcherFragment buildFragment() {

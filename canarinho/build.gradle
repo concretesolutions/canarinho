@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply from: 'tools/tools.gradle'
+apply from: 'linters/linters.gradle'
 
 ext {
     bintrayRepo = 'maven'
@@ -12,7 +12,7 @@ ext {
     libraryDescription = 'Utilitários Android para padrões Brasileiros'
     siteUrl = 'https://github.com/cs-victor-nascimento/canarinho'
     gitUrl = 'https://github.com/cs-victor-nascimento/canarinho.git'
-    libraryVersion = '0.1.0'
+    libraryVersion = '1.0.0'
 
     developerId = 'cs-victor-nascimento'
     developerName = 'Victor Oliveira Nascimento'

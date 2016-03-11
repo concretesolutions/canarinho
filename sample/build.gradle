@@ -40,7 +40,6 @@ dependencies {
     androidTestCompile("com.android.support:support-annotations:${supportLibsVersion}")
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.1')
     androidTestCompile('com.android.support.test:runner:0.4.1')
-//    androidTestCompile 'net.vidageek:mirror:1.6.1'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-all:1.3'
