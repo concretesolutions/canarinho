@@ -8,7 +8,13 @@ import java.text.ParsePosition;
 import java.util.Locale;
 import java.util.regex.Pattern;
 
-/** */
+/**
+ * Formatador de valores monetários. Possui duas versões:
+ * <ul>
+ * <li>Com símbolo do Real {@link Formatador#VALOR_COM_SIMBOLO}</li>
+ * <li>Sem símbolo do Real {@link Formatador#VALOR}</li>
+ * </ul>
+ */
 public final class FormatadorValor implements Formatador {
 
     private static final DecimalFormat FORMATADOR_MOEDA = (DecimalFormat)
@@ -17,6 +23,8 @@ public final class FormatadorValor implements Formatador {
             .compile("^\\d+(\\.\\d{1,2})?$");
     private static final Pattern PADRAO_MOEDA = Pattern
             .compile("\\d{1,3}(\\.\\d{3})*(,\\d{2})?");
+
+    private static final String SIMBOLO_REAL = "R$ ";
 
     static {
         final DecimalFormatSymbols decimalFormatSymbols = FORMATADOR_MOEDA.getDecimalFormatSymbols();
@@ -29,22 +37,40 @@ public final class FormatadorValor implements Formatador {
         FORMATADOR_MOEDA.setParseBigDecimal(true);
     }
 
+    private final boolean adicionaSimboloReal;
+
     // No instance creation
-    private FormatadorValor() {
+    private FormatadorValor(boolean comSimboloReal) {
+        adicionaSimboloReal = comSimboloReal;
     }
 
-    static FormatadorValor getInstance() {
-        return SingletonHolder.INSTANCE;
+    /**
+     * Busca uma instância do formatador com símbolo ou sem.
+     *
+     * @param comSimboloReal Flag para saber qual instância buscar.
+     * @return FormatadorValor de acordo com a flag
+     */
+    static FormatadorValor getInstance(boolean comSimboloReal) {
+        return comSimboloReal
+                ? SingletonHolder.INSTANCE_COM_SIMBOLO
+                : SingletonHolder.INSTANCE_SEM_SIMBOLO;
     }
 
     @Override
     public String formata(String value) {
-        return FORMATADOR_MOEDA.format(new BigDecimal(value));
+        final String resultado = FORMATADOR_MOEDA.format(new BigDecimal(value));
+        return adicionaSimboloReal ? SIMBOLO_REAL + resultado : resultado;
     }
 
     @Override
     public String desformata(String value) {
-        final BigDecimal valor = (BigDecimal) FORMATADOR_MOEDA.parse(value, new ParsePosition(0));
+
+        String realValue = value;
+        if (value.startsWith(SIMBOLO_REAL)) {
+            realValue = value.substring(value.indexOf(SIMBOLO_REAL));
+        }
+
+        final BigDecimal valor = (BigDecimal) FORMATADOR_MOEDA.parse(realValue, new ParsePosition(0));
         return valor.toPlainString();
     }
 
@@ -69,6 +95,7 @@ public final class FormatadorValor implements Formatador {
     }
 
     private static class SingletonHolder {
-        private static final FormatadorValor INSTANCE = new FormatadorValor();
+        private static final FormatadorValor INSTANCE_SEM_SIMBOLO = new FormatadorValor(false);
+        private static final FormatadorValor INSTANCE_COM_SIMBOLO = new FormatadorValor(true);
     }
 }

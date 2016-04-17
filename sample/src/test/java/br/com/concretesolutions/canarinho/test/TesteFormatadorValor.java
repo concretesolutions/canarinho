@@ -3,6 +3,7 @@ package br.com.concretesolutions.canarinho.test;
 import org.junit.Test;
 
 import br.com.concretesolutions.canarinho.formatador.Formatador;
+import br.com.concretesolutions.canarinho.formatador.FormatadorValor;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -13,6 +14,7 @@ public class TesteFormatadorValor {
 
     @Test
     public void consegueFormatar() {
+
         assertThat(Formatador.VALOR.formata("1.00"), is("1,00"));
         assertThat(Formatador.VALOR.formata("1.0"), is("1,00"));
         assertThat(Formatador.VALOR.formata("1"), is("1,00"));
@@ -23,6 +25,21 @@ public class TesteFormatadorValor {
         assertThat(Formatador.VALOR.formata("1.1"), is("1,10"));
         assertThat(Formatador.VALOR.formata("1234.56"), is("1.234,56"));
         assertThat(Formatador.VALOR.formata("1234.5"), is("1.234,50"));
+    }
+
+    @Test
+    public void consegueFormatarComSimbolo() {
+
+        assertThat(Formatador.VALOR_COM_SIMBOLO.formata("1.00"), is("R$ 1,00"));
+        assertThat(Formatador.VALOR_COM_SIMBOLO.formata("1.0"), is("R$ 1,00"));
+        assertThat(Formatador.VALOR_COM_SIMBOLO.formata("1"), is("R$ 1,00"));
+        assertThat(Formatador.VALOR_COM_SIMBOLO.formata("1000"), is("R$ 1.000,00"));
+        assertThat(Formatador.VALOR_COM_SIMBOLO.formata("1.23"), is("R$ 1,23"));
+        assertThat(Formatador.VALOR_COM_SIMBOLO.formata("1.233"), is("R$ 1,23"));
+        assertThat(Formatador.VALOR_COM_SIMBOLO.formata("1.01"), is("R$ 1,01"));
+        assertThat(Formatador.VALOR_COM_SIMBOLO.formata("1.1"), is("R$ 1,10"));
+        assertThat(Formatador.VALOR_COM_SIMBOLO.formata("1234.56"), is("R$ 1.234,56"));
+        assertThat(Formatador.VALOR_COM_SIMBOLO.formata("1234.5"), is("R$ 1.234,50"));
     }
 
     @Test

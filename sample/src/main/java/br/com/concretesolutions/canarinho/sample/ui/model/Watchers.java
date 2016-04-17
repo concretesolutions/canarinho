@@ -24,112 +24,70 @@ public enum Watchers {
 
     BOLETO_BANCARIO("Boleto Bancário", "Digite um boleto válido") {
         @Override
-        public WatcherFragment buildFragment() {
-            return new WatcherFragment() {
-                @Override
-                protected TextWatcher getWatcher(FragmentActivity context) {
-                    return new BoletoBancarioTextWatcher(new SampleEventoDeValidacao(context));
-                }
-            };
+        public WatcherFragment buildFragment(Context context) {
+            return WatcherFragment.newInstance(this, new BoletoBancarioTextWatcher(new SampleEventoDeValidacao(context)));
         }
     },
     BOLETO_BANCARIO_MSG_CUSTOM("Boleto Bancário com mensagem", "Digite um boleto válido") {
         @Override
-        public WatcherFragment buildFragment() {
-            return new WatcherFragment() {
-                @Override
-                protected TextWatcher getWatcher(FragmentActivity context) {
-                    return new BoletoBancarioTextWatcher(new EventoDeValidacaoBoleto(context));
-                }
-            };
+        public WatcherFragment buildFragment(Context context) {
+            return WatcherFragment.newInstance(this, new BoletoBancarioTextWatcher(new EventoDeValidacaoBoleto(context)));
         }
     },
 
     CPF("CPF", "Digite um CPF válido") {
         @Override
-        public WatcherFragment buildFragment() {
-            return new WatcherFragment() {
-                @Override
-                protected TextWatcher getWatcher(FragmentActivity activity) {
-                    return new MascaraNumericaTextWatcher.Builder()
-                            .paraMascara("###.###.###-##")
-                            .comCallbackDeValidacao(new SampleEventoDeValidacao(activity))
-                            .comValidador(Validador.CPF)
-                            .build();
-                }
-            };
+        public WatcherFragment buildFragment(Context context) {
+            return WatcherFragment.newInstance(this, new MascaraNumericaTextWatcher.Builder()
+                    .paraMascara("###.###.###-##")
+                    .comCallbackDeValidacao(new SampleEventoDeValidacao(context))
+                    .comValidador(Validador.CPF)
+                    .build());
         }
     },
 
     CNPJ("CNPJ", "Digite um CNPJ válido") {
         @Override
-        public WatcherFragment buildFragment() {
-            return new WatcherFragment() {
-                @Override
-                protected TextWatcher getWatcher(FragmentActivity activity) {
-                    return new MascaraNumericaTextWatcher.Builder()
-                            .paraMascara("##.###.###/####-##")
-                            .comCallbackDeValidacao(new SampleEventoDeValidacao(activity))
-                            .comValidador(Validador.CNPJ)
-                            .build();
-                }
-            };
+        public WatcherFragment buildFragment(Context context) {
+            return WatcherFragment.newInstance(this, new MascaraNumericaTextWatcher.Builder()
+                    .paraMascara("##.###.###/####-##")
+                    .comCallbackDeValidacao(new SampleEventoDeValidacao(context))
+                    .comValidador(Validador.CNPJ)
+                    .build());
         }
     },
 
     TELEFONE("Telefone", "Digite um telefone válido") {
         @Override
-        public WatcherFragment buildFragment() {
-            return new WatcherFragment() {
-                @Override
-                protected TextWatcher getWatcher(FragmentActivity activity) {
-                    return new TelefoneTextWatcher(new SampleEventoDeValidacao(activity));
-                }
-            };
+        public WatcherFragment buildFragment(Context context) {
+            return WatcherFragment.newInstance(this, new TelefoneTextWatcher(new SampleEventoDeValidacao(context)));
         }
     },
 
     CPF_CNPJ("CPF e CNPJ", "Digite um CPF ou CNPJ válido") {
         @Override
-        public WatcherFragment buildFragment() {
-            return new WatcherFragment() {
-                @Override
-                protected TextWatcher getWatcher(FragmentActivity activity) {
-                    return new CPFCNPJTextWatcher(new SampleEventoDeValidacao(activity));
-                }
-            };
+        public WatcherFragment buildFragment(Context context) {
+            return WatcherFragment.newInstance(this, new CPFCNPJTextWatcher(new SampleEventoDeValidacao(context)));
         }
     },
 
     CEP("CEP", "Digite um CEP válido") {
         @Override
-        public WatcherFragment buildFragment() {
-            return new WatcherFragment() {
-                @Override
-                protected TextWatcher getWatcher(FragmentActivity activity) {
-                    return new CEPTextWatcher(new SampleEventoDeValidacao(activity));
-                }
-            };
+        public WatcherFragment buildFragment(Context context) {
+            return WatcherFragment.newInstance(this, new CEPTextWatcher(new SampleEventoDeValidacao(context)));
         }
     },
 
     MASCARA_GENERICA("Máscara genérica", "5 números") {
         @Override
-        public WatcherFragment buildFragment() {
-            return new WatcherFragment() {
-                @Override
-                protected TextWatcher getWatcher(FragmentActivity activity) {
-                    return new MascaraNumericaTextWatcher.Builder()
-                            .paraMascara("#-#-#-#-#")
-                            .build();
-                }
-            };
+        public WatcherFragment buildFragment(Context context) {
+            return WatcherFragment.newInstance(this, new MascaraNumericaTextWatcher("#-#-#-#-#"));
         }
     },
 
     VALOR_MONETARIO("Valor monetário", "Digite um valor monetário") {
         @Override
-        public CanarinhoValorMonetarioWatcherFragment buildFragment() {
+        public CanarinhoValorMonetarioWatcherFragment buildFragment(Context context) {
             return new CanarinhoValorMonetarioWatcherFragment();
         }
     };
@@ -150,7 +108,7 @@ public enum Watchers {
         return hint;
     }
 
-    public abstract BaseWatcherFragment buildFragment();
+    public abstract BaseWatcherFragment buildFragment(Context context);
 
     public static class SampleEventoDeValidacao implements EventoDeValidacao {
 
@@ -168,6 +126,7 @@ public enum Watchers {
 
         @Override
         public void parcialmenteValido(String valorAtual) {
+            textInputLayout.setErrorEnabled(false);
             textInputLayout.setError(null);
         }
 

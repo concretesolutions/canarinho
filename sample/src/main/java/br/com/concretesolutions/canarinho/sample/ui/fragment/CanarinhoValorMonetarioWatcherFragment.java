@@ -30,6 +30,7 @@ public class CanarinhoValorMonetarioWatcherFragment extends BaseWatcherFragment 
         watcherTitle = (TextView) layout.findViewById(R.id.watcher_title);
         watcherInputLayout = (TextInputLayout) layout.findViewById(R.id.edit_input_layout);
         watcherEdit = (EditText) layout.findViewById(R.id.edit_text);
+        setModel(Watchers.VALOR_MONETARIO);
         bind(model);
         return layout;
     }

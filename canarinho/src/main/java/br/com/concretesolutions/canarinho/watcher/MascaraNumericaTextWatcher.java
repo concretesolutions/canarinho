@@ -20,6 +20,15 @@ public final class MascaraNumericaTextWatcher extends BaseCanarinhoTextWatcher {
     private final char[] mascara;
     private final InputFilter[] filtroNumerico;
 
+    /**
+     * Construtor para adicionar uma máscara sem validação.
+     *
+     * @param mascara Máscara para efetuar a formatação
+     */
+    public MascaraNumericaTextWatcher(String mascara) {
+        this(new Builder().paraMascara(mascara));
+    }
+
     private MascaraNumericaTextWatcher(Builder builder) {
         this.mascara = builder.mascara.toCharArray();
         this.validador = builder.validador;

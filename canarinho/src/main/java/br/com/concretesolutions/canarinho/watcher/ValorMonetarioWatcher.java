@@ -10,6 +10,7 @@ import java.math.RoundingMode;
 import br.com.concretesolutions.canarinho.formatador.Formatador;
 
 /**
+ * TextWatcher para valores monetários
  */
 public final class ValorMonetarioWatcher implements TextWatcher {
 

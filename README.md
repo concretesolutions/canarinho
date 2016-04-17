@@ -15,6 +15,50 @@ Entre os padrões implementados temos:
 
 Estes são utilizados para implementar `TextWatcher`s que formatam e validam a digitação do usuário.
 
+## Exemplo de uso:
+
+### Validar um CPF
+
+```java
+if (Validador.CPF.ehValido(cpf))
+    Toast.makeText(context, "Válido!", Toast.LENGTH_SHORT).show();
+else
+    Toast.makeText(context, "Inválido!", Toast.LENGTH_SHORT).show();
+```
+
+### Formatar um CPF
+
+```java
+String cpfFormatado = Formatador.CPF.formata(usuario.getCpf());
+```
+
+### Formatar um EditText para CPF sem validação
+
+```java
+cpfEditText.addTextChangedListener(new MascaraNumericaTextWatcher("###.###.###-##"));
+```
+
+### Formatar um EditText para CPF com validação
+
+```java
+cpfEditText.addTextChangedListener(new MascaraNumericaTextWatcher.Builder()
+                                        .paraMascara("###.###.###-##")
+                                        .comCallbackDeValidacao(new SampleEventoDeValidacao(context))
+                                        .comValidador(Validador.CPF)
+                                        .build());
+```
+
+## Callback de validação
+
+Os `TextWatcher`s possuem a possibilidade de avisar o usuário conforme ele está digitando sobre algum erro de campo.
+Para isso, usamos um `EventoDeValidacao` que possui os seguintes callbacks:
+
+- `void invalido(String valorAtual, String mensagem)`: chamado quando o valor está inválido
+- `void parcialmenteValido(String valorAtual)`: chamado quando o valor ainda não está completo e também não está inválido
+- `void totalmenteValido(String valorAtual)`: chamado quando o valor está completo e válido
+
+Veja exemplos de implementação no sample.
+
 ## Changelog
 
 Ver [CHANGELOG.md](CHANGELOG.md)
@@ -29,21 +73,7 @@ Para exemplos, verifique os testes na pasta sample.
 
 ## Gradle
 
-- compile 'br.com.concretesolutions:canarinho:X.Y.Z'
-
-## Backlog para 1.0.0
-
-- [ ] Melhorar a forma de expor utilitários da biblioteca para criação de Watchers.
-- [ ] Estudar formas de manter a posição do cursor quando clicar no meio da String.
-- [ ] Incluir validadores e formatadores para inscrições estaduais.
-- [ ] Publicar o Sample.
-- [ ] Criar uma página gh-pages que tenha um link para Javadoc.
-    - [ ] Criar GIFs do uso.
-    - [ ] Terminar de documentar com Javadoc e publicar.
-    - [ ] Aumentar a documentação do projeto sobre o uso.]
-    - [ ] Incluir documentação de como testar.
-    - [ ] Incluir documentação sobre a configuração de ProGuard.
-    - [ ] Incluir uma tradução para o inglês das interfaces públicas apenas na documentação.
+`compile 'br.com.concretesolutions:canarinho:1.1.0'`
 
 ## ATENÇÃO
 
