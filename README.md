@@ -1,4 +1,7 @@
-# Android Canarinho [![Build Status](https://travis-ci.org/cs-victor-nascimento/canarinho.svg?branch=master)](https://travis-ci.org/cs-victor-nascimento/canarinho)
+# Android Canarinho
+
+[![Build](https://travis-ci.org/concretesolutions/canarinho.svg?branch=master)](https://travis-ci.org/concretesolutions/canarinho)
+
 
 Esta biblioteca é um conjunto de utilitários para trabalhar com padrões brasileiros no Android. Inspirado em: https://github.com/caelum/caelum-stella.
 
