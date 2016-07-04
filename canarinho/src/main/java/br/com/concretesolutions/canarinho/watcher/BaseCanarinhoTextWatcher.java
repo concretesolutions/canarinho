@@ -124,7 +124,7 @@ public abstract class BaseCanarinhoTextWatcher implements TextWatcher {
         // Verifica se o último caracter que foi excluído fazia parte da máscara
         final boolean ultimoCaracterEraMascara = mascara[posicaoUltimoCaracter] != '#';
 
-        // Se o último caracter excluido fazia parte da máscara,
+        // Se o último caracter excluído fazia parte da máscara,
         // deve excluir até o primeiro caracter que não faz parte da máscara
         if (ultimoCaracterEraMascara) {
             boolean encontrouCaracterValido = false;

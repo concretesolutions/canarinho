@@ -285,6 +285,7 @@ public class DemoWatchersInstrumentationTest {
         return new ViewAction() {
             @Override
             public Matcher<View> getConstraints() {
+                // noinspection unchecked
                 Matcher<View> matchers = allOf(isDisplayed());
 
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {

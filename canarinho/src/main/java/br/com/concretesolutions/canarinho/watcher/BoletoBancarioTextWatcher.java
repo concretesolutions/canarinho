@@ -11,9 +11,9 @@ import br.com.concretesolutions.canarinho.watcher.evento.EventoDeValidacao;
 import br.com.concretesolutions.canarinho.watcher.evento.EventoDeValidacaoDeBoleto;
 
 /**
- * {@link android.text.TextWatcher} responsável por formatar e validar um {@link android.widget.EditText} para boletos.
- * Para usar este componente basta criar uma instância e chamar
- * {@link android.widget.EditText#addTextChangedListener(android.text.TextWatcher)}.
+ * {@link android.text.TextWatcher} responsável por formatar e validar um {@link
+ * android.widget.EditText} para boletos. Para usar este componente basta criar uma instância e
+ * chamar {@link android.widget.EditText#addTextChangedListener(android.text.TextWatcher)}.
  */
 public final class BoletoBancarioTextWatcher extends BaseCanarinhoTextWatcher {
 
@@ -52,6 +52,10 @@ public final class BoletoBancarioTextWatcher extends BaseCanarinhoTextWatcher {
             if (getEventoDeValidacao() != null) {
                 getEventoDeValidacao().parcialmenteValido("");
             }
+        }
+
+        if (s.length() == 0) {
+            verificaFiltro(s, false);
             return;
         }
 

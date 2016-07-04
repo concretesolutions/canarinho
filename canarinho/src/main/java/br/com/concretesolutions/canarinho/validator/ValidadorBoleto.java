@@ -71,6 +71,12 @@ public final class ValidadorBoleto implements Validador {
 
         resultadoParcial.totalmenteValido(false);
 
+        if (valorDesformatado.length() == 0) {
+            return resultadoParcial
+                    .parcialmenteValido(true)
+                    .mensagem("");
+        }
+
         return ehTributo(valorDesformatado)
                 ? validaTributo(valorDesformatado, resultadoParcial)
                 : validaNormal(valorDesformatado, resultadoParcial);
@@ -98,6 +104,10 @@ public final class ValidadorBoleto implements Validador {
     }
 
     private ResultadoParcial validaTributo(String valor, ResultadoParcial rParcial) {
+
+        if (valor.length() < 3) {
+            return rParcial.parcialmenteValido(true);
+        }
 
         // A validação precisa levar em conta o terceiro dígito
         final boolean ehMod10 = valor.charAt(2) == '6' || valor.charAt(2) == '7';
