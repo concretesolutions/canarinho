@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1:
+    - Corrigido bug de ArrayIndexOutOfBounds no `BoletoBancarioTextWatcher` após apagar em lote
+    - Adicionado teste de regressão para o caso acima na JVM que será executado no Travis
+
 ## 1.1.0:
     - Refatorados testes instrumentados
     - Adicionado construtor para máscara genérica
