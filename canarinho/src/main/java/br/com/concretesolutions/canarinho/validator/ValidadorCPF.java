@@ -22,7 +22,7 @@ public final class ValidadorCPF implements Validador {
     private ValidadorCPF() {
     }
 
-    static ValidadorCPF getInstance() {
+    public static ValidadorCPF getInstance() {
         return SingletonHolder.INSTANCE;
     }
 
