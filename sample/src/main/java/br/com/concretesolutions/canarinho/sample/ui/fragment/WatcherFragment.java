@@ -52,6 +52,10 @@ public class WatcherFragment extends BaseWatcherFragment {
 
         watcherEdit.addTextChangedListener(currentWatcher);
 
+        if(currentWatcher instanceof View.OnFocusChangeListener){
+            watcherEdit.setOnFocusChangeListener((View.OnFocusChangeListener)currentWatcher);
+        }
+
         if (currentWatcher instanceof BaseCanarinhoTextWatcher) {
             final BaseCanarinhoTextWatcher canarinhoWatcher = (BaseCanarinhoTextWatcher) currentWatcher;
             if (canarinhoWatcher.getEventoDeValidacao() != null) {
