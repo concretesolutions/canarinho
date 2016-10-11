@@ -84,7 +84,10 @@ public abstract class BaseCanarinhoTextWatcher implements TextWatcher, View.OnFo
      * @param lostFocus        Edica se o input perdeu o focu
      */
     // CUIDADO AO ATUALIZAR O Editable AQUI!!!
-    protected void efetuaValidacao(Validador validador, Validador.ResultadoParcial resultadoParcial, Editable s, boolean lostFocus) {
+    protected void efetuaValidacao(Validador validador,
+                                   Validador.ResultadoParcial resultadoParcial,
+                                   Editable s,
+                                   boolean lostFocus) {
         if (validador == null) {
             return;
         }
