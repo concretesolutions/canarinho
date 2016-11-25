@@ -7,7 +7,7 @@ import android.widget.EditText;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ActivityController;
@@ -20,8 +20,8 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.robolectric.Robolectric.buildActivity;
 
-@RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class)
+@RunWith(RobolectricTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = 22)
 public class BoletoTextWatcherTest {
 
     private BoletoBancarioTextWatcher watcher;
@@ -33,14 +33,14 @@ public class BoletoTextWatcherTest {
         final ActivityController<Activity> activityController = buildActivity(Activity.class);
         final Activity activity = activityController.create().get();
 
-        textInputLayout = new TextInputLayout(activity);
+        final Watchers.SampleEventoDeValidacao sampleEventoDeValidacao =
+                new Watchers.SampleEventoDeValidacao(RuntimeEnvironment.application);
+
+        activity.setContentView(textInputLayout = new TextInputLayout(activity));
         textInputLayout.addView(editText = new EditText(activity));
-        activity.setContentView(textInputLayout);
         activityController.start().resume().visible();
-        final Watchers.SampleEventoDeValidacao sampleEventoDeValidacao = new Watchers.SampleEventoDeValidacao(RuntimeEnvironment.application);
         sampleEventoDeValidacao.setTextInputLayout(textInputLayout);
-        watcher = new BoletoBancarioTextWatcher(sampleEventoDeValidacao);
-        editText.addTextChangedListener(watcher);
+        editText.addTextChangedListener(watcher = new BoletoBancarioTextWatcher(sampleEventoDeValidacao));
     }
 
     @Test

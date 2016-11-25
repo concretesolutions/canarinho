@@ -29,6 +29,18 @@ public abstract class BaseCanarinhoTextWatcher implements TextWatcher {
         // Não faz nada aqui
     }
 
+    public boolean isMudancaInterna() {
+        return mudancaInterna;
+    }
+
+    public EventoDeValidacao getEventoDeValidacao() {
+        return eventoDeValidacao;
+    }
+
+    public void setEventoDeValidacao(EventoDeValidacao eventoDeValidacao) {
+        this.eventoDeValidacao = eventoDeValidacao;
+    }
+
     /**
      * Utilitário para implementações de Watcher customizadas.
      * Verifica se a ação foi de apagar um caracter
@@ -171,17 +183,5 @@ public abstract class BaseCanarinhoTextWatcher implements TextWatcher {
         }
 
         return builder;
-    }
-
-    public boolean isMudancaInterna() {
-        return mudancaInterna;
-    }
-
-    public EventoDeValidacao getEventoDeValidacao() {
-        return eventoDeValidacao;
-    }
-
-    public void setEventoDeValidacao(EventoDeValidacao eventoDeValidacao) {
-        this.eventoDeValidacao = eventoDeValidacao;
     }
 }

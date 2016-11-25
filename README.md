@@ -14,7 +14,7 @@ Entre os padrões implementados temos:
 - Formatador e validador de boleto bancário (e linha digitável)
 - Formatador e validador de CEP
 - Formatador de telefone
-- Formatador de valores financeiros no padrão Real (vírgula para milhares e ponto para decimais com duas casas)
+- [Formatador de valores financeiros](#formatador-de-valor-financeiro-no-padrão-real) (vírgula para milhares e ponto para decimais com duas casas)
 
 Estes são utilizados para implementar `TextWatcher`s que formatam e validam a digitação do usuário.
 
@@ -49,6 +49,46 @@ cpfEditText.addTextChangedListener(new MascaraNumericaTextWatcher.Builder()
                                         .comCallbackDeValidacao(new SampleEventoDeValidacao(context))
                                         .comValidador(Validador.CPF)
                                         .build());
+```
+
+## Formatador de valor financeiro no padrão Real
+
+Para deixar um usuário digitar valores monetários no padrão Real, basta adicionar um `ValorMonetarioWatcher` e alguns atributos ao `EditText`
+
+```java
+// Padrão sem símbolo de Real
+editText.addTextChangedListener(new ValorMonetarioWatcher());
+editText.append("1234567890");
+assertThat(editText.getText().toString(), is("12.345.678,90"));
+
+// Customizado com símbolo e mantendo zeros ao apagar em lote
+editText.addTextChangedListener(new ValorMonetarioWatcher.Builder()
+        .comSimboloReal()
+        .comMantemZerosAoLimpar()
+        .build());
+editText.append("1234567890");
+assertThat(editText.getText().toString(), is("R$ 12.345.678,90"));
+
+editText.getText().clear();
+assertThat(editText.getText().toString(), is("R$ 0,00"));
+```
+
+Exemplo de declaração no layout:
+
+```xml
+<!--
+     O inputType abre o teclado númerico e permite caracteres de 
+    formatação. O text inicia com o valor zerado, porém não é 
+    obrigatório.
+-->
+<android.support.design.widget.TextInputEditText
+    android:id="@+id/amount"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="@string/hint_value"
+    android:inputType="textFilter|number"
+    android:maxLength="13"
+    android:text="0,00" />
 ```
 
 ## Callback de validação
