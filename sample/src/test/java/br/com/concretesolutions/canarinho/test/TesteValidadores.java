@@ -2,7 +2,7 @@ package br.com.concretesolutions.canarinho.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
 import br.com.concretesolutions.canarinho.sample.BuildConfig;
@@ -11,9 +11,8 @@ import br.com.concretesolutions.canarinho.validator.Validador;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-/** */
-@RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@RunWith(RobolectricTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = 22)
 public class TesteValidadores {
 
     @Test

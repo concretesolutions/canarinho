@@ -1,15 +1,21 @@
 language: android
+
+jdk:
+  - oraclejdk8
+
 android:
   components:
-    - platform-tools
     - tools
+    - tools
+    - platform-tools
     - extra
-    - build-tools-23.0.3
-    - android-23
+    - build-tools-25.0.1
+    - android-25
     - extra-android-m2repository
     - sys-img-armeabi-v7a-android-19
     - sys-img-x86-android-18
 
 script:
-  - ./gradlew check assemble :sample:test
+  - ./gradlew clean assemble check :sample:test
 
+after_failure: "cat $TRAVIS_BUILD_DIR/sample/build/outputs/lint-results-debug.xml"

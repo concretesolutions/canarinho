@@ -1,14 +1,19 @@
 package br.com.concretesolutions.canarinho.test;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.robolectric.RobolectricTestRunner;
+import org.robolectric.annotation.Config;
 
 import br.com.concretesolutions.canarinho.formatador.Formatador;
+import br.com.concretesolutions.canarinho.sample.BuildConfig;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.fail;
 
-/** */
+@RunWith(RobolectricTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = 22)
 public class TesteFormatadorCPF {
 
     @Test
