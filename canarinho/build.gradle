@@ -4,15 +4,16 @@ apply from: "$rootDir/tools/linters/linters.gradle"
 ext {
     bintrayRepo = 'maven'
     bintrayName = 'canarinho'
+    bintrayUserOrg = 'concretesolutions'
 
     publishedGroupId = 'br.com.concretesolutions'
     libraryName = 'Android Canarinho'
     artifact = 'canarinho'
 
     libraryDescription = 'Utilitários Android para padrões Brasileiros'
-    siteUrl = 'https://github.com/cs-victor-nascimento/canarinho'
-    gitUrl = 'https://github.com/cs-victor-nascimento/canarinho.git'
-    libraryVersion = '1.1.1'
+    siteUrl = 'https://github.com/concretesolutions/canarinho'
+    gitUrl = 'https://github.com/concretesolutions/canarinho.git'
+    libraryVersion = '1.2.0'
 
     developerId = 'cs-victor-nascimento'
     developerName = 'Victor Oliveira Nascimento'
