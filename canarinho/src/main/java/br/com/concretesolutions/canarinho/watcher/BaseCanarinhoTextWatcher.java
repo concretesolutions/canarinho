@@ -3,6 +3,7 @@ package br.com.concretesolutions.canarinho.watcher;
 import android.text.Editable;
 import android.text.Selection;
 import android.text.TextWatcher;
+import android.view.View;
 
 import br.com.concretesolutions.canarinho.formatador.Formatador;
 import br.com.concretesolutions.canarinho.validator.Validador;
@@ -13,11 +14,14 @@ import br.com.concretesolutions.canarinho.watcher.evento.EventoDeValidacao;
  *
  * @see Validador
  */
-public abstract class BaseCanarinhoTextWatcher implements TextWatcher {
+public abstract class BaseCanarinhoTextWatcher implements TextWatcher, View.OnFocusChangeListener {
 
     private boolean mudancaInterna = false;
     private int tamanhoAnterior = 0;
     private EventoDeValidacao eventoDeValidacao;
+    private Validador validador;
+    private Validador.ResultadoParcial resultadoParcial;
+    private Editable editable;
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -75,7 +79,11 @@ public abstract class BaseCanarinhoTextWatcher implements TextWatcher {
             Selection.setSelection(s, builder.length());
         }
 
-        efetuaValidacao(validador, resultadoParcial, s);
+        this.validador = validador;
+        this.resultadoParcial = resultadoParcial;
+        this.editable = s;
+
+        efetuaValidacao(this.validador, this.resultadoParcial, this.editable);
         mudancaInterna = false;
     }
 
@@ -85,10 +93,13 @@ public abstract class BaseCanarinhoTextWatcher implements TextWatcher {
      * @param validador        Validador utilizado para verificar o input
      * @param resultadoParcial Objeto de validação
      * @param s                Editable em uso
+     * @param lostFocus        Edica se o input perdeu o focu
      */
     // CUIDADO AO ATUALIZAR O Editable AQUI!!!
-    protected void efetuaValidacao(Validador validador, Validador.ResultadoParcial resultadoParcial, Editable s) {
-
+    protected void efetuaValidacao(Validador validador,
+                                   Validador.ResultadoParcial resultadoParcial,
+                                   Editable s,
+                                   boolean lostFocus) {
         if (validador == null) {
             return;
         }
@@ -100,12 +111,40 @@ public abstract class BaseCanarinhoTextWatcher implements TextWatcher {
 
         validador.ehValido(s, resultadoParcial);
 
-        if (!resultadoParcial.isParcialmenteValido()) {
+        if (resultadoParcial.isValido()) {
+            if (!lostFocus) {
+                eventoDeValidacao.totalmenteValido(s.toString());
+            }
+        } else if (lostFocus) {
             eventoDeValidacao.invalido(s.toString(), resultadoParcial.getMensagem());
-        } else if (!resultadoParcial.isValido()) {
+        } else if (resultadoParcial.isParcialmenteValido()) {
             eventoDeValidacao.parcialmenteValido(s.toString());
         } else {
-            eventoDeValidacao.totalmenteValido(s.toString());
+            eventoDeValidacao.invalido(s.toString(), resultadoParcial.getMensagem());
+        }
+    }
+
+    /**
+     * Chama o evento de validação do input com focu
+     *
+     * @param validador        Validador utilizado para verificar o input
+     * @param resultadoParcial Objeto de validação
+     * @param s                Editable em uso
+     */
+    protected void efetuaValidacao(Validador validador, Validador.ResultadoParcial resultadoParcial, Editable s) {
+        efetuaValidacao(validador, resultadoParcial, s, false);
+    }
+
+    /**
+     * Evento que indica que o focos do input mudou
+     *
+     * @param v        Input em uso
+     * @param hasFocus Flag que indica se o input possui ou não focu
+     */
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if (!hasFocus) {
+            efetuaValidacao(this.validador, this.resultadoParcial, this.editable, true);
         }
     }
 
