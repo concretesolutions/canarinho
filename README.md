@@ -116,7 +116,7 @@ Para exemplos, verifique os testes na pasta sample.
 
 ## Gradle
 
-`compile 'br.com.concretesolutions:canarinho:1.1.0'`
+`compile 'br.com.concretesolutions:canarinho:1.2.0'`
 
 ## ATENÇÃO
 
