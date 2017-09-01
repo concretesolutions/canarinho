@@ -1,6 +1,7 @@
 package br.com.concretesolutions.canarinho.watcher;
 
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.Selection;
 import android.text.TextWatcher;
 
@@ -78,7 +79,12 @@ public class ValorMonetarioWatcher implements TextWatcher {
     private void atualizaTexto(Editable s, String valor) {
         mudancaInterna = true;
 
+        InputFilter[] oldFilters = s.getFilters();
+
+        s.setFilters(new InputFilter[] {});
         s.replace(0, s.length(), valor);
+
+        s.setFilters(oldFilters);
 
         if (valor.equals(s.toString())) {
             // TODO: estudar implantar a manutenção da posição do cursor
