@@ -76,19 +76,19 @@ public class ValorMonetarioWatcher implements TextWatcher {
         atualizaTexto(s, formatador.formata(resultado.toPlainString()));
     }
 
-    private void atualizaTexto(Editable s, String valor) {
+    private void atualizaTexto(Editable editable, String valor) {
         mudancaInterna = true;
 
-        InputFilter[] oldFilters = s.getFilters();
+        InputFilter[] oldFilters = editable.getFilters();
 
-        s.setFilters(new InputFilter[] {});
-        s.replace(0, s.length(), valor);
+        editable.setFilters(new InputFilter[] {});
+        editable.replace(0, editable.length(), valor);
 
-        s.setFilters(oldFilters);
+        editable.setFilters(oldFilters);
 
-        if (valor.equals(s.toString())) {
+        if (valor.equals(editable.toString())) {
             // TODO: estudar implantar a manutenção da posição do cursor
-            Selection.setSelection(s, valor.length());
+            Selection.setSelection(editable, valor.length());
         }
 
         mudancaInterna = false;
