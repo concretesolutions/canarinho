@@ -4,9 +4,12 @@ apply plugin: 'pmd'
 
 check.dependsOn 'checkstyle', 'findbugs', 'pmd'
 
+checkstyle.toolVersion = "8.2"
+
 task checkstyle(type: Checkstyle) {
     configFile file("$rootDir/tools/linters/checkstyle/checkstyle.xml")
-    configProperties.checkstyleSuppressionsPath = file("$rootDir/tools/linters/checkstyle/suppressions.xml").absolutePath
+    configProperties.checkstyleSuppressionsPath =
+            file("$rootDir/tools/linters/checkstyle/suppressions.xml").absolutePath
     source 'src'
     include '**/*.java'
     exclude '**/gen/**'
@@ -27,12 +30,6 @@ task findbugs(type: FindBugs) {
     reports {
         xml.enabled = false
         html.enabled = true
-        xml {
-            destination "$buildDir/reports/findbugs/findbugs.xml"
-        }
-        html {
-            destination "$buildDir/reports/findbugs/findbugs.html"
-        }
     }
 
     classpath = files()
@@ -48,13 +45,7 @@ task pmd(type: Pmd) {
     exclude '**/gen/**'
 
     reports {
-        xml.enabled = false
+        xml.enabled = true
         html.enabled = true
-        xml {
-            destination "$buildDir/reports/pmd/pmd.xml"
-        }
-        html {
-            destination "$buildDir/reports/pmd/pmd.html"
-        }
     }
 }
