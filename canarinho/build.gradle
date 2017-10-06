@@ -13,7 +13,7 @@ ext {
     libraryDescription = 'Utilitários Android para padrões Brasileiros'
     siteUrl = 'https://github.com/concretesolutions/canarinho'
     gitUrl = 'https://github.com/concretesolutions/canarinho.git'
-    libraryVersion = '1.2.0'
+    libraryVersion = '1.3.0-snapshot'
 
     developerId = 'cs-victor-nascimento'
     developerName = 'Victor Oliveira Nascimento'
