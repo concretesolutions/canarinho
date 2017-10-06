@@ -44,7 +44,10 @@ public class CanarinhoValorMonetarioWatcherFragment extends BaseWatcherFragment 
             watcherEdit.removeTextChangedListener(currentWatcher);
         }
 
-        currentWatcher = new ValorMonetarioWatcher();
+        currentWatcher = new ValorMonetarioWatcher.Builder()
+                .comSimboloReal()
+                .comMantemZerosAoLimpar()
+                .build();
         watcherEdit.addTextChangedListener(currentWatcher);
 
         if (currentWatcher instanceof BaseCanarinhoTextWatcher) {

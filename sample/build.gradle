@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         applicationId "br.com.concretesolutions.canarinho.sample"
@@ -27,7 +27,7 @@ android {
     }
 }
 
-def supportLibsVersion = '26.0.2'
+def supportLibsVersion = '26.1.0'
 
 dependencies {
 
