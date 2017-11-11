@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.0
+    - Alterado o pacote da bilbioteca. Junto a reformulação do nome da própria Concrete (remoção de Solutions)
+    - Corrige issue #19. Obrigado a @luisfernandezbr pelo fix
+    - Atualiza sistema de build
+
 ## 1.2.0
     - Adicionada configuração de `ValorMonetarioWatcher`
         - É possível deixar o símbolo de Real

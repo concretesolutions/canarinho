@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'jacoco'
 
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.2"
 
     defaultConfig {
-        applicationId "br.com.concretesolutions.canarinho.sample"
+        applicationId "br.com.concrete.canarinho.sample"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
@@ -14,6 +15,11 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+
+        debug {
+            testCoverageEnabled true
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -25,28 +31,58 @@ android {
         exclude 'META-INF/NOTICE.txt'
         exclude 'LICENSE.txt'
     }
+
+    testOptions {
+        execution 'ANDROID_TEST_ORCHESTRATOR'
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
 }
 
 def supportLibsVersion = '26.1.0'
 
 dependencies {
 
-    compile project(':canarinho')
+    implementation project(':canarinho')
 
-    compile "com.android.support:design:$supportLibsVersion"
-    compile "com.android.support:cardview-v7:$supportLibsVersion"
-    compile "com.android.support:appcompat-v7:$supportLibsVersion"
+    implementation "com.android.support:appcompat-v7:$supportLibsVersion"
+    implementation "com.android.support:cardview-v7:$supportLibsVersion"
+    implementation "com.android.support:design:$supportLibsVersion"
 
-    androidTestCompile("com.android.support:support-annotations:$supportLibsVersion")
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2')
-    androidTestCompile('com.android.support.test:runner:0.5')
+    androidTestUtil 'com.android.support.test:orchestrator:1.0.1'
 
-    testCompile 'junit:junit:4.12'
-    testCompile 'org.khronos:opengl-api:gl1.1-android-2.1_r1'
-    testCompile 'org.hamcrest:hamcrest-all:1.3'
-    testCompile 'net.vidageek:mirror:1.6.1'
-    testCompile('org.robolectric:robolectric:3.1.4') {
-        exclude group: 'commons-logging', module: 'commons-logging'
-        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+    androidTestImplementation("com.android.support:support-annotations:$supportLibsVersion")
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1')
+    androidTestImplementation('com.android.support.test:runner:1.0.1')
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.hamcrest:hamcrest-all:1.3'
+    testImplementation 'org.robolectric:robolectric:3.5.1'
+}
+
+jacoco {
+    toolVersion = "0.7.4+"
+}
+
+task fullCoverageReport(type: JacocoReport) {
+    dependsOn 'createDebugCoverageReport'
+    dependsOn 'testDebugUnitTest'
+
+    reports {
+        xml.enabled true
+        html.enabled true
     }
+
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*',
+                      '**/*Test*.*', 'android/**/*.*']
+    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    def mainSrc = "${project.projectDir}/src/main/java"
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree])
+    executionData = fileTree(dir: "$buildDir", includes: [
+            "jacoco/testDebugUnitTest.exec",
+            "outputs/code-coverage/connected/*coverage.ec"
+    ])
 }

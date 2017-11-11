@@ -170,12 +170,12 @@
                 value="GenericWhitespace ''{0}'' is not preceded with whitespace." />
         </module>
         <module name="Indentation">
-            <property name="basicOffset" value="2" />
+            <property name="basicOffset" value="4" />
             <property name="braceAdjustment" value="0" />
-            <property name="caseIndent" value="2" />
+            <property name="caseIndent" value="4" />
             <property name="throwsIndent" value="4" />
             <property name="lineWrappingIndentation" value="4" />
-            <property name="arrayInitIndent" value="2" />
+            <property name="arrayInitIndent" value="4" />
         </module>
         <module name="AbbreviationAsWordInName">
             <property name="ignoreFinal" value="false" />
@@ -189,6 +189,11 @@
             <property name="customImportOrderRules" value="STATIC###THIRD_PARTY_PACKAGE" />
         </module>
         <module name="MethodParamPad" />
+        <module name="NoWhitespaceBefore">
+            <property name="tokens"
+                value="COMMA, SEMI, POST_INC, POST_DEC, DOT, ELLIPSIS, METHOD_REF" />
+            <property name="allowLineBreaks" value="true" />
+        </module>
         <module name="ParenPad" />
         <module name="OperatorWrap">
             <property name="option" value="NL" />
@@ -223,7 +228,7 @@
             <property name="allowMissingThrowsTags" value="true" />
             <property name="allowMissingReturnTag" value="true" />
             <property name="minLineCount" value="2" />
-            <property name="allowedAnnotations" value="Override, Test" />
+            <property name="allowedAnnotations" value="Override, TestSolution" />
             <property name="allowThrowsTagsForSubclasses" value="true" />
         </module>
         <module name="MethodName">

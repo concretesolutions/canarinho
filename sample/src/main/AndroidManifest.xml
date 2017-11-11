@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.com.concretesolutions.canarinho.sample">
+    package="br.com.concrete.canarinho.sample">
 
     <application
         android:allowBackup="true"
@@ -7,7 +7,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
-        <activity android:name="br.com.concretesolutions.canarinho.sample.ui.activity.MainActivity">
+        <activity android:name="br.com.concrete.canarinho.sample.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
