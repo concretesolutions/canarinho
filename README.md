@@ -86,7 +86,7 @@ Exemplo de declaração no layout:
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="@string/hint_value"
-    android:inputType="textFilter|number"
+    android:inputType="number"
     android:maxLength="13"
     android:text="0,00" />
 ```
@@ -99,6 +99,12 @@ Para isso, usamos um `EventoDeValidacao` que possui os seguintes callbacks:
 - `void invalido(String valorAtual, String mensagem)`: chamado quando o valor está inválido
 - `void parcialmenteValido(String valorAtual)`: chamado quando o valor ainda não está completo e também não está inválido
 - `void totalmenteValido(String valorAtual)`: chamado quando o valor está completo e válido
+
+Um exemplo de implementação:
+
+```java
+
+```
 
 Veja exemplos de implementação no sample.
 

@@ -4,48 +4,66 @@ apply plugin: 'pmd'
 
 check.dependsOn 'checkstyle', 'findbugs', 'pmd'
 
-checkstyle.toolVersion = "8.2"
-
-task checkstyle(type: Checkstyle) {
+checkstyle {
+    toolVersion '8.2'
     configFile file("$rootDir/tools/linters/checkstyle/checkstyle.xml")
-    configProperties.checkstyleSuppressionsPath =
-            file("$rootDir/tools/linters/checkstyle/suppressions.xml").absolutePath
+    configProperties.checkstyleSuppressionsPath = file(
+            "$rootDir/tools/linters/checkstyle/suppressions.xml"
+    ).absolutePath
+}
+
+findbugs {
+    toolVersion = '3.0.1'
+    ignoreFailures = false
+    effort = 'max'
+    reportLevel = 'high'
+    excludeFilter = file("$rootDir/tools/linters/findbugs/findbugs-filter.xml")
+}
+
+pmd {
+    toolVersion = '5.5.2'
+    ignoreFailures = false
+    ruleSetFiles = files("$rootDir/tools/linters/pmd/pmd-ruleset.xml")
+    ruleSets = []
+}
+
+task checkstyle(type: Checkstyle, group: 'verification') {
     source 'src'
     include '**/*.java'
     exclude '**/gen/**'
+    exclude '**/test/**'
+    exclude '**/androidTest/**'
+    exclude '**/R.java'
+    exclude '**/BuildConfig.java'
     classpath = files()
 }
 
-task findbugs(type: FindBugs) {
-    ignoreFailures = false
-    effort = "max"
-    reportLevel = "high"
-    excludeFilter = new File("$rootDir/tools/linters/findbugs/findbugs-filter.xml")
-    classes = files("$buildDir/intermediates/classes")
-
+task findbugs(type: FindBugs, dependsOn: 'assemble', group: 'verification') {
+    classes = files("$projectDir/build/intermediates/classes")
     source 'src'
     include '**/*.java'
     exclude '**/gen/**'
 
     reports {
+        // FindBugs tasks can only have one report enabled
         xml.enabled = false
-        html.enabled = true
+        html.enabled = !xml.enabled
+        xml.destination file("$projectDir/build/reports/findbugs/findbugs.xml")
+        html.destination file("$projectDir/build/reports/findbugs/findbugs.html")
     }
 
     classpath = files()
 }
 
-task pmd(type: Pmd) {
-    ignoreFailures = false
-    ruleSetFiles = files("$rootDir/tools/linters/pmd/pmd-ruleset.xml")
-    ruleSets = []
-
+task pmd(type: Pmd, group: 'verification') {
     source 'src'
     include '**/*.java'
-    exclude '**/gen/**'
+    exclude('**/gen/**', '**/debug/**')
 
     reports {
         xml.enabled = true
         html.enabled = true
+        xml.destination file("$projectDir/build/reports/pmd/pmd.xml")
+        html.destination file("$projectDir/build/reports/pmd/pmd.html")
     }
 }
