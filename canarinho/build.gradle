@@ -4,7 +4,7 @@ apply from: "$rootDir/tools/linters/linters.gradle"
 ext {
     bintrayRepo = 'maven'
     bintrayName = 'canarinho'
-    bintrayUserOrg = 'concretesolutions'
+    bintrayUserOrg = 'concrete'
 
     publishedGroupId = 'br.com.concrete'
     libraryName = 'Android Canarinho'
