@@ -31,7 +31,7 @@ public interface Validador {
     /**
      * Referência para o singleton de validação de telefone
      */
-    Validador TELFONE = ValidadorTelefone.getInstance();
+    Validador TELEFONE = ValidadorTelefone.getInstance();
 
     /**
      * Referência para o singleton de validação de CEP

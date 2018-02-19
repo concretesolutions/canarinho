@@ -5,6 +5,9 @@
     - Corrige issue #19. Obrigado a @luisfernandezbr pelo fix
     - Atualiza sistema de build
 
+### Quebras de API
+    - Corrige grafia do validador de telefone (TELFONE -> TELEFONE).
+
 ## 1.2.0
     - Adicionada configuração de `ValorMonetarioWatcher`
         - É possível deixar o símbolo de Real
