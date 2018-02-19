@@ -103,7 +103,33 @@ Para isso, usamos um `EventoDeValidacao` que possui os seguintes callbacks:
 Um exemplo de implementação:
 
 ```java
+public class SampleEventoDeValidacao implements EventoDeValidacao {
 
+    private final TextInputLayout textInputLayout;
+
+    public SampleEventoDeValidacao(TextInputLayout textInputLayout) {
+        this.textInputLayout = textInputLayout;
+    }
+
+    @Override
+    public void invalido(String valorAtual, String mensagem) {
+        textInputLayout.setError(mensagem);
+    }
+
+    @Override
+    public void parcialmenteValido(String valorAtual) {
+        textInputLayout.setErrorEnabled(false);
+        textInputLayout.setError(null);
+    }
+
+    @Override
+    public void totalmenteValido(String valorAtual) {
+        new AlertDialog.Builder(textInputLayout.getContext())
+                .setTitle("Campo válido!")
+                .setMessage(valorAtual)
+                .show();
+    }
+}
 ```
 
 Veja exemplos de implementação no sample.
@@ -116,13 +142,13 @@ Ver [CHANGELOG.md](CHANGELOG.md)
 
 - `Formatador`: Formata, desformata e verifica se um valor está formatado e se pode ser formatado. Opera com valores completos.
 - `Validador`: Valida de duas formas: absoluta (true ou false) e atualizando um objeto de validação (`ResultadoParcial`).
-- Watchers: implementações de `TextWatcher`s para formatação e validação contínua (conforme a digitação do usuário.
+- Watchers: implementações de `TextWatcher`s para formatação e validação contínua (conforme a digitação do usuário).
 
 Para exemplos, verifique os testes na pasta sample.
 
 ## Gradle
 
-`compile 'br.com.concretesolutions:canarinho:1.2.0'`
+`compile 'br.com.concrete:canarinho:2.0.0'`
 
 ## ATENÇÃO
 
