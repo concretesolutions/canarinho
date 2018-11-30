@@ -19,6 +19,7 @@ import static org.junit.Assert.assertThat;
 import static org.robolectric.Robolectric.buildActivity;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = 27)
 public class ValorMonetarioWatcherTest {
 
     private EditText editText;

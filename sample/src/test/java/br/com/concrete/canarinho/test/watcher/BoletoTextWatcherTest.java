@@ -9,7 +9,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
+import org.robolectric.annotation.Config;
 
+import br.com.concrete.canarinho.sample.BuildConfig;
 import br.com.concrete.canarinho.sample.ui.activity.MainActivity;
 import br.com.concrete.canarinho.sample.ui.model.Watchers;
 import br.com.concrete.canarinho.watcher.BoletoBancarioTextWatcher;
@@ -19,6 +21,7 @@ import static org.junit.Assert.assertThat;
 import static org.robolectric.Robolectric.buildActivity;
 
 @RunWith(RobolectricTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = 22)
 public class BoletoTextWatcherTest {
 
     private BoletoBancarioTextWatcher watcher;

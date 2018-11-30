@@ -55,6 +55,13 @@ public class TesteFormatadorValor {
     }
 
     @Test
+    public void consegueDesformatarComSimbolo() {
+        assertThat(Formatador.VALOR.desformata("R$ 1,00"), is("1.00"));
+        assertThat(Formatador.VALOR.desformata("R$ 1.234,10"), is("1234.10"));
+        assertThat(Formatador.VALOR.desformata("R$ 0,10"), is("0.10"));
+    }
+
+    @Test
     public void consegueDizerSeEstaFormatado() {
 
         assertThat(Formatador.VALOR.estaFormatado("1,00"), is(true));
