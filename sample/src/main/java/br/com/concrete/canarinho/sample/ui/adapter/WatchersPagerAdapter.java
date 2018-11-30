@@ -1,9 +1,9 @@
 package br.com.concrete.canarinho.sample.ui.adapter;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentPagerAdapter;
 import br.com.concrete.canarinho.sample.ui.activity.MainActivity;
 import br.com.concrete.canarinho.sample.ui.model.Watchers;
 

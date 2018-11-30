@@ -4,32 +4,31 @@ apply from: "$rootDir/tools/linters/linters.gradle"
 ext {
     bintrayRepo = 'maven'
     bintrayName = 'canarinho'
-    bintrayUserOrg = 'concrete'
+    bintrayUserOrg = 'rafaeltoledo'
 
-    publishedGroupId = 'br.com.concrete'
+    publishedGroupId = 'net.rafaeltoledo.canarinho'
     libraryName = 'Android Canarinho'
     artifact = 'canarinho'
 
     libraryDescription = 'Utilitários Android para padrões Brasileiros'
-    siteUrl = 'https://github.com/concretesolutions/canarinho'
-    gitUrl = 'https://github.com/concretesolutions/canarinho.git'
-    libraryVersion = '2.0.0'
+    siteUrl = 'https://github.com/rafaeltoledo/canarinho'
+    gitUrl = 'https://github.com/rafaeltoledo/canarinho.git'
+    libraryVersion = '3.0.0'
 
-    developerId = 'cs-victor-nascimento'
-    developerName = 'Victor Oliveira Nascimento'
+    developerId = 'rafaeltoledo'
+    developerName = 'Rafael Toledo'
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
+    allLicenses = ['Apache-2.0']
 }
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.1"
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 27
+        targetSdkVersion 28
     }
     buildTypes {
         debug {}
@@ -37,8 +36,7 @@ android {
     }
 }
 
-dependencies {
-}
+dependencies { }
 
 // Configura publicação
 def localProps = project.rootProject.file('local.properties')

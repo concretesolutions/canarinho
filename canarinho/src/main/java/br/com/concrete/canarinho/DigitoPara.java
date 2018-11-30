@@ -122,7 +122,7 @@ public final class DigitoPara {
 
     /**
      * Builder com interface fluente para criação de instâncias configuradas de
-     * {@link DigitoPara}
+     * {@link DigitoPara}.
      */
     public static final class Builder {
 

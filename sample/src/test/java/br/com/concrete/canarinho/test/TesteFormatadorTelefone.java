@@ -3,26 +3,22 @@ package br.com.concrete.canarinho.test;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import br.com.concrete.canarinho.formatador.Formatador;
-import br.com.concrete.canarinho.sample.BuildConfig;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.fail;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 22)
 public class TesteFormatadorTelefone {
 
     @Test
     public void consegueFormatar() {
-        assertThat(Formatador.TELEFONE.formata("1112345678"),
-                is("(11) 1234-5678"));
+        assertThat(Formatador.TELEFONE.formata("1112345678"))
+                .isEqualTo("(11) 1234-5678");
 
-        assertThat(Formatador.TELEFONE.formata("11123456789"),
-                is("(11) 12345-6789"));
+        assertThat(Formatador.TELEFONE.formata("11123456789"))
+                .isEqualTo("(11) 12345-6789");
 
         try {
             Formatador.TELEFONE.formata(null);
@@ -33,11 +29,11 @@ public class TesteFormatadorTelefone {
 
     @Test
     public void consegueDesformatar() {
-        assertThat(Formatador.TELEFONE.desformata("(11) 1234-5678"),
-                is("1112345678"));
+        assertThat(Formatador.TELEFONE.desformata("(11) 1234-5678"))
+                .isEqualTo("1112345678");
 
-        assertThat(Formatador.TELEFONE.desformata("(11) 12345-6789"),
-                is("11123456789"));
+        assertThat(Formatador.TELEFONE.desformata("(11) 12345-6789"))
+                .isEqualTo("11123456789");
 
         try {
             Formatador.TELEFONE.desformata(null);
@@ -48,12 +44,12 @@ public class TesteFormatadorTelefone {
 
     @Test
     public void consegueDizerSeEstaFormatado() {
-        assertThat(Formatador.TELEFONE.estaFormatado("(11) 1234-5678"), is(true));
-        assertThat(Formatador.TELEFONE.estaFormatado("(11) 12345-6789"), is(true));
+        assertThat(Formatador.TELEFONE.estaFormatado("(11) 1234-5678")).isTrue();
+        assertThat(Formatador.TELEFONE.estaFormatado("(11) 12345-6789")).isTrue();
 
-        assertThat(Formatador.TELEFONE.estaFormatado("(11) 1234-56789"), is(false));
-        assertThat(Formatador.TELEFONE.estaFormatado("1112345678"), is(false));
-        assertThat(Formatador.TELEFONE.estaFormatado("11123456789"), is(false));
+        assertThat(Formatador.TELEFONE.estaFormatado("(11) 1234-56789")).isFalse();
+        assertThat(Formatador.TELEFONE.estaFormatado("1112345678")).isFalse();
+        assertThat(Formatador.TELEFONE.estaFormatado("11123456789")).isFalse();
 
         try {
             Formatador.TELEFONE.estaFormatado(null);
@@ -64,11 +60,11 @@ public class TesteFormatadorTelefone {
 
     @Test
     public void consegueDizerSePodeFormatar() {
-        assertThat(Formatador.TELEFONE.podeSerFormatado("11"), is(false));
-        assertThat(Formatador.TELEFONE.podeSerFormatado("111234567890"), is(false));
+        assertThat(Formatador.TELEFONE.podeSerFormatado("11")).isFalse();
+        assertThat(Formatador.TELEFONE.podeSerFormatado("111234567890")).isFalse();
 
-        assertThat(Formatador.TELEFONE.podeSerFormatado("1112345678"), is(true));
-        assertThat(Formatador.TELEFONE.podeSerFormatado("11123456789"), is(true));
+        assertThat(Formatador.TELEFONE.podeSerFormatado("1112345678")).isTrue();
+        assertThat(Formatador.TELEFONE.podeSerFormatado("11123456789")).isTrue();
 
         try {
             Formatador.TELEFONE.podeSerFormatado(null);

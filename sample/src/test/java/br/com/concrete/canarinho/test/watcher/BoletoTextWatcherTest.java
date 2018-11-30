@@ -1,24 +1,23 @@
 package br.com.concrete.canarinho.test.watcher;
 
-import android.app.Activity;
-import android.support.design.widget.TextInputLayout;
 import android.widget.EditText;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.android.controller.ActivityController;
 
-import br.com.concrete.canarinho.sample.ui.activity.MainActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
+import androidx.test.core.app.ActivityScenario;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import br.com.concrete.canarinho.sample.ui.model.Watchers;
 import br.com.concrete.canarinho.watcher.BoletoBancarioTextWatcher;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertThat;
-import static org.robolectric.Robolectric.buildActivity;
+import static com.google.common.truth.Truth.assertThat;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class BoletoTextWatcherTest {
 
     private BoletoBancarioTextWatcher watcher;
@@ -26,58 +25,61 @@ public class BoletoTextWatcherTest {
 
     @Before
     public void setUp() {
+        final ActivityScenario<AppCompatActivity> scenario = ActivityScenario.launch(AppCompatActivity.class);
+        scenario.moveToState(Lifecycle.State.STARTED);
 
-        final ActivityController<MainActivity> activityController = buildActivity(MainActivity.class);
-        final Activity activity = activityController.create().get();
+        scenario.onActivity(new ActivityScenario.ActivityAction<AppCompatActivity>() {
 
-        final TextInputLayout textInputLayout = new TextInputLayout(activity);
-        textInputLayout.addView(editText = new EditText(activity));
-        activityController.start().resume().visible();
+            @Override
+            public void perform(AppCompatActivity activity) {
+                final TextInputLayout textInputLayout = new TextInputLayout(activity);
+                textInputLayout.addView(editText = new EditText(activity));
+                final Watchers.SampleEventoDeValidacao sampleEventoDeValidacao =
+                        new Watchers.SampleEventoDeValidacao(textInputLayout);
 
-        final Watchers.SampleEventoDeValidacao sampleEventoDeValidacao =
-                new Watchers.SampleEventoDeValidacao(textInputLayout);
+                editText.addTextChangedListener(watcher = new BoletoBancarioTextWatcher(sampleEventoDeValidacao));
 
-        editText.addTextChangedListener(watcher = new BoletoBancarioTextWatcher(sampleEventoDeValidacao));
-
-        activity.setContentView(textInputLayout);
+                activity.setContentView(textInputLayout);
+            }
+        });
     }
 
     @Test
     public void typing_canValidateEmptyState() {
         editText.append("");
-        assertThat(editText.getText().toString(), is(""));
-        assertThat(watcher.getResultadoParcial().isParcialmenteValido(), is(true));
+        assertThat(editText.getText().toString()).isEmpty();
+        assertThat(watcher.getResultadoParcial().isParcialmenteValido()).isTrue();
     }
 
     @Test
     public void typing_canValidateProperCharacters() {
         editText.append("1bas2nas3lamsd4");
-        assertThat(editText.getText().toString(), is("1234"));
-        assertThat(watcher.getResultadoParcial().isParcialmenteValido(), is(true));
+        assertThat(editText.getText().toString()).isEqualTo("1234");
+        assertThat(watcher.getResultadoParcial().isParcialmenteValido()).isTrue();
     }
 
     @Test
     public void deleting_canEmptyEditText() {
         editText.append("1234");
-        assertThat(editText.getText().toString(), is("1234"));
-        assertThat(watcher.getResultadoParcial().isParcialmenteValido(), is(true));
+        assertThat(editText.getText().toString()).isEqualTo("1234");
+        assertThat(watcher.getResultadoParcial().isParcialmenteValido()).isTrue();
 
         editText.getEditableText().clear();
-        assertThat(editText.getText().toString(), is(""));
+        assertThat(editText.getText().toString()).isEmpty();
     }
 
     // Teste de regressão
     @Test
     public void deleting_afterEmptyingEditTextItKeepsValidatingInput() {
         editText.append("1234");
-        assertThat(editText.getText().toString(), is("1234"));
-        assertThat(watcher.getResultadoParcial().isParcialmenteValido(), is(true));
+        assertThat(editText.getText().toString()).isEqualTo("1234");
+        assertThat(watcher.getResultadoParcial().isParcialmenteValido()).isTrue();
 
         editText.getEditableText().clear();
-        assertThat(editText.getText().toString(), is(""));
+        assertThat(editText.getText().toString()).isEmpty();
 
         // menos caracteres que o tamanho inicial para saber qual máscara aplicar
         editText.append("$$");
-        assertThat(editText.getText().toString(), is(""));
+        assertThat(editText.getText().toString()).isEmpty();
     }
 }

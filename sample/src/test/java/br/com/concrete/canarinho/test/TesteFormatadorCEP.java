@@ -3,28 +3,24 @@ package br.com.concrete.canarinho.test;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
 import br.com.concrete.canarinho.formatador.Formatador;
-import br.com.concrete.canarinho.sample.BuildConfig;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static com.google.common.truth.Truth.assertThat;
 import static org.junit.Assert.fail;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 22)
 public class TesteFormatadorCEP {
 
     @Test
     public void consegueFormatar() {
 
         // Gerados automaticamente para testes
-        assertThat(Formatador.CEP.formata("00000-000"), is("00000-000"));
-        assertThat(Formatador.CEP.formata("00000000"), is("00000-000"));
+        assertThat(Formatador.CEP.formata("00000-000")).isEqualTo("00000-000");
+        assertThat(Formatador.CEP.formata("00000000")).isEqualTo("00000-000");
 
-        assertThat(Formatador.CEP.formata("12345-123"), is("12345-123"));
-        assertThat(Formatador.CEP.formata("12345678"), is("12345-678"));
+        assertThat(Formatador.CEP.formata("12345-123")).isEqualTo("12345-123");
+        assertThat(Formatador.CEP.formata("12345678")).isEqualTo("12345-678");
 
         assertThrowsFormat("");
         assertThrowsFormat("123123");
@@ -34,11 +30,11 @@ public class TesteFormatadorCEP {
     public void consegueDesformatar() {
 
         // Gerados automaticamente para testes
-        assertThat(Formatador.CEP.desformata("00000-000"), is("00000000"));
-        assertThat(Formatador.CEP.desformata("00000000"), is("00000000"));
+        assertThat(Formatador.CEP.desformata("00000-000")).isEqualTo("00000000");
+        assertThat(Formatador.CEP.desformata("00000000")).isEqualTo("00000000");
 
-        assertThat(Formatador.CEP.desformata("12345-123"), is("12345123"));
-        assertThat(Formatador.CEP.desformata("12345678"), is("12345678"));
+        assertThat(Formatador.CEP.desformata("12345-123")).isEqualTo("12345123");
+        assertThat(Formatador.CEP.desformata("12345678")).isEqualTo("12345678");
 
         assertThrowsDesformat("");
         assertThrowsDesformat("123123");
@@ -48,13 +44,13 @@ public class TesteFormatadorCEP {
     public void consegueDizerSeEstaFormatado() {
 
         // Gerados automaticamente para testes
-        assertThat(Formatador.CEP.estaFormatado("12345-678"), is(true));
-        assertThat(Formatador.CEP.estaFormatado("12345678"), is(false));
-        assertThat(Formatador.CEP.estaFormatado("00000-000"), is(true));
-        assertThat(Formatador.CEP.estaFormatado("12345-67"), is(false));
+        assertThat(Formatador.CEP.estaFormatado("12345-678")).isTrue();
+        assertThat(Formatador.CEP.estaFormatado("12345678")).isFalse();
+        assertThat(Formatador.CEP.estaFormatado("00000-000")).isTrue();
+        assertThat(Formatador.CEP.estaFormatado("12345-67")).isFalse();
 
-        assertThat(Formatador.CEP.estaFormatado("047486"), is(false));
-        assertThat(Formatador.CEP.estaFormatado(""), is(false));
+        assertThat(Formatador.CEP.estaFormatado("047486")).isFalse();
+        assertThat(Formatador.CEP.estaFormatado("")).isFalse();
         try {
             Formatador.CEP.estaFormatado(null);
             fail("Should have thrown!!!");
@@ -64,13 +60,12 @@ public class TesteFormatadorCEP {
 
     @Test
     public void consegueDizerSePodeFormatar() {
-
         // Gerados automaticamente para testes
-        assertThat(Formatador.CEP.podeSerFormatado("12345-678"), is(false));
-        assertThat(Formatador.CEP.podeSerFormatado("12345678"), is(true));
-        assertThat(Formatador.CEP.podeSerFormatado("020"), is(false));
-        assertThat(Formatador.CEP.podeSerFormatado(""), is(false));
-        assertThat(Formatador.CEP.podeSerFormatado(null), is(false));
+        assertThat(Formatador.CEP.podeSerFormatado("12345-678")).isFalse();
+        assertThat(Formatador.CEP.podeSerFormatado("12345678")).isTrue();
+        assertThat(Formatador.CEP.podeSerFormatado("020")).isFalse();
+        assertThat(Formatador.CEP.podeSerFormatado("")).isFalse();
+        assertThat(Formatador.CEP.podeSerFormatado(null)).isFalse();
     }
 
     private void assertThrowsFormat(String valor) {

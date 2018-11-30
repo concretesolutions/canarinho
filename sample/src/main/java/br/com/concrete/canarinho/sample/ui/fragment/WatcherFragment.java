@@ -1,8 +1,6 @@
 package br.com.concrete.canarinho.sample.ui.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputLayout;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +8,10 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.material.textfield.TextInputLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import br.com.concrete.canarinho.sample.R;
 import br.com.concrete.canarinho.sample.ui.model.Watchers;
 
@@ -29,9 +31,9 @@ public class WatcherFragment extends BaseWatcherFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        final View layout = inflater.inflate(R.layout.fragment_canarinho_watcher, null);
+        final View layout = inflater.inflate(R.layout.fragment_canarinho_watcher, container, false);
         watcherTitle = layout.findViewById(R.id.watcher_title);
         watcherInputLayout = layout.findViewById(R.id.edit_input_layout);
         watcherEdit = layout.findViewById(R.id.edit_text);
