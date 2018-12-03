@@ -1,5 +1,7 @@
 package br.com.concrete.canarinho.formatador;
 
+import android.os.Build;
+
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -71,8 +73,15 @@ public final class FormatadorValor implements Formatador {
             realValue = value.substring(offset);
         }
 
-        final BigDecimal valor = (BigDecimal) FORMATADOR_MOEDA.parse(realValue,
-                new ParsePosition(0));
+        final BigDecimal valor;
+        if (Build.VERSION.SDK_INT < 28) {
+            valor = (BigDecimal) FORMATADOR_MOEDA.parse(realValue,
+                    new ParsePosition(0));
+        } else {
+            // Implementando o parse manual devido a um bug na API 28
+            valor = new BigDecimal(realValue.replaceAll("\\.", "")
+                    .replace(",", "."));
+        }
         return valor.toPlainString();
     }
 
