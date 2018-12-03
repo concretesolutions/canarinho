@@ -67,7 +67,8 @@ public final class FormatadorValor implements Formatador {
 
         String realValue = value;
         if (value.startsWith(SIMBOLO_REAL)) {
-            realValue = value.substring(value.indexOf(SIMBOLO_REAL));
+            int offset = value.indexOf(SIMBOLO_REAL) + SIMBOLO_REAL.length();
+            realValue = value.substring(offset);
         }
 
         final BigDecimal valor = (BigDecimal) FORMATADOR_MOEDA.parse(realValue,
