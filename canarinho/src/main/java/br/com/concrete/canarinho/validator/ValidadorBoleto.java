@@ -3,6 +3,8 @@ package br.com.concrete.canarinho.validator;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import br.com.concrete.canarinho.DigitoPara;
@@ -83,17 +85,32 @@ public final class ValidadorBoleto implements Validador {
     }
 
     private ResultadoParcial validaNormal(String valor, ResultadoParcial rParcial) {
-
+        List<String> mensagens = new ArrayList<>();
         if (!validaBloco(valor, rParcial, MOD_10, 10, 0, "Primeiro")) {
-            return rParcial;
+            mensagens.add("Primeiro");
         }
 
         if (!validaBloco(valor, rParcial, MOD_10, 21, 10, "Segundo")) {
-            return rParcial;
+            mensagens.add("Segundo");
         }
 
         if (!validaBloco(valor, rParcial, MOD_10, 32, 21, "Terceiro")) {
+            mensagens.add("Terceiro");
+        }
+
+        if (mensagens.size() == 1) {
             return rParcial;
+        } else if (mensagens.size() > 1) {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < mensagens.size(); i++) {
+                builder.append(mensagens.get(i));
+                if (i != mensagens.size() - 1) {
+                    builder.append(", ");
+                }
+            }
+            builder.append(" blocos inválidos");
+            return rParcial
+                    .mensagem(builder.toString());
         }
 
         if (valor.length() < 47) {
@@ -113,20 +130,36 @@ public final class ValidadorBoleto implements Validador {
         final boolean ehMod10 = valor.charAt(2) == '6' || valor.charAt(2) == '7';
         final DigitoPara digitoPara = ehMod10 ? MOD_10 : MOD_11;
 
+        List<String> mensagens = new ArrayList<>();
         if (!validaBloco(valor, rParcial, digitoPara, 12, 0, "Primeiro")) {
-            return rParcial;
+            mensagens.add("Primeiro");
         }
 
         if (!validaBloco(valor, rParcial, digitoPara, 24, 12, "Segundo")) {
-            return rParcial;
+            mensagens.add("Segundo");
         }
 
         if (!validaBloco(valor, rParcial, digitoPara, 36, 24, "Terceiro")) {
-            return rParcial;
+            mensagens.add("Terceiro");
         }
 
         if (!validaBloco(valor, rParcial, digitoPara, 48, 36, "Quarto")) {
+            mensagens.add("Quarto");
+        }
+
+        if (mensagens.size() == 1) {
             return rParcial;
+        } else if (mensagens.size() > 1) {
+            StringBuilder builder = new StringBuilder();
+            for (int i = 0; i < mensagens.size(); i++) {
+                builder.append(mensagens.get(i));
+                if (i != mensagens.size() - 1) {
+                    builder.append(", ");
+                }
+            }
+            builder.append(" blocos inválidos");
+            return rParcial
+                    .mensagem(builder.toString());
         }
 
         // Retorna bloco válido

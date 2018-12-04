@@ -59,6 +59,14 @@ public class BoletoTextWatcherTest {
     }
 
     @Test
+    public void typing_canValidateBlocks() {
+        editText.append("858440000090207203281837240720183202308757811035");
+        assertThat(watcher.getResultadoParcial().isParcialmenteValido()).isFalse();
+        assertThat(watcher.getResultadoParcial().getMensagem().contains("Primeiro")).isTrue();
+        assertThat(watcher.getResultadoParcial().getMensagem().contains("Quarto")).isTrue();
+    }
+
+    @Test
     public void deleting_canEmptyEditText() {
         editText.append("1234");
         assertThat(editText.getText().toString()).isEqualTo("1234");

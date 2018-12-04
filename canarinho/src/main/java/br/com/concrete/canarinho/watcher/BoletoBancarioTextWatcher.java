@@ -3,7 +3,9 @@ package br.com.concrete.canarinho.watcher;
 import android.text.Editable;
 import android.text.InputFilter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import br.com.concrete.canarinho.validator.Validador;
 import br.com.concrete.canarinho.validator.ValidadorBoleto;
@@ -91,21 +93,22 @@ public final class BoletoBancarioTextWatcher extends BaseCanarinhoTextWatcher {
 
             if (callbackErros instanceof EventoDeValidacaoDeBoleto) {
 
-                final int bloco;
+                final List<Integer> blocos = new ArrayList<>();
 
-                if (mensagem.startsWith("Primeiro")) {
-                    bloco = 1;
-                } else if (mensagem.startsWith("Segundo")) {
-                    bloco = 2;
-                } else if (mensagem.startsWith("Terceiro")) {
-                    bloco = 3;
-                } else if (mensagem.startsWith("Quarto")) {
-                    bloco = 4;
-                } else {
-                    throw new IllegalArgumentException("Valor não reconhecido para bloco");
+                if (mensagem.contains("Primeiro")) {
+                    blocos.add(1);
+                }
+                if (mensagem.contains("Segundo")) {
+                    blocos.add(2);
+                }
+                if (mensagem.contains("Terceiro")) {
+                    blocos.add(3);
+                }
+                if (mensagem.contains("Quarto")) {
+                    blocos.add(4);
                 }
 
-                ((EventoDeValidacaoDeBoleto) callbackErros).invalido(valorAtual, bloco);
+                ((EventoDeValidacaoDeBoleto) callbackErros).invalido(valorAtual, blocos);
             }
 
         } else if (!resultadoParcial.isValido()) {

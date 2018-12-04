@@ -4,6 +4,8 @@ import android.text.TextWatcher;
 
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.List;
+
 import androidx.appcompat.app.AlertDialog;
 import br.com.concrete.canarinho.sample.ui.fragment.BaseWatcherFragment;
 import br.com.concrete.canarinho.sample.ui.fragment.CanarinhoValorMonetarioWatcherFragment;
@@ -202,19 +204,22 @@ public enum Watchers {
         }
 
         @Override
-        public void invalido(String valorAtual, int blocoInvalido) {
+        public void invalido(String valorAtual, List<Integer> blocoInvalido) {
+            StringBuilder builder = new StringBuilder();
 
-            if (blocoInvalido == 1)
-                textInputLayout.setError("Primeira mensagem");
+            if (blocoInvalido.contains(1))
+                builder.append("Primeira mensagem");
 
-            else if (blocoInvalido == 2)
-                textInputLayout.setError("Segunda mensagem");
+            else if (blocoInvalido.contains(2))
+                builder.append("Segunda mensagem");
 
-            else if (blocoInvalido == 3)
-                textInputLayout.setError("Terceira mensagem");
+            else if (blocoInvalido.contains(3))
+                builder.append("Terceira mensagem");
 
-            else if (blocoInvalido == 4)
-                textInputLayout.setError("Quarta mensagem");
+            else if (blocoInvalido.contains(4))
+                builder.append("Quarta mensagem");
+
+            textInputLayout.setError(builder.toString());
 
         }
     }
