@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply from: "$rootDir/tools/linters/linters.gradle"
 
 ext {
-    bintrayRepo = 'maven'
+    bintrayRepo = 'concrete-maven'
     bintrayName = 'canarinho'
     bintrayUserOrg = 'concrete'
 
