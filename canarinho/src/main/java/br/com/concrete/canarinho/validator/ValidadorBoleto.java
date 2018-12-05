@@ -39,6 +39,48 @@ public final class ValidadorBoleto implements Validador {
     private static final Pattern PADRAO_PARA_LIMPAR = Pattern.compile("[\\s.]");
     private static final Pattern PADRAO_APENAS_NUMEROS = Pattern.compile("[\\d]*");
 
+    public static final int PRIMEIRO_BLOCO_INICIO_NORMAL = 0;
+    public static final int PRIMEIRO_BLOCO_FIM_NORMAL = 10;
+
+    public static final int PRIMEIRO_BLOCO_INICIO_MASCARA = PRIMEIRO_BLOCO_INICIO_NORMAL;
+    public static final int PRIMEIRO_BLOCO_FIM_MASCARA = PRIMEIRO_BLOCO_FIM_NORMAL +1;
+    public static final int PRIMEIRO_BLOCO_INICIO_MASCARA_TRIBUTO = PRIMEIRO_BLOCO_INICIO_NORMAL;
+    public static final int PRIMEIRO_BLOCO_FIM_MASCARA_TRIBUTO = PRIMEIRO_BLOCO_FIM_NORMAL +2;
+
+    public static final int SEGUNDO_BLOCO_INICIO_NORMAL = 10;
+    public static final int SEGUNDO_BLOCO_FIM_NORMAL = 21;
+
+    public static final int SEGUNDO_BLOCO_INICIO_MASCARA = SEGUNDO_BLOCO_INICIO_NORMAL +1;
+    public static final int SEGUNDO_BLOCO_FIM_MASCARA = SEGUNDO_BLOCO_FIM_NORMAL +3;
+    public static final int SEGUNDO_BLOCO_INICIO_MASCARA_TRIBUTO = SEGUNDO_BLOCO_INICIO_NORMAL +2;
+    public static final int SEGUNDO_BLOCO_FIM_MASCARA_TRIBUTO = SEGUNDO_BLOCO_FIM_NORMAL +4;
+
+    public static final int TERCEIRO_BLOCO_INICIO_NORMAL = 21;
+    public static final int TERCEIRO_BLOCO_FIM_NORMAL = 32;
+
+    public static final int TERCEIRO_BLOCO_INICIO_MASCARA = TERCEIRO_BLOCO_INICIO_NORMAL +3;
+    public static final int TERCEIRO_BLOCO_FIM_MASCARA = TERCEIRO_BLOCO_FIM_NORMAL +5;
+    public static final int TERCEIRO_BLOCO_INICIO_MASCARA_TRIBUTO = TERCEIRO_BLOCO_INICIO_NORMAL +4;
+    public static final int TERCEIRO_BLOCO_FIM_MASCARA_TRIBUTO = TERCEIRO_BLOCO_FIM_NORMAL +6;
+
+    public static final int PRIMEIRO_BLOCO_INICIO_TRIBUTO = 0;
+    public static final int PRIMEIRO_BLOCO_FIM_TRIBUTO = 12;
+
+    public static final int SEGUNDO_BLOCO_INICIO_TRIBUTO = 12;
+    public static final int SEGUNDO_BLOCO_FIM_TRIBUTO = 24;
+
+    public static final int TERCEIRO_BLOCO_INICIO_TRIBUTO = 24;
+    public static final int TERCEIRO_BLOCO_FIM_TRIBUTO = 36;
+
+    public static final int QUARTO_BLOCO_INICIO_TRIBUTO = 36;
+    public static final int QUARTO_BLOCO_FIM_TRIBUTO = 48;
+    public static final int QUARTO_BLOCO_INICIO_MASCARA = QUARTO_BLOCO_INICIO_TRIBUTO +3;
+    public static final int QUARTO_BLOCO_FIM_MASCARA = QUARTO_BLOCO_FIM_TRIBUTO +3;
+
+    public enum TipoBoleto {
+        NORMAL, TRIBUTO
+    }
+
     // No instance creation
     private ValidadorBoleto() {
     }
@@ -86,38 +128,47 @@ public final class ValidadorBoleto implements Validador {
 
     private ResultadoParcial validaNormal(String valor, ResultadoParcial rParcial) {
         List<String> mensagens = new ArrayList<>();
-        if (!validaBloco(valor, rParcial, MOD_10, 10, 0, "Primeiro")) {
-            mensagens.add("Primeiro");
+        boolean ehUmMaisInvalido = false;
+
+        if (!validaBloco(valor, rParcial, MOD_10, PRIMEIRO_BLOCO_FIM_NORMAL, PRIMEIRO_BLOCO_INICIO_NORMAL, "Primeiro", mensagens)) {
+            //mensagens.add("Primeiro");
+            ehUmMaisInvalido = true;
         }
 
-        if (!validaBloco(valor, rParcial, MOD_10, 21, 10, "Segundo")) {
-            mensagens.add("Segundo");
+        if (!validaBloco(valor, rParcial, MOD_10, SEGUNDO_BLOCO_FIM_NORMAL, SEGUNDO_BLOCO_INICIO_NORMAL, "Segundo", mensagens)) {
+            //mensagens.add("Segundo");
+            ehUmMaisInvalido = true;
         }
 
-        if (!validaBloco(valor, rParcial, MOD_10, 32, 21, "Terceiro")) {
-            mensagens.add("Terceiro");
+        if (!validaBloco(valor, rParcial, MOD_10, TERCEIRO_BLOCO_FIM_NORMAL, TERCEIRO_BLOCO_INICIO_NORMAL, "Terceiro", mensagens)) {
+            //mensagens.add("Terceiro");
+            ehUmMaisInvalido = true;
         }
 
-        if (mensagens.size() == 1) {
-            return rParcial;
-        } else if (mensagens.size() > 1) {
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < mensagens.size(); i++) {
-                builder.append(mensagens.get(i));
-                if (i != mensagens.size() - 1) {
-                    builder.append(", ");
-                }
-            }
-            builder.append(" blocos inválidos");
-            return rParcial
-                    .mensagem(builder.toString());
-        }
+        montaMensagem(mensagens, rParcial);
 
-        if (valor.length() < 47) {
-            return rParcial;
-        }
+        return validaValorInvalido(ehUmMaisInvalido, rParcial, valor, TipoBoleto.NORMAL);
 
-        return rParcial.parcialmenteValido(true).totalmenteValido(true);
+//        if (mensagens.size() == 1) {
+//            return rParcial;
+//        } else if (mensagens.size() > 1) {
+//            StringBuilder builder = new StringBuilder();
+//            for (int i = 0; i < mensagens.size(); i++) {
+//                builder.append(mensagens.get(i));
+//                if (i != mensagens.size() - 1) {
+//                    builder.append(", ");
+//                }
+//            }
+//            builder.append(" blocos inválidos");
+//            return rParcial
+//                    .mensagem(builder.toString());
+//        }
+//
+//        if (valor.length() < 47) {
+//            return rParcial;
+//        }
+//
+//        return rParcial.parcialmenteValido(true).totalmenteValido(true);
     }
 
     private ResultadoParcial validaTributo(String valor, ResultadoParcial rParcial) {
@@ -130,40 +181,72 @@ public final class ValidadorBoleto implements Validador {
         final boolean ehMod10 = valor.charAt(2) == '6' || valor.charAt(2) == '7';
         final DigitoPara digitoPara = ehMod10 ? MOD_10 : MOD_11;
 
+        boolean ehUmMaisInvalido = false;
+
         List<String> mensagens = new ArrayList<>();
-        if (!validaBloco(valor, rParcial, digitoPara, 12, 0, "Primeiro")) {
-            mensagens.add("Primeiro");
+        if (!validaBloco(valor, rParcial, digitoPara, PRIMEIRO_BLOCO_FIM_TRIBUTO, PRIMEIRO_BLOCO_INICIO_TRIBUTO, "Primeiro", mensagens)) {
+            //mensagens.add("Primeiro");
+            ehUmMaisInvalido = true;
         }
 
-        if (!validaBloco(valor, rParcial, digitoPara, 24, 12, "Segundo")) {
-            mensagens.add("Segundo");
+        if (!validaBloco(valor, rParcial, digitoPara, SEGUNDO_BLOCO_FIM_TRIBUTO, SEGUNDO_BLOCO_INICIO_TRIBUTO, "Segundo", mensagens)) {
+            //mensagens.add("Segundo");
+            ehUmMaisInvalido = true;
         }
 
-        if (!validaBloco(valor, rParcial, digitoPara, 36, 24, "Terceiro")) {
-            mensagens.add("Terceiro");
+        if (!validaBloco(valor, rParcial, digitoPara, TERCEIRO_BLOCO_FIM_TRIBUTO, TERCEIRO_BLOCO_INICIO_TRIBUTO, "Terceiro", mensagens)) {
+            //mensagens.add("Terceiro");
+            ehUmMaisInvalido = true;
         }
 
-        if (!validaBloco(valor, rParcial, digitoPara, 48, 36, "Quarto")) {
-            mensagens.add("Quarto");
+        if (!validaBloco(valor, rParcial, digitoPara, QUARTO_BLOCO_FIM_TRIBUTO, QUARTO_BLOCO_INICIO_TRIBUTO, "Quarto", mensagens)) {
+            //mensagens.add("Quarto");
+            ehUmMaisInvalido = true;
         }
 
-        if (mensagens.size() == 1) {
-            return rParcial;
-        } else if (mensagens.size() > 1) {
-            StringBuilder builder = new StringBuilder();
-            for (int i = 0; i < mensagens.size(); i++) {
-                builder.append(mensagens.get(i));
-                if (i != mensagens.size() - 1) {
-                    builder.append(", ");
-                }
-            }
-            builder.append(" blocos inválidos");
-            return rParcial
-                    .mensagem(builder.toString());
-        }
+        montaMensagem(mensagens, rParcial);
+
+//      if (mensagens.size() == 1) {
+//
+//            return rParcial;
+//      } else if (mensagens.size() > 1) {
+//            montaMensagem(mensagens, rParcial);
+//      }
 
         // Retorna bloco válido
-        return rParcial.parcialmenteValido(true).totalmenteValido(true);
+        return validaValorInvalido(ehUmMaisInvalido, rParcial, valor, TipoBoleto.TRIBUTO);
+    }
+
+    private void montaMensagem(final List<String> mensagens, final ResultadoParcial rParcial) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < mensagens.size(); i++) {
+            builder.append(mensagens.get(i));
+            if (i != mensagens.size() - 1) {
+                builder.append(", ");
+            }
+        }
+        builder.append(" bloco(s) inválido(s)");
+        rParcial.mensagem(builder.toString());
+
+    }
+
+    private Validador.ResultadoParcial validaValorInvalido(boolean ehUmMaisInvalido,
+                                                           Validador.ResultadoParcial rParcial,
+                                                           String valor, TipoBoleto tipoBoleto) {
+        if (!ehUmMaisInvalido) {
+            rParcial.parcialmenteValido(true);
+        }
+
+        if (tipoBoleto == TipoBoleto.TRIBUTO) {
+            if (valor.length() < 48) return rParcial;
+        } else {
+            if (valor.length() < 47) return rParcial;
+        }
+
+        if (!ehUmMaisInvalido){
+            return rParcial.parcialmenteValido(true).totalmenteValido(true);
+        }
+        return rParcial;
     }
 
     private boolean ehTributo(CharSequence valor) {
@@ -171,11 +254,15 @@ public final class ValidadorBoleto implements Validador {
     }
 
     private boolean validaBloco(String valor, ResultadoParcial resultadoParcial, DigitoPara mod,
-                                int tamanhoMinimo, int st, String mensagem) {
+                                int tamanhoMinimo, int st, String mensagem, List<String> mensagens) {
+
+        if (tamanhoMinimo > valor.length()) {
+            //resultadoParcial.removeBlocoInvalidoArray(bloco);
+            return true;
+        }
 
         if (valor.length() < tamanhoMinimo) {
-            resultadoParcial.parcialmenteValido(true);
-            return false;
+            return true;
         }
 
         final int end = tamanhoMinimo - 1;
@@ -183,8 +270,8 @@ public final class ValidadorBoleto implements Validador {
         final char digito = mod.calcula(valor.subSequence(st, end).toString()).charAt(0);
 
         if (digito != valor.charAt(end)) {
+            mensagens.add(mensagem);
             return resultadoParcial
-                    .mensagem(mensagem + " bloco inválido")
                     .parcialmenteValido(false)
                     .isParcialmenteValido();
         }

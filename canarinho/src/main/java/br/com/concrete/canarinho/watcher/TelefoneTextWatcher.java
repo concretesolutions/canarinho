@@ -45,7 +45,7 @@ public final class TelefoneTextWatcher extends BaseCanarinhoTextWatcher {
         final char[] mascara = ehNoveDigitos(s) ? TELEFONE_NOVE_DIGITOS : TELEFONE_OITO_DIGITOS;
         final StringBuilder builder = trataAdicaoRemocaoDeCaracter(s, mascara);
 
-        atualizaTexto(validador, resultadoParcial, s, builder);
+        atualizaTexto(validador, resultadoParcial, s, builder, false);
     }
 
     // Verifica se o telefone possui 9 dígitos

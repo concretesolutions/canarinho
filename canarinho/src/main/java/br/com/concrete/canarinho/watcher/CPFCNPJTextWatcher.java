@@ -49,7 +49,7 @@ public class CPFCNPJTextWatcher extends BaseCanarinhoTextWatcher {
 
         final char[] mascara = ehCpf(s) ? CPF : CNPJ;
         final StringBuilder builder = trataAdicaoRemocaoDeCaracter(s, mascara);
-        atualizaTexto(validador, resultadoParcial, s, builder);
+        atualizaTexto(validador, resultadoParcial, s, builder, false);
     }
 
     // Verifica se o valor informado é cpf

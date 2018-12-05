@@ -54,7 +54,7 @@ public final class MascaraNumericaTextWatcher extends BaseCanarinhoTextWatcher {
 
         final StringBuilder builder = trataAdicaoRemocaoDeCaracter(s, mascara);
 
-        atualizaTexto(validador, resultadoParcial, s, builder);
+        atualizaTexto(validador, resultadoParcial, s, builder, false);
     }
 
     /**

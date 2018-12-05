@@ -1,7 +1,10 @@
 package br.com.concrete.canarinho.watcher;
 
+import android.graphics.Color;
 import android.text.Editable;
 import android.text.InputFilter;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,7 +70,7 @@ public final class BoletoBancarioTextWatcher extends BaseCanarinhoTextWatcher {
 
         // Trata deleção e adição de forma diferente (só formata em adições)
         final StringBuilder builder = trataAdicaoRemocaoDeCaracter(s, mascara);
-        atualizaTexto(validador, resultadoParcial, s, builder);
+        atualizaTexto(validador, resultadoParcial, s, builder, tributo);
     }
 
     public Validador.ResultadoParcial getResultadoParcial() {
@@ -75,7 +78,8 @@ public final class BoletoBancarioTextWatcher extends BaseCanarinhoTextWatcher {
     }
 
     @Override
-    protected void efetuaValidacao(Validador validador, Validador.ResultadoParcial resultadoParcial, Editable s) {
+    protected void efetuaValidacao(Validador validador, Validador.ResultadoParcial resultadoParcial,
+                                   Editable s, boolean ehTributo) {
 
         validador.ehValido(s, resultadoParcial);
 
@@ -97,24 +101,52 @@ public final class BoletoBancarioTextWatcher extends BaseCanarinhoTextWatcher {
 
                 if (mensagem.contains("Primeiro")) {
                     blocos.add(1);
+                    if (ehTributo) {
+                        destacarBloco(s, ValidadorBoleto.PRIMEIRO_BLOCO_INICIO_MASCARA_TRIBUTO, ValidadorBoleto.PRIMEIRO_BLOCO_FIM_MASCARA_TRIBUTO);
+                    } else {
+                        destacarBloco(s, ValidadorBoleto.PRIMEIRO_BLOCO_INICIO_MASCARA, ValidadorBoleto.PRIMEIRO_BLOCO_FIM_MASCARA);
+                    }
                 }
                 if (mensagem.contains("Segundo")) {
                     blocos.add(2);
+                    if (ehTributo) {
+                        destacarBloco(s, ValidadorBoleto.SEGUNDO_BLOCO_INICIO_MASCARA_TRIBUTO, ValidadorBoleto.SEGUNDO_BLOCO_FIM_MASCARA_TRIBUTO);
+                    } else {
+                        destacarBloco(s, ValidadorBoleto.SEGUNDO_BLOCO_INICIO_MASCARA, ValidadorBoleto.SEGUNDO_BLOCO_FIM_MASCARA);
+                    }
                 }
                 if (mensagem.contains("Terceiro")) {
                     blocos.add(3);
+                    if (ehTributo) {
+                        destacarBloco(s, ValidadorBoleto.TERCEIRO_BLOCO_INICIO_MASCARA_TRIBUTO, ValidadorBoleto.TERCEIRO_BLOCO_FIM_MASCARA_TRIBUTO);
+                    } else {
+                        destacarBloco(s, ValidadorBoleto.TERCEIRO_BLOCO_INICIO_MASCARA, ValidadorBoleto.TERCEIRO_BLOCO_FIM_MASCARA);
+                    }
                 }
                 if (mensagem.contains("Quarto")) {
                     blocos.add(4);
+                    if (ehTributo) destacarBloco(s, ValidadorBoleto.QUARTO_BLOCO_INICIO_MASCARA, ValidadorBoleto.QUARTO_BLOCO_FIM_MASCARA);
                 }
 
                 ((EventoDeValidacaoDeBoleto) callbackErros).invalido(valorAtual, blocos);
             }
 
         } else if (!resultadoParcial.isValido()) {
+            removeSpans(s);
             callbackErros.parcialmenteValido(valorAtual);
         } else {
             callbackErros.totalmenteValido(valorAtual);
+        }
+    }
+
+    private void destacarBloco(final Editable s, final int inicio, final int fim) {
+        s.setSpan(new ForegroundColorSpan(Color.RED), inicio, fim, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+
+    private void removeSpans(final Editable s) {
+        ForegroundColorSpan[] colorSpans = s.getSpans(0, s.length(), ForegroundColorSpan.class);
+        for (ForegroundColorSpan colorSpan : colorSpans) {
+            s.removeSpan(colorSpan);
         }
     }
 

@@ -65,7 +65,7 @@ public abstract class BaseCanarinhoTextWatcher implements TextWatcher {
     // Usa o Editable para atualizar o Editable
     // O cursor SEMPRE sera posicionado no final do conteúdo
     protected void atualizaTexto(Validador validador, Validador.ResultadoParcial resultadoParcial,
-                                 Editable s, StringBuilder builder) {
+                                 Editable s, StringBuilder builder, boolean ehTributo) {
 
         tamanhoAnterior = builder.length();
         mudancaInterna = true;
@@ -76,7 +76,7 @@ public abstract class BaseCanarinhoTextWatcher implements TextWatcher {
             Selection.setSelection(s, builder.length());
         }
 
-        efetuaValidacao(validador, resultadoParcial, s);
+        efetuaValidacao(validador, resultadoParcial, s, ehTributo);
         mudancaInterna = false;
     }
 
@@ -88,7 +88,8 @@ public abstract class BaseCanarinhoTextWatcher implements TextWatcher {
      * @param s                Editable em uso
      */
     // CUIDADO AO ATUALIZAR O Editable AQUI!!!
-    protected void efetuaValidacao(Validador validador, Validador.ResultadoParcial resultadoParcial, Editable s) {
+    protected void efetuaValidacao(Validador validador, Validador.ResultadoParcial resultadoParcial,
+                                   Editable s, boolean ehTributo) {
 
         if (validador == null) {
             return;

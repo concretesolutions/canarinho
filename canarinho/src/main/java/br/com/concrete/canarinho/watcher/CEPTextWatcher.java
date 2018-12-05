@@ -42,6 +42,6 @@ public final class CEPTextWatcher extends BaseCanarinhoTextWatcher {
 
         final StringBuilder builder = trataAdicaoRemocaoDeCaracter(s, CEP_DIGITOS);
 
-        atualizaTexto(validador, resultadoParcial, s, builder);
+        atualizaTexto(validador, resultadoParcial, s, builder, false);
     }
 }
