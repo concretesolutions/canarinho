@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+    - Corrige bug no formatador da API 28
+    - Corrige bug do formatador numérico com símbolo
+
 ## 2.0.0
     - Alterado o pacote da bilbioteca. Junto a reformulação do nome da própria Concrete (remoção de Solutions)
     - Corrige issue #19. Obrigado a @luisfernandezbr pelo fix

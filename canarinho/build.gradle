@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply from: "$rootDir/tools/linters/linters.gradle"
 
 ext {
-    bintrayRepo = 'maven'
+    bintrayRepo = 'concrete-maven'
     bintrayName = 'canarinho'
     bintrayUserOrg = 'concrete'
 
@@ -13,7 +13,7 @@ ext {
     libraryDescription = 'Utilitários Android para padrões Brasileiros'
     siteUrl = 'https://github.com/concretesolutions/canarinho'
     gitUrl = 'https://github.com/concretesolutions/canarinho.git'
-    libraryVersion = '2.0.0'
+    libraryVersion = '2.0.1'
 
     developerId = 'cs-victor-nascimento'
     developerName = 'Victor Oliveira Nascimento'
@@ -52,3 +52,4 @@ if (localProps.exists()) {
     if (user && apikey)
         apply from: 'publica.gradle'
 }
+
