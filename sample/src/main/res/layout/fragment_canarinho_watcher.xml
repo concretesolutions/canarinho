@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             app:errorEnabled="true">
 
-            <com.google.android.material.textfield.TextInputLayout
+            <EditText
                 android:id="@+id/edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

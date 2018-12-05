@@ -1,5 +1,6 @@
 package br.com.concrete.canarinho.test.watcher;
 
+import android.graphics.Color;
 import android.text.style.ForegroundColorSpan;
 import android.widget.EditText;
 
@@ -62,7 +63,7 @@ public class BoletoValidacaoBlocoTest {
             }
         };
 
-        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback));
+        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback, null));
         editText.append(invalidBarCodeTribute);
     }
 
@@ -75,7 +76,7 @@ public class BoletoValidacaoBlocoTest {
             }
         };
 
-        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback));
+        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback, null));
         editText.append(invalidBarCode);
     }
 
@@ -88,7 +89,7 @@ public class BoletoValidacaoBlocoTest {
             }
         };
 
-        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback));
+        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback, null));
         editText.append(validBarCode);
     }
 
@@ -101,7 +102,7 @@ public class BoletoValidacaoBlocoTest {
             }
         };
 
-        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback));
+        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback, null));
         editText.append(validBarCodeTribute);
     }
 
@@ -117,7 +118,7 @@ public class BoletoValidacaoBlocoTest {
             }
         };
 
-        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback));
+        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback, Color.BLUE));
         editText.append(invalidBarCodeTribute);
     }
 
@@ -133,7 +134,7 @@ public class BoletoValidacaoBlocoTest {
             }
         };
 
-        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback));
+        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback, Color.BLUE));
         editText.append(invalidBarCode);
     }
 
@@ -154,7 +155,7 @@ public class BoletoValidacaoBlocoTest {
             }
         };
 
-        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback));
+        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback, null));
         editText.append(validBarCodeTribute);
     }
 
@@ -175,7 +176,7 @@ public class BoletoValidacaoBlocoTest {
             }
         };
 
-        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback));
+        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback, null));
         editText.append(validBarCode);
     }
 
@@ -203,7 +204,7 @@ public class BoletoValidacaoBlocoTest {
             }
         };
 
-        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback));
+        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback, null));
         editText.append(partiallyValidBarCode);
     }
 
@@ -225,7 +226,7 @@ public class BoletoValidacaoBlocoTest {
 
         };
 
-        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback));
+        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback, null));
         editText.append(partiallyValidBarCodeTribute);
     }
 
@@ -246,7 +247,7 @@ public class BoletoValidacaoBlocoTest {
             }
         };
 
-        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback));
+        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback, Color.BLUE));
         editText.append(partiallyInvalidBarCode);
     }
 
@@ -267,7 +268,7 @@ public class BoletoValidacaoBlocoTest {
             }
         };
 
-        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback));
+        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback, Color.BLUE));
         editText.append(partiallyInvalidBarCodeTribute);
     }
 
@@ -283,7 +284,7 @@ public class BoletoValidacaoBlocoTest {
                 assertEquals("Primeiro, Terceiro bloco(s) inválido(s)", mensagem);
             }
         };
-        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback));
+        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback, null));
         editText.append(invalidBarCode);
     }
 
@@ -299,7 +300,7 @@ public class BoletoValidacaoBlocoTest {
                 assertEquals("Primeiro bloco(s) inválido(s)", mensagem);
             }
         };
-        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback));
+        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback, null));
         editText.append(invalidBarCodeTributeFirstBlock);
     }
 
@@ -315,7 +316,7 @@ public class BoletoValidacaoBlocoTest {
                 assertEquals("", mensagem);
             }
         };
-        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback));
+        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback, null));
         editText.append(validBarCode);
     }
 
@@ -331,7 +332,7 @@ public class BoletoValidacaoBlocoTest {
                 assertEquals("", mensagem);
             }
         };
-        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback));
+        editText.addTextChangedListener(new BoletoBancarioTextWatcher(callback, null));
         editText.append(validBarCodeTribute);
     }
 

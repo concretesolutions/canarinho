@@ -1,5 +1,6 @@
 package br.com.concrete.canarinho.sample.ui.model;
 
+import android.graphics.Color;
 import android.text.TextWatcher;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -7,6 +8,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.List;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import br.com.concrete.canarinho.sample.ui.fragment.BaseWatcherFragment;
 import br.com.concrete.canarinho.sample.ui.fragment.CanarinhoValorMonetarioWatcherFragment;
 import br.com.concrete.canarinho.sample.ui.fragment.WatcherFragment;
@@ -31,9 +33,10 @@ public enum Watchers {
 
         @Override
         public TextWatcher setupWatcher(TextInputLayout textInputLayout) {
-            return new BoletoBancarioTextWatcher(new SampleEventoDeValidacao(textInputLayout));
+            return new BoletoBancarioTextWatcher(new SampleEventoDeValidacao(textInputLayout), null);
         }
     },
+
     BOLETO_BANCARIO_MSG_CUSTOM("Boleto Bancário com mensagem", "Digite um boleto válido") {
         @Override
         public WatcherFragment buildFragment() {
@@ -42,7 +45,20 @@ public enum Watchers {
 
         @Override
         public TextWatcher setupWatcher(TextInputLayout textInputLayout) {
-            return new BoletoBancarioTextWatcher(new EventoDeValidacaoBoleto(textInputLayout));
+            return new BoletoBancarioTextWatcher(new EventoDeValidacaoBoleto(textInputLayout), null);
+        }
+    },
+
+    BOLETO_BANCARIO_MSG_DESTACADO("Boleto Bancário com destaque", "Digite um boleto válido") {
+        @Override
+        public WatcherFragment buildFragment() {
+            return WatcherFragment.newInstance(this);
+        }
+
+        @Override
+        public TextWatcher setupWatcher(TextInputLayout textInputLayout) {
+            return new BoletoBancarioTextWatcher(new EventoDeValidacaoBoletoDestacado(textInputLayout),
+                    Color.parseColor("#d20f02"));
         }
     },
 
@@ -222,6 +238,56 @@ public enum Watchers {
             textInputLayout.setError(builder.toString());
 
         }
+
+    }
+
+    public static class EventoDeValidacaoBoletoDestacado
+            extends SampleEventoDeValidacao
+            implements EventoDeValidacaoDeBoleto {
+
+        EventoDeValidacaoBoletoDestacado(TextInputLayout textInputLayout) {
+            super(textInputLayout);
+        }
+
+        @Override
+        public void invalido(String valorAtual, List<Integer> blocoInvalido) {
+            StringBuilder builder = new StringBuilder();
+
+//            if (blocoInvalido.contains(1))
+//                builder.append("Primeira mensagem");
+//
+//            else if (blocoInvalido.contains(2))
+//                builder.append("Segunda mensagem");
+//
+//            else if (blocoInvalido.contains(3))
+//                builder.append("Terceira mensagem");
+//
+//            else if (blocoInvalido.contains(4))
+//                builder.append("Quarta mensagem");
+//
+//            textInputLayout.setError(builder.toString());
+
+        }
+
+        @Override
+        public void invalido(String valorAtual, String mensagem) {
+            textInputLayout.setError(mensagem);
+        }
+
+        @Override
+        public void parcialmenteValido(String valorAtual) {
+            textInputLayout.setErrorEnabled(false);
+            textInputLayout.setError(null);
+        }
+
+        @Override
+        public void totalmenteValido(String valorAtual) {
+            new AlertDialog.Builder(textInputLayout.getContext())
+                    .setTitle("Campo válido!")
+                    .setMessage(valorAtual)
+                    .show();
+        }
+
     }
 
 }

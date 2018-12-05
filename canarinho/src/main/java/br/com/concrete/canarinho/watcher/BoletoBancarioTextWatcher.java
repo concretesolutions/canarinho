@@ -28,6 +28,7 @@ public final class BoletoBancarioTextWatcher extends BaseCanarinhoTextWatcher {
             new InputFilter.LengthFilter(BOLETO_TRIBUTO.length)};
     private static final InputFilter[] FILTRO_NORMAL = new InputFilter[]{
             new InputFilter.LengthFilter(BOLETO_NORMAL.length)};
+    private Integer corMarcacao;
 
     private final Validador validador = ValidadorBoleto.getInstance();
     private final Validador.ResultadoParcial resultadoParcial = new Validador.ResultadoParcial();
@@ -37,7 +38,8 @@ public final class BoletoBancarioTextWatcher extends BaseCanarinhoTextWatcher {
      *
      * @param callbackErros a descrever
      */
-    public BoletoBancarioTextWatcher(EventoDeValidacao callbackErros) {
+    public BoletoBancarioTextWatcher(EventoDeValidacao callbackErros, Integer corMarcacao) {
+        this.corMarcacao = corMarcacao;
         setEventoDeValidacao(callbackErros);
     }
 
@@ -140,7 +142,8 @@ public final class BoletoBancarioTextWatcher extends BaseCanarinhoTextWatcher {
     }
 
     private void destacarBloco(final Editable s, final int inicio, final int fim) {
-        s.setSpan(new ForegroundColorSpan(Color.RED), inicio, fim, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        if (corMarcacao != null)
+        s.setSpan(new ForegroundColorSpan(corMarcacao), inicio, fim, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
     private void removeSpans(final Editable s) {

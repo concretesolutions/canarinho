@@ -1,5 +1,6 @@
 package br.com.concrete.canarinho.test.watcher;
 
+import android.graphics.Color;
 import android.widget.EditText;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -37,7 +38,7 @@ public class BoletoTextWatcherTest {
                 final Watchers.SampleEventoDeValidacao sampleEventoDeValidacao =
                         new Watchers.SampleEventoDeValidacao(textInputLayout);
 
-                editText.addTextChangedListener(watcher = new BoletoBancarioTextWatcher(sampleEventoDeValidacao));
+                editText.addTextChangedListener(watcher = new BoletoBancarioTextWatcher(sampleEventoDeValidacao, Color.parseColor("#d20f02")));
 
                 activity.setContentView(textInputLayout);
             }
