@@ -24,16 +24,11 @@ ext {
 }
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.1"
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 15
-        targetSdkVersion 27
-    }
-    buildTypes {
-        debug {}
-        release {}
+        targetSdkVersion 28
     }
 }
 
