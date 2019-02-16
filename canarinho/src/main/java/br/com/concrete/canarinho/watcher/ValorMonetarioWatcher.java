@@ -5,13 +5,13 @@ import android.text.InputFilter;
 import android.text.Selection;
 import android.text.TextWatcher;
 
+import br.com.concrete.canarinho.formatador.Formatador;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import br.com.concrete.canarinho.formatador.Formatador;
-
 /**
- * TextWatcher para valores monetários
+ * TextWatcher para valores monetários.
  */
 public class ValorMonetarioWatcher implements TextWatcher {
 
@@ -95,7 +95,7 @@ public class ValorMonetarioWatcher implements TextWatcher {
     }
 
     /**
-     * Builder para facilitar a construção de instâncias de {@link ValorMonetarioWatcher}
+     * Builder para facilitar a construção de instâncias de {@link ValorMonetarioWatcher}.
      */
     public static class Builder {
 
@@ -123,7 +123,7 @@ public class ValorMonetarioWatcher implements TextWatcher {
         }
 
         /**
-         * Constrói a instância
+         * Constrói a instância.
          *
          * @return Watcher para ser usado
          */

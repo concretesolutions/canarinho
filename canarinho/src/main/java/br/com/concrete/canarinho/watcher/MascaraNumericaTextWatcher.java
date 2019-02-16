@@ -3,10 +3,10 @@ package br.com.concrete.canarinho.watcher;
 import android.text.Editable;
 import android.text.InputFilter;
 
-import java.util.Arrays;
-
 import br.com.concrete.canarinho.validator.Validador;
 import br.com.concrete.canarinho.watcher.evento.EventoDeValidacao;
+
+import java.util.Arrays;
 
 /**
  * Máscara c/ validação genérica para campos numéricos.

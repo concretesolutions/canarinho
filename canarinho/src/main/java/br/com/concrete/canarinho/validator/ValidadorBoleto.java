@@ -3,20 +3,20 @@ package br.com.concrete.canarinho.validator;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
 
-import java.util.regex.Pattern;
-
 import br.com.concrete.canarinho.DigitoPara;
 import br.com.concrete.canarinho.formatador.Formatador;
 
+import java.util.regex.Pattern;
+
 /**
- * Implementação de @{link Validador} para boleto
+ * Implementação de @{link Validador} para boleto.
  *
  * @see Validador
  */
 public final class ValidadorBoleto implements Validador {
 
     /**
-     * Instância de módulo 10 para cálculo de digito verificador de boleto
+     * Instância de módulo 10 para cálculo de digito verificador de boleto.
      */
     public static final DigitoPara MOD_10 = new DigitoPara.Builder()
             .mod(10)
@@ -27,7 +27,7 @@ public final class ValidadorBoleto implements Validador {
             .build();
 
     /**
-     * Instância de módulo 11 para cálculo de digito verificador de boleto
+     * Instância de módulo 11 para cálculo de digito verificador de boleto.
      */
     public static final DigitoPara MOD_11 = new DigitoPara.Builder()
             .trocandoPorSeEncontrar("0", 10, 11)
@@ -82,55 +82,55 @@ public final class ValidadorBoleto implements Validador {
                 : validaNormal(valorDesformatado, resultadoParcial);
     }
 
-    private ResultadoParcial validaNormal(String valor, ResultadoParcial rParcial) {
+    private ResultadoParcial validaNormal(String valor, ResultadoParcial resultadoParcial) {
 
-        if (!validaBloco(valor, rParcial, MOD_10, 10, 0, "Primeiro")) {
-            return rParcial;
+        if (!validaBloco(valor, resultadoParcial, MOD_10, 10, 0, "Primeiro")) {
+            return resultadoParcial;
         }
 
-        if (!validaBloco(valor, rParcial, MOD_10, 21, 10, "Segundo")) {
-            return rParcial;
+        if (!validaBloco(valor, resultadoParcial, MOD_10, 21, 10, "Segundo")) {
+            return resultadoParcial;
         }
 
-        if (!validaBloco(valor, rParcial, MOD_10, 32, 21, "Terceiro")) {
-            return rParcial;
+        if (!validaBloco(valor, resultadoParcial, MOD_10, 32, 21, "Terceiro")) {
+            return resultadoParcial;
         }
 
         if (valor.length() < 47) {
-            return rParcial;
+            return resultadoParcial;
         }
 
-        return rParcial.parcialmenteValido(true).totalmenteValido(true);
+        return resultadoParcial.parcialmenteValido(true).totalmenteValido(true);
     }
 
-    private ResultadoParcial validaTributo(String valor, ResultadoParcial rParcial) {
+    private ResultadoParcial validaTributo(String valor, ResultadoParcial resultadoParcial) {
 
         if (valor.length() < 3) {
-            return rParcial.parcialmenteValido(true);
+            return resultadoParcial.parcialmenteValido(true);
         }
 
         // A validação precisa levar em conta o terceiro dígito
         final boolean ehMod10 = valor.charAt(2) == '6' || valor.charAt(2) == '7';
         final DigitoPara digitoPara = ehMod10 ? MOD_10 : MOD_11;
 
-        if (!validaBloco(valor, rParcial, digitoPara, 12, 0, "Primeiro")) {
-            return rParcial;
+        if (!validaBloco(valor, resultadoParcial, digitoPara, 12, 0, "Primeiro")) {
+            return resultadoParcial;
         }
 
-        if (!validaBloco(valor, rParcial, digitoPara, 24, 12, "Segundo")) {
-            return rParcial;
+        if (!validaBloco(valor, resultadoParcial, digitoPara, 24, 12, "Segundo")) {
+            return resultadoParcial;
         }
 
-        if (!validaBloco(valor, rParcial, digitoPara, 36, 24, "Terceiro")) {
-            return rParcial;
+        if (!validaBloco(valor, resultadoParcial, digitoPara, 36, 24, "Terceiro")) {
+            return resultadoParcial;
         }
 
-        if (!validaBloco(valor, rParcial, digitoPara, 48, 36, "Quarto")) {
-            return rParcial;
+        if (!validaBloco(valor, resultadoParcial, digitoPara, 48, 36, "Quarto")) {
+            return resultadoParcial;
         }
 
         // Retorna bloco válido
-        return rParcial.parcialmenteValido(true).totalmenteValido(true);
+        return resultadoParcial.parcialmenteValido(true).totalmenteValido(true);
     }
 
     private boolean ehTributo(CharSequence valor) {

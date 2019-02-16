@@ -4,7 +4,7 @@ apply plugin: 'pmd'
 check.dependsOn 'checkstyle', 'pmd'
 
 checkstyle {
-    toolVersion '8.2'
+    toolVersion '8.17'
     configFile file("$rootDir/tools/linters/checkstyle/checkstyle.xml")
     configProperties.checkstyleSuppressionsPath = file(
             "$rootDir/tools/linters/checkstyle/suppressions.xml"
@@ -12,7 +12,7 @@ checkstyle {
 }
 
 pmd {
-    toolVersion = '5.5.2'
+    toolVersion = '6.11.0'
     ignoreFailures = false
     ruleSetFiles = files("$rootDir/tools/linters/pmd/pmd-ruleset.xml")
     ruleSets = []

@@ -5,7 +5,7 @@ import android.text.Editable;
 import br.com.concrete.canarinho.formatador.Formatador;
 
 /**
- * Implementação de @{link Validador} para CEP (Código de endereçamento Postal)
+ * Implementação de @{link Validador} para CEP (Código de endereçamento Postal).
  *
  * @see Validador
  */

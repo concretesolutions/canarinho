@@ -17,7 +17,7 @@ public final class CEPTextWatcher extends BaseCanarinhoTextWatcher {
     private static final char[] CEP_DIGITOS = "#####-###".toCharArray();
 
     private static final InputFilter[] FILTRO_OITO_DIGITOS = new InputFilter[]{
-            new InputFilter.LengthFilter(CEP_DIGITOS.length)};
+        new InputFilter.LengthFilter(CEP_DIGITOS.length)};
 
     private final Validador validador = ValidadorCEP.getInstance();
     private final Validador.ResultadoParcial resultadoParcial = new Validador.ResultadoParcial();
