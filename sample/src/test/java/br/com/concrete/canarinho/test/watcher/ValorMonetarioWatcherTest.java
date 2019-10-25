@@ -9,9 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.android.controller.ActivityController;
-import org.robolectric.annotation.Config;
 
-import br.com.concrete.canarinho.sample.BuildConfig;
 import br.com.concrete.canarinho.watcher.ValorMonetarioWatcher;
 
 import static org.hamcrest.Matchers.is;

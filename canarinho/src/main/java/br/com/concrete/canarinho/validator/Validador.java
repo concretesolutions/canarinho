@@ -14,31 +14,6 @@ import android.text.Editable;
 public interface Validador {
 
     /**
-     * Referência para o singleton de validação de CPF
-     */
-    Validador CPF = ValidadorCPF.getInstance();
-
-    /**
-     * Referência para o singleton de validação de CNPJ
-     */
-    Validador CNPJ = ValidadorCNPJ.getInstance();
-
-    /**
-     * Referência para o singleton de validação de boleto
-     */
-    Validador BOLETO = ValidadorBoleto.getInstance();
-
-    /**
-     * Referência para o singleton de validação de telefone
-     */
-    Validador TELEFONE = ValidadorTelefone.getInstance();
-
-    /**
-     * Referência para o singleton de validação de CEP
-     */
-    Validador CEP = ValidadorCEP.getInstance();
-
-    /**
      * Valida uma {@link String} completa
      *
      * @param valor Valor a ser validado
@@ -108,6 +83,39 @@ public interface Validador {
         public ResultadoParcial mensagem(String mensagem) {
             this.mensagem = mensagem;
             return this;
+        }
+    }
+
+    /**
+     * Classe para guardar os singletons
+     */
+    final class Constantes {
+        /**
+         * Referência para o singleton de validação de CPF
+         */
+        public static final Validador CPF = ValidadorCPF.getInstance();
+
+        /**
+         * Referência para o singleton de validação de CNPJ
+         */
+        public static final Validador CNPJ = ValidadorCNPJ.getInstance();
+
+        /**
+         * Referência para o singleton de validação de boleto
+         */
+        public static final Validador BOLETO = ValidadorBoleto.getInstance();
+
+        /**
+         * Referência para o singleton de validação de telefone
+         */
+        public static final Validador TELEFONE = ValidadorTelefone.getInstance();
+
+        /**
+         * Referência para o singleton de validação de CEP
+         */
+        public static final Validador CEP = ValidadorCEP.getInstance();
+
+        private Constantes() {
         }
     }
 }

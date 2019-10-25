@@ -16,28 +16,28 @@ public final class FormatadorCPFCNPJ implements Formatador {
     @Override
     public String formata(final String value) {
         if (ehCpf(value)) {
-            return Formatador.CPF.formata(value);
+            return Formatador.Constantes.CPF.formata(value);
         }
 
-        return Formatador.CNPJ.formata(value);
+        return Formatador.Constantes.CNPJ.formata(value);
     }
 
     @Override
     public String desformata(final String value) {
         if (ehCpf(value)) {
-            return Formatador.CPF.desformata(value);
+            return Formatador.Constantes.CPF.desformata(value);
         }
 
-        return Formatador.CNPJ.desformata(value);
+        return Formatador.Constantes.CNPJ.desformata(value);
     }
 
     @Override
     public boolean estaFormatado(final String value) {
         if (ehCpf(value)) {
-            return Formatador.CPF.estaFormatado(value);
+            return Formatador.Constantes.CPF.estaFormatado(value);
         }
 
-        return Formatador.CNPJ.estaFormatado(value);
+        return Formatador.Constantes.CNPJ.estaFormatado(value);
     }
 
     @Override
@@ -47,10 +47,10 @@ public final class FormatadorCPFCNPJ implements Formatador {
         }
 
         if (ehCpf(value)) {
-            return Formatador.CPF.podeSerFormatado(value);
+            return Formatador.Constantes.CPF.podeSerFormatado(value);
         }
 
-        return Formatador.CNPJ.podeSerFormatado(value);
+        return Formatador.Constantes.CNPJ.podeSerFormatado(value);
     }
 
     private boolean ehCpf(String value) {

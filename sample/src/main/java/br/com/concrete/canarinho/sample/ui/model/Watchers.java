@@ -54,7 +54,7 @@ public enum Watchers {
             return new MascaraNumericaTextWatcher.Builder()
                     .paraMascara("###.###.###-##")
                     .comCallbackDeValidacao(new SampleEventoDeValidacao(textInputLayout))
-                    .comValidador(Validador.CPF)
+                    .comValidador(Validador.Constantes.CPF)
                     .build();
         }
     },
@@ -70,7 +70,7 @@ public enum Watchers {
             return new MascaraNumericaTextWatcher.Builder()
                     .paraMascara("##.###.###/####-##")
                     .comCallbackDeValidacao(new SampleEventoDeValidacao(textInputLayout))
-                    .comValidador(Validador.CNPJ)
+                    .comValidador(Validador.Constantes.CNPJ)
                     .build();
         }
     },

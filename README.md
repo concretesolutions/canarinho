@@ -25,7 +25,7 @@ Estes são utilizados para implementar `TextWatcher`s que formatam e validam a d
 ### Validar um CPF
 
 ```java
-if (Validador.CPF.ehValido(cpf))
+if (Validador.Constantes.CPF.ehValido(cpf))
     Toast.makeText(context, "Válido!", Toast.LENGTH_SHORT).show();
 else
     Toast.makeText(context, "Inválido!", Toast.LENGTH_SHORT).show();
@@ -34,7 +34,7 @@ else
 ### Formatar um CPF
 
 ```java
-String cpfFormatado = Formatador.CPF.formata(usuario.getCpf());
+String cpfFormatado = Formatador.Constantes.CPF.formata(usuario.getCpf());
 ```
 
 ### Formatar um EditText para CPF sem validação
@@ -49,7 +49,7 @@ cpfEditText.addTextChangedListener(new MascaraNumericaTextWatcher("###.###.###-#
 cpfEditText.addTextChangedListener(new MascaraNumericaTextWatcher.Builder()
                                         .paraMascara("###.###.###-##")
                                         .comCallbackDeValidacao(new SampleEventoDeValidacao(context))
-                                        .comValidador(Validador.CPF)
+                                        .comValidador(Validador.Constantes.CPF)
                                         .build());
 ```
 

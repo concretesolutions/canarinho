@@ -34,8 +34,8 @@ public class ValorMonetarioWatcher implements TextWatcher {
      */
     ValorMonetarioWatcher(boolean comSimboloReal, boolean mantemZerosAoLimpar) {
         this.formatador = comSimboloReal
-                ? Formatador.VALOR_COM_SIMBOLO
-                : Formatador.VALOR;
+                ? Formatador.Constantes.VALOR_COM_SIMBOLO
+                : Formatador.Constantes.VALOR;
         this.mantemZerosAoLimpar = mantemZerosAoLimpar;
     }
 

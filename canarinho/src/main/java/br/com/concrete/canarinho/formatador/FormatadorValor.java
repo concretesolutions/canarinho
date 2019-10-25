@@ -13,8 +13,8 @@ import java.util.regex.Pattern;
 /**
  * Formatador de valores monetários. Possui duas versões:
  * <ul>
- * <li>Com símbolo do Real {@link Formatador#VALOR_COM_SIMBOLO}</li>
- * <li>Sem símbolo do Real {@link Formatador#VALOR}</li>
+ * <li>Com símbolo do Real {@link Formatador.Constantes#VALOR_COM_SIMBOLO}</li>
+ * <li>Sem símbolo do Real {@link Formatador.Constantes#VALOR}</li>
  * </ul>
  */
 public final class FormatadorValor implements Formatador {

@@ -130,7 +130,7 @@ public final class FormatadorLinhaDigitavel implements Formatador {
 
     @Override
     public boolean estaFormatado(String value) {
-        return Formatador.BOLETO.estaFormatado(value);
+        return Formatador.Constantes.BOLETO.estaFormatado(value);
     }
 
     @Override

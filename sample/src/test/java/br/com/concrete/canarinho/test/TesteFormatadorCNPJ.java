@@ -20,14 +20,14 @@ public class TesteFormatadorCNPJ {
     public void consegueFormatar() {
 
         // Gerados automaticamente para testes
-        assertThat(Formatador.CNPJ.formata("50.713.534/0001-33"), is("50.713.534/0001-33"));
-        assertThat(Formatador.CNPJ.formata("50713534000133"), is("50.713.534/0001-33"));
+        assertThat(Formatador.Constantes.CNPJ.formata("50.713.534/0001-33"), is("50.713.534/0001-33"));
+        assertThat(Formatador.Constantes.CNPJ.formata("50713534000133"), is("50.713.534/0001-33"));
 
-        assertThat(Formatador.CNPJ.formata("72.606.598/0001-78"), is("72.606.598/0001-78"));
-        assertThat(Formatador.CNPJ.formata("72606598000178"), is("72.606.598/0001-78"));
+        assertThat(Formatador.Constantes.CNPJ.formata("72.606.598/0001-78"), is("72.606.598/0001-78"));
+        assertThat(Formatador.Constantes.CNPJ.formata("72606598000178"), is("72.606.598/0001-78"));
 
-        assertThat(Formatador.CNPJ.formata("23.106.535/0001-47"), is("23.106.535/0001-47"));
-        assertThat(Formatador.CNPJ.formata("23106535000147"), is("23.106.535/0001-47"));
+        assertThat(Formatador.Constantes.CNPJ.formata("23.106.535/0001-47"), is("23.106.535/0001-47"));
+        assertThat(Formatador.Constantes.CNPJ.formata("23106535000147"), is("23.106.535/0001-47"));
 
         assertThrowsFormat("");
         assertThrowsFormat("123123");
@@ -39,14 +39,14 @@ public class TesteFormatadorCNPJ {
     public void consegueDesformatar() {
 
         // Gerados automaticamente para testes
-        assertThat(Formatador.CNPJ.desformata("50.713.534/0001-33"), is("50713534000133"));
-        assertThat(Formatador.CNPJ.desformata("50713534000133"), is("50713534000133"));
+        assertThat(Formatador.Constantes.CNPJ.desformata("50.713.534/0001-33"), is("50713534000133"));
+        assertThat(Formatador.Constantes.CNPJ.desformata("50713534000133"), is("50713534000133"));
 
-        assertThat(Formatador.CNPJ.desformata("72.606.598/0001-78"), is("72606598000178"));
-        assertThat(Formatador.CNPJ.desformata("72606598000178"), is("72606598000178"));
+        assertThat(Formatador.Constantes.CNPJ.desformata("72.606.598/0001-78"), is("72606598000178"));
+        assertThat(Formatador.Constantes.CNPJ.desformata("72606598000178"), is("72606598000178"));
 
-        assertThat(Formatador.CNPJ.desformata("23.106.535/0001-47"), is("23106535000147"));
-        assertThat(Formatador.CNPJ.desformata("23106535000147"), is("23106535000147"));
+        assertThat(Formatador.Constantes.CNPJ.desformata("23.106.535/0001-47"), is("23106535000147"));
+        assertThat(Formatador.Constantes.CNPJ.desformata("23106535000147"), is("23106535000147"));
 
         assertThrowsDesformat("");
         assertThrowsDesformat("123123");
@@ -58,15 +58,15 @@ public class TesteFormatadorCNPJ {
     public void consegueDizerSeEstaFormatado() {
 
         // Gerados automaticamente para testes
-        assertThat(Formatador.CNPJ.estaFormatado("72.606.598/0001-78"), is(true));
-        assertThat(Formatador.CNPJ.estaFormatado("72606598000178"), is(false));
-        assertThat(Formatador.CNPJ.estaFormatado("23.106.535/0001-47"), is(true));
-        assertThat(Formatador.CNPJ.estaFormatado("23106535000147"), is(false));
+        assertThat(Formatador.Constantes.CNPJ.estaFormatado("72.606.598/0001-78"), is(true));
+        assertThat(Formatador.Constantes.CNPJ.estaFormatado("72606598000178"), is(false));
+        assertThat(Formatador.Constantes.CNPJ.estaFormatado("23.106.535/0001-47"), is(true));
+        assertThat(Formatador.Constantes.CNPJ.estaFormatado("23106535000147"), is(false));
 
-        assertThat(Formatador.CNPJ.estaFormatado("047486"), is(false));
-        assertThat(Formatador.CNPJ.estaFormatado(""), is(false));
+        assertThat(Formatador.Constantes.CNPJ.estaFormatado("047486"), is(false));
+        assertThat(Formatador.Constantes.CNPJ.estaFormatado(""), is(false));
         try {
-            Formatador.CNPJ.estaFormatado(null);
+            Formatador.Constantes.CNPJ.estaFormatado(null);
             fail("Should have thrown!!!");
         } catch (IllegalArgumentException e) {
         }
@@ -76,16 +76,16 @@ public class TesteFormatadorCNPJ {
     public void consegueDizerSePodeFormatar() {
 
         // Gerados automaticamente para testes
-        assertThat(Formatador.CNPJ.podeSerFormatado("23.106.535/0001-47"), is(false));
-        assertThat(Formatador.CNPJ.podeSerFormatado("23106535000147"), is(true));
-        assertThat(Formatador.CNPJ.podeSerFormatado("020"), is(false));
-        assertThat(Formatador.CNPJ.podeSerFormatado(""), is(false));
-        assertThat(Formatador.CNPJ.podeSerFormatado(null), is(false));
+        assertThat(Formatador.Constantes.CNPJ.podeSerFormatado("23.106.535/0001-47"), is(false));
+        assertThat(Formatador.Constantes.CNPJ.podeSerFormatado("23106535000147"), is(true));
+        assertThat(Formatador.Constantes.CNPJ.podeSerFormatado("020"), is(false));
+        assertThat(Formatador.Constantes.CNPJ.podeSerFormatado(""), is(false));
+        assertThat(Formatador.Constantes.CNPJ.podeSerFormatado(null), is(false));
     }
 
     private void assertThrowsFormat(String valor) {
         try {
-            Formatador.CNPJ.formata(valor);
+            Formatador.Constantes.CNPJ.formata(valor);
             fail("Deveria ter jogado exceção!!!");
         } catch (IllegalArgumentException e) {
         }
@@ -93,7 +93,7 @@ public class TesteFormatadorCNPJ {
 
     private void assertThrowsDesformat(String valor) {
         try {
-            Formatador.CNPJ.desformata(valor);
+            Formatador.Constantes.CNPJ.desformata(valor);
             fail("Deveria ter jogado exceção!!!");
         } catch (IllegalArgumentException e) {
         }
