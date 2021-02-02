@@ -14,7 +14,7 @@ jobs:
     runs-on: macOS-latest
     strategy:
       matrix:
-        api-level: [27, 28, 30]
+        api-level: [27, 28, 28]
     steps:
       - name: checkout
         uses: actions/checkout@v1
@@ -25,4 +25,4 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v1
         with:
           api-level: ${{ matrix.api-level }}
-          script: ./gradlew connectedCheck
+          script: sh ./gradlew connectedCheck
