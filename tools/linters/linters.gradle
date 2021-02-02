@@ -1,27 +1,18 @@
 apply plugin: 'checkstyle'
-apply plugin: 'findbugs'
 apply plugin: 'pmd'
 
-check.dependsOn 'checkstyle', 'findbugs', 'pmd'
+check.dependsOn 'checkstyle', 'pmd'
 
 checkstyle {
-    toolVersion '8.2'
+    toolVersion '8.17'
     configFile file("$rootDir/tools/linters/checkstyle/checkstyle.xml")
     configProperties.checkstyleSuppressionsPath = file(
             "$rootDir/tools/linters/checkstyle/suppressions.xml"
     ).absolutePath
 }
 
-findbugs {
-    toolVersion = '3.0.1'
-    ignoreFailures = false
-    effort = 'max'
-    reportLevel = 'high'
-    excludeFilter = file("$rootDir/tools/linters/findbugs/findbugs-filter.xml")
-}
-
 pmd {
-    toolVersion = '5.5.2'
+    toolVersion = '6.11.0'
     ignoreFailures = false
     ruleSetFiles = files("$rootDir/tools/linters/pmd/pmd-ruleset.xml")
     ruleSets = []
@@ -35,23 +26,6 @@ task checkstyle(type: Checkstyle, group: 'verification') {
     exclude '**/androidTest/**'
     exclude '**/R.java'
     exclude '**/BuildConfig.java'
-    classpath = files()
-}
-
-task findbugs(type: FindBugs, dependsOn: 'assemble', group: 'verification') {
-    classes = files("$projectDir/build/intermediates/classes")
-    source 'src'
-    include '**/*.java'
-    exclude '**/gen/**'
-
-    reports {
-        // FindBugs tasks can only have one report enabled
-        xml.enabled = false
-        html.enabled = !xml.enabled
-        xml.destination file("$projectDir/build/reports/findbugs/findbugs.xml")
-        html.destination file("$projectDir/build/reports/findbugs/findbugs.html")
-    }
-
     classpath = files()
 }
 

@@ -1,20 +1,16 @@
 package br.com.concrete.canarinho.sample.ui.adapter;
 
-import android.content.Context;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
-
-import br.com.concrete.canarinho.sample.ui.activity.MainActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 import br.com.concrete.canarinho.sample.ui.model.Watchers;
 
 public class WatchersPagerAdapter extends FragmentPagerAdapter {
 
     private Watchers[] models = Watchers.values();
-    private Context context;
 
-    public WatchersPagerAdapter(MainActivity mainActivity) {
-        super(mainActivity.getSupportFragmentManager());
-        this.context = mainActivity;
+    public WatchersPagerAdapter(FragmentManager fragmentManager) {
+        super(fragmentManager);
     }
 
     @Override

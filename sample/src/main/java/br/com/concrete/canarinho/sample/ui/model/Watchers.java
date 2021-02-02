@@ -1,9 +1,10 @@
 package br.com.concrete.canarinho.sample.ui.model;
 
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
 import android.text.TextWatcher;
 
+import com.google.android.material.textfield.TextInputLayout;
+
+import androidx.appcompat.app.AlertDialog;
 import br.com.concrete.canarinho.sample.ui.fragment.BaseWatcherFragment;
 import br.com.concrete.canarinho.sample.ui.fragment.CanarinhoValorMonetarioWatcherFragment;
 import br.com.concrete.canarinho.sample.ui.fragment.WatcherFragment;

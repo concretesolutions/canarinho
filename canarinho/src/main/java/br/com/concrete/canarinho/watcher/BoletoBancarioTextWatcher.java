@@ -3,12 +3,12 @@ package br.com.concrete.canarinho.watcher;
 import android.text.Editable;
 import android.text.InputFilter;
 
-import java.util.Arrays;
-
 import br.com.concrete.canarinho.validator.Validador;
 import br.com.concrete.canarinho.validator.ValidadorBoleto;
 import br.com.concrete.canarinho.watcher.evento.EventoDeValidacao;
 import br.com.concrete.canarinho.watcher.evento.EventoDeValidacaoDeBoleto;
+
+import java.util.Arrays;
 
 /**
  * {@link android.text.TextWatcher} responsável por formatar e validar um {@link
@@ -20,15 +20,15 @@ public final class BoletoBancarioTextWatcher extends BaseCanarinhoTextWatcher {
     private static final char[] BOLETO_NORMAL = "#####.##### #####.###### #####.###### # ##############".toCharArray();
     private static final char[] BOLETO_TRIBUTO = "############ ############ ############ ############".toCharArray();
     private static final InputFilter[] FILTRO_TRIBUTO = new InputFilter[]{
-            new InputFilter.LengthFilter(BOLETO_TRIBUTO.length)};
+        new InputFilter.LengthFilter(BOLETO_TRIBUTO.length)};
     private static final InputFilter[] FILTRO_NORMAL = new InputFilter[]{
-            new InputFilter.LengthFilter(BOLETO_NORMAL.length)};
+        new InputFilter.LengthFilter(BOLETO_NORMAL.length)};
 
     private final Validador validador = ValidadorBoleto.getInstance();
     private final Validador.ResultadoParcial resultadoParcial = new Validador.ResultadoParcial();
 
     /**
-     * TODO Javadoc pendente
+     * TODO Javadoc pendente.
      *
      * @param callbackErros a descrever
      */

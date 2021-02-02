@@ -3,16 +3,13 @@ package br.com.concrete.canarinho.test;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 
-import br.com.concrete.canarinho.sample.BuildConfig;
 import br.com.concrete.canarinho.validator.Validador;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(RobolectricTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 22)
 public class TesteValidadores {
 
     @Test

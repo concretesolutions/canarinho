@@ -1,19 +1,18 @@
 package br.com.concrete.canarinho.sample.ui.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 
+import com.google.android.material.tabs.TabLayout;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.viewpager.widget.ViewPager;
 import br.com.concrete.canarinho.sample.R;
 import br.com.concrete.canarinho.sample.ui.adapter.WatchersPagerAdapter;
 
 /** */
 public class MainActivity extends AppCompatActivity {
-
-    private ViewPager viewPager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
             supportActionBar.setDisplayShowTitleEnabled(false);
         }
 
-        viewPager = findViewById(R.id.viewpager);
-        viewPager.setAdapter(new WatchersPagerAdapter(this));
+        final ViewPager viewPager = findViewById(R.id.viewpager);
+        viewPager.setAdapter(new WatchersPagerAdapter(getSupportFragmentManager()));
 
         final TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);

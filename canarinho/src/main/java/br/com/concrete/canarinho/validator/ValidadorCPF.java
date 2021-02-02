@@ -6,7 +6,7 @@ import br.com.concrete.canarinho.DigitoPara;
 import br.com.concrete.canarinho.formatador.Formatador;
 
 /**
- * Implementação de @{link Validador} para CPF
+ * Implementação de @{link Validador} para CPF.
  *
  * @see Validador
  */

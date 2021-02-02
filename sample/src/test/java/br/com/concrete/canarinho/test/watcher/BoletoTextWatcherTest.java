@@ -1,24 +1,23 @@
 package br.com.concrete.canarinho.test.watcher;
 
 import android.app.Activity;
-import android.support.design.widget.TextInputLayout;
 import android.widget.EditText;
+
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.android.controller.ActivityController;
 
-import br.com.concrete.canarinho.sample.ui.activity.MainActivity;
+import androidx.test.core.app.ActivityScenario;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import br.com.concrete.canarinho.sample.ui.model.Watchers;
 import br.com.concrete.canarinho.watcher.BoletoBancarioTextWatcher;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
-import static org.robolectric.Robolectric.buildActivity;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class BoletoTextWatcherTest {
 
     private BoletoBancarioTextWatcher watcher;
@@ -26,20 +25,21 @@ public class BoletoTextWatcherTest {
 
     @Before
     public void setUp() {
+        final ActivityScenario<Activity> scenario = ActivityScenario.launch(Activity.class);
+        scenario.onActivity(new ActivityScenario.ActivityAction<Activity>() {
+            @Override
+            public void perform(Activity activity) {
+                final TextInputLayout textInputLayout = new TextInputLayout(activity);
+                textInputLayout.addView(editText = new EditText(activity));
 
-        final ActivityController<MainActivity> activityController = buildActivity(MainActivity.class);
-        final Activity activity = activityController.create().get();
+                final Watchers.SampleEventoDeValidacao sampleEventoDeValidacao =
+                        new Watchers.SampleEventoDeValidacao(textInputLayout);
 
-        final TextInputLayout textInputLayout = new TextInputLayout(activity);
-        textInputLayout.addView(editText = new EditText(activity));
-        activityController.start().resume().visible();
+                editText.addTextChangedListener(watcher = new BoletoBancarioTextWatcher(sampleEventoDeValidacao));
 
-        final Watchers.SampleEventoDeValidacao sampleEventoDeValidacao =
-                new Watchers.SampleEventoDeValidacao(textInputLayout);
-
-        editText.addTextChangedListener(watcher = new BoletoBancarioTextWatcher(sampleEventoDeValidacao));
-
-        activity.setContentView(textInputLayout);
+                activity.setContentView(textInputLayout);
+            }
+        });
     }
 
     @Test

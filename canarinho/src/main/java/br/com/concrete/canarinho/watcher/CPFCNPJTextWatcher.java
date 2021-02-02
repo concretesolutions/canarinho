@@ -24,13 +24,13 @@ public class CPFCNPJTextWatcher extends BaseCanarinhoTextWatcher {
     private final Validador.ResultadoParcial resultadoParcial = new Validador.ResultadoParcial();
 
     /**
-     * TODO Javadoc pendente
+     * TODO Javadoc pendente.
      */
     public CPFCNPJTextWatcher() {
     }
 
     /**
-     * TODO Javadoc pendente
+     * TODO Javadoc pendente.
      *
      * @param callbackErros a descrever
      */

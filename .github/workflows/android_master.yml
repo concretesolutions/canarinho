@@ -10,7 +10,7 @@ on:
       - 'master'
 
 jobs:
-  test:
+  Instrumented Test:
     runs-on: macOS-latest
     strategy:
       matrix:
@@ -26,3 +26,13 @@ jobs:
         with:
           api-level: ${{ matrix.api-level }}
           script: ./gradlew connectedCheck
+  Unit Test:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Unit tests
+        run: ./gradlew test
