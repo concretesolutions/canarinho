@@ -1,6 +1,7 @@
 package br.com.concrete.canarinho.sample;
 
 import android.os.Build;
+import android.os.SystemClock;
 import android.support.test.espresso.UiController;
 import android.support.test.espresso.ViewAction;
 import android.support.test.rule.ActivityTestRule;
@@ -25,6 +26,7 @@ import static android.support.test.espresso.action.ViewActions.scrollTo;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+import static android.support.test.espresso.matcher.ViewMatchers.isCompletelyDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isDescendantOfA;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.supportsInputMethods;
@@ -225,12 +227,17 @@ public class DemoWatchersInstrumentationTest {
     }
 
     @Test
-    public void consegueDigitarCPFCNPJValido() {
-
+    public void consegueDigitarCPFValido() {
         navigateToTab(Watchers.CPF_CNPJ);
 
-        onView(allOf(withId(R.id.edit_text), isDisplayed())).perform(typeText("46574356636"));
-        onView(withText("Campo válido!")).check(matches(isDisplayed())).perform(pressBack());
+        onView(allOf(withId(R.id.edit_text), isCompletelyDisplayed())).perform(typeText("46574356636"));
+        onView(withText("Campo válido!")).check(matches(isCompletelyDisplayed())).perform(pressBack());
+    }
+
+    @Test
+    public void consegueDigitarCNPJValido() {
+        navigateToTab(Watchers.CPF_CNPJ);
+
         onView(allOf(withId(R.id.edit_text), isDisplayed())).perform(clearText(), typeText("95621433000170"));
         onView(withText("Campo válido!")).check(matches(isDisplayed()));
     }
@@ -252,10 +259,10 @@ public class DemoWatchersInstrumentationTest {
 
         navigateToTab(Watchers.CEP);
 
-        onView(allOf(withId(R.id.edit_text), isDisplayed())).perform(typeText("49025090"));
+        onView(allOf(withId(R.id.edit_text), isCompletelyDisplayed())).perform(typeText("49025090"));
 
         onView(withText("Campo válido!"))
-                .check(matches(isDisplayed()));
+                .check(matches(isCompletelyDisplayed()));
     }
 
     @Test
@@ -263,7 +270,7 @@ public class DemoWatchersInstrumentationTest {
 
         navigateToTab(Watchers.MASCARA_GENERICA);
 
-        onView(allOf(withId(R.id.edit_text), isDisplayed()))
+        onView(allOf(withId(R.id.edit_text), isCompletelyDisplayed()))
                 .perform(typeText("12345"))
                 .check(matches(withText("1-2-3-4-5")));
     }
@@ -275,6 +282,8 @@ public class DemoWatchersInstrumentationTest {
                         isDescendantOfA(withId(R.id.tabs)))
         )
                 .perform(scrollTo(), click());
+
+        SystemClock.sleep(1000);
     }
 
     private ViewAction paste(final String type) {
