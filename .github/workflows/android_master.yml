@@ -52,4 +52,4 @@ jobs:
       - name: Checkstyle
         run: bash ./gradlew checkstyle
       - name: PMD
-          run: bash ./gradlew pmd
+        run: bash ./gradlew pmd
