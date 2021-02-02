@@ -19,13 +19,13 @@ public final class TelefoneTextWatcher extends BaseCanarinhoTextWatcher {
     private static final char[] TELEFONE_OITO_DIGITOS = "(##) ####-####".toCharArray();
     private static final char[] TELEFONE_NOVE_DIGITOS = "(##) #####-####".toCharArray();
     private static final InputFilter[] FILTRO_NOVE_DIGITOS = new InputFilter[]{
-            new InputFilter.LengthFilter(TELEFONE_NOVE_DIGITOS.length)};
+        new InputFilter.LengthFilter(TELEFONE_NOVE_DIGITOS.length)};
 
     private final Validador validador = ValidadorTelefone.getInstance();
     private final Validador.ResultadoParcial resultadoParcial = new Validador.ResultadoParcial();
 
     /**
-     * TODO Javadoc pendente
+     * TODO Javadoc pendente.
      *
      * @param callbackErros a descrever
      */

@@ -2,18 +2,18 @@ apply plugin: 'com.android.application'
 apply plugin: 'jacoco'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion "27.0.1"
+    compileSdkVersion 28
 
     defaultConfig {
-        applicationId "br.com.concrete.canarinho.sample"
+        applicationId 'br.com.concrete.canarinho.sample'
         minSdkVersion 15
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
-        versionName "1.0"
+        versionName '1.0'
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
+
     buildTypes {
 
         debug {
@@ -26,43 +26,37 @@ android {
         }
     }
 
-    packagingOptions {
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'LICENSE.txt'
-    }
-
     testOptions {
-        execution 'ANDROID_TEST_ORCHESTRATOR'
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
         unitTests {
             includeAndroidResources = true
         }
     }
 }
 
-def supportLibsVersion = '27.0.2'
-
 dependencies {
 
     implementation project(':canarinho')
 
-    implementation "com.android.support:appcompat-v7:$supportLibsVersion"
-    implementation "com.android.support:cardview-v7:$supportLibsVersion"
-    implementation "com.android.support:design:$supportLibsVersion"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'com.google.android.material:material:1.0.0'
 
-    androidTestUtil 'com.android.support.test:orchestrator:1.0.1'
+    androidTestUtil 'androidx.test:orchestrator:1.1.1'
 
-    androidTestImplementation("com.android.support:support-annotations:$supportLibsVersion")
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1')
-    androidTestImplementation('com.android.support.test:runner:1.0.1')
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test:rules:1.1.1'
+    androidTestImplementation 'androidx.test:core:1.1.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
 
     testImplementation 'junit:junit:4.12'
-    testImplementation 'org.hamcrest:hamcrest-all:1.3'
-    testImplementation 'org.robolectric:robolectric:3.7.1'
+    testImplementation 'org.robolectric:robolectric:4.1'
+    testImplementation 'androidx.test:core:1.1.0'
+    testImplementation 'androidx.test.ext:junit:1.1.0'
 }
 
 jacoco {
-    toolVersion = "0.7.4+"
+    toolVersion = '0.8.3'
 }
 
 task fullCoverageReport(type: JacocoReport) {
@@ -83,6 +77,6 @@ task fullCoverageReport(type: JacocoReport) {
     classDirectories = files([debugTree])
     executionData = fileTree(dir: "$buildDir", includes: [
             "jacoco/testDebugUnitTest.exec",
-            "outputs/code-coverage/connected/*coverage.ec"
+            "outputs/code_coverage/connected/*coverage.ec"
     ])
 }

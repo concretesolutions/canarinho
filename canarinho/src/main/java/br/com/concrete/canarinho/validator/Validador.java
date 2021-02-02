@@ -14,32 +14,32 @@ import android.text.Editable;
 public interface Validador {
 
     /**
-     * Referência para o singleton de validação de CPF
+     * Referência para o singleton de validação de CPF.
      */
     Validador CPF = ValidadorCPF.getInstance();
 
     /**
-     * Referência para o singleton de validação de CNPJ
+     * Referência para o singleton de validação de CNPJ.
      */
     Validador CNPJ = ValidadorCNPJ.getInstance();
 
     /**
-     * Referência para o singleton de validação de boleto
+     * Referência para o singleton de validação de boleto.
      */
     Validador BOLETO = ValidadorBoleto.getInstance();
 
     /**
-     * Referência para o singleton de validação de telefone
+     * Referência para o singleton de validação de telefone.
      */
     Validador TELEFONE = ValidadorTelefone.getInstance();
 
     /**
-     * Referência para o singleton de validação de CEP
+     * Referência para o singleton de validação de CEP.
      */
     Validador CEP = ValidadorCEP.getInstance();
 
     /**
-     * Valida uma {@link String} completa
+     * Valida uma {@link String} completa.
      *
      * @param valor Valor a ser validado
      * @return true se estiver válida e false caso contrário
@@ -48,7 +48,7 @@ public interface Validador {
 
     /**
      * Valida um {@link Editable} retornando o
-     * {@link br.com.concrete.canarinho.validator.Validador.ResultadoParcial}
+     * {@link br.com.concrete.canarinho.validator.Validador.ResultadoParcial}.
      *
      * @param valor            Editable
      * @param resultadoParcial Objeto com o estado da validação
@@ -100,7 +100,7 @@ public interface Validador {
         }
 
         /**
-         * Ajusta a mensagem de erro
+         * Ajusta a mensagem de erro.
          *
          * @param mensagem Mensagem usada na apresentação do erro.
          * @return Fluent Interface "this"

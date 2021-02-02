@@ -66,8 +66,8 @@ public final class DigitoPara {
 
         final char[] digitos = trecho.toCharArray();
 
-        for (int i = 0; i < digitos.length; i++) {
-            numero.add(Character.getNumericValue(digitos[i]));
+        for (char digito : digitos) {
+            numero.add(Character.getNumericValue(digito));
         }
 
         Collections.reverse(numero);
@@ -122,7 +122,7 @@ public final class DigitoPara {
 
     /**
      * Builder com interface fluente para criação de instâncias configuradas de
-     * {@link DigitoPara}
+     * {@link DigitoPara}.
      */
     public static final class Builder {
 
@@ -130,9 +130,11 @@ public final class DigitoPara {
         private boolean complementar;
         private int modulo;
         private boolean somarIndividual;
-        private final SparseArray<String> substituicoes = new SparseArray<String>();
+        private final SparseArray<String> substituicoes = new SparseArray<>();
 
         /**
+         * TODO Javadoc pendente.
+         *
          * @param modulo Inteiro pelo qual o resto será tirado e também seu complementar.
          *               O valor padrão é 11.
          * @return this
@@ -191,7 +193,7 @@ public final class DigitoPara {
         }
 
         /**
-         * Troca por uma String caso encontre qualquer dos inteiros passados como argumento
+         * Troca por uma String caso encontre qualquer dos inteiros passados como argumento.
          *
          * @param substituto String para substituir
          * @param i          varargs de inteiros a serem substituídos

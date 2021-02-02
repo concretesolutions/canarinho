@@ -26,8 +26,8 @@ public final class FormatadorLinhaDigitavel implements Formatador {
     public String formata(String value) {
 
         if (value == null || value.length() != 44) {
-            throw new IllegalArgumentException("Linha digitável deve conter 44 caracteres. " +
-                    "Valor possui " + value + " caracteres");
+            throw new IllegalArgumentException("Linha digitável deve conter 44 caracteres. "
+                    + "Valor possui " + value + " caracteres");
         }
 
         if (value.startsWith("8")) {
