@@ -1,6 +1,5 @@
 package br.com.concrete.canarinho.sample;
 
-
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.filters.SdkSuppress;
 import org.junit.Test;
