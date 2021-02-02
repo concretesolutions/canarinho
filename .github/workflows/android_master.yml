@@ -16,10 +16,10 @@ jobs:
       matrix:
         api-level: [27, 28, 29]
     steps:
-#      - name: Checkout
-#        uses: actions/checkout@v1
-#        with:
-#          fetch-depth: 1
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
 #
 #      - name: Instrumented Tests
 #        uses: reactivecircus/android-emulator-runner@v1
