@@ -10,22 +10,23 @@ on:
       - 'master'
 
 jobs:
-  #  Instrumented_Test:
-  #    runs-on: macOS-latest
-  #    strategy:
-  #      matrix:
-  #        api-level: [27, 28, 29]
-  #    steps:
-  #      - name: Checkout
-  #        uses: actions/checkout@v1
-  #        with:
-  #          fetch-depth: 1
-  #
-  #      - name: Instrumented Tests
-  #        uses: reactivecircus/android-emulator-runner@v1
-  #        with:
-  #          api-level: ${{ matrix.api-level }}
-  #          script: ./gradlew connectedCheck
+  Instrumented_Test:
+    runs-on: macOS-latest
+    strategy:
+      matrix:
+        api-level: [27, 28, 29]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Instrumented Tests
+        uses: reactivecircus/android-emulator-runner@v1
+        with:
+          api-level: ${{ matrix.api-level }}
+          script: ./gradlew connectedCheck
+
   unitTests:
     name: Unit Tests
     runs-on: ubuntu-18.04
