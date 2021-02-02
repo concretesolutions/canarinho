@@ -1,0 +1,56 @@
+name: Android Pull Request Master CI
+
+on:
+  pull_request:
+    branches:
+      - 'master'
+
+  push:
+    branches:
+      - 'master'
+
+jobs:
+  Instrumented_Test:
+    runs-on: macOS-latest
+    strategy:
+      matrix:
+        api-level: [27, 28, 29]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Instrumented Tests
+        uses: reactivecircus/android-emulator-runner@v1
+        with:
+          api-level: ${{ matrix.api-level }}
+          script: ./gradlew connectedCheck
+
+  unitTests:
+    name: Unit Tests
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Unit tests
+        run: bash ./gradlew test
+
+  linters:
+    name: Linters
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Checkstyle
+        run: bash ./gradlew checkstyle
+      - name: PMD
+        run: bash ./gradlew pmd
