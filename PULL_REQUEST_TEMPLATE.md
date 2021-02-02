@@ -1,14 +1,14 @@
-# Title of your pull request
-A short description of this pull request.
+# Título para o PullRequest
+O que acha de deixar uma descrição simples sobre o seu PR?
 
-## Type of Change 
+## Tipo de mudança
 - [ ] Bug fix 
-- [ ] New Feature 
-- [ ] Improvement
-- [ ] Other? 
+- [ ] Nova Feature
+- [ ] Melhoria
+- [ ] Outra?
 
-## Is this Related to a issue?
-Please link the issue here.
+## Está relacionada a uma issue?
+Cole o link da issue aqui.
 
-## Want to add something else?
-Just write it here.
+## Quer adicionar outra informação?
+Basta escrever aqui.
