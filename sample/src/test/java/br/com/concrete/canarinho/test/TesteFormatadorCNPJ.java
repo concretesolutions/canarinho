@@ -2,15 +2,15 @@ package br.com.concrete.canarinho.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 
 import br.com.concrete.canarinho.formatador.Formatador;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.fail;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class TesteFormatadorCNPJ {
 
     @Test

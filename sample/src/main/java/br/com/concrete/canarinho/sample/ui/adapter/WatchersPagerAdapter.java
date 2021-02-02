@@ -10,7 +10,7 @@ public class WatchersPagerAdapter extends FragmentPagerAdapter {
     private Watchers[] models = Watchers.values();
 
     public WatchersPagerAdapter(FragmentManager fragmentManager) {
-        super(fragmentManager);
+        super(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     }
 
     @Override

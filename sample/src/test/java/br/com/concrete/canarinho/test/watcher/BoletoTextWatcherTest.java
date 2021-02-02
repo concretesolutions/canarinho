@@ -1,6 +1,5 @@
 package br.com.concrete.canarinho.test.watcher;
 
-import android.app.Activity;
 import android.widget.EditText;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -11,10 +10,11 @@ import org.junit.runner.RunWith;
 
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import br.com.concrete.canarinho.sample.ui.activity.MainActivity;
 import br.com.concrete.canarinho.sample.ui.model.Watchers;
 import br.com.concrete.canarinho.watcher.BoletoBancarioTextWatcher;
 
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 @RunWith(AndroidJUnit4.class)
@@ -25,10 +25,10 @@ public class BoletoTextWatcherTest {
 
     @Before
     public void setUp() {
-        final ActivityScenario<Activity> scenario = ActivityScenario.launch(Activity.class);
-        scenario.onActivity(new ActivityScenario.ActivityAction<Activity>() {
+        final ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class);
+        scenario.onActivity(new ActivityScenario.ActivityAction<MainActivity>() {
             @Override
-            public void perform(Activity activity) {
+            public void perform(MainActivity activity) {
                 final TextInputLayout textInputLayout = new TextInputLayout(activity);
                 textInputLayout.addView(editText = new EditText(activity));
 
