@@ -1,6 +1,6 @@
 language: android
 sudo: required
-jdk: oraclejdk8
+jdk: oraclejdk11
 
 before_cache:
   -rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -15,8 +15,8 @@ before_install:
   # Download SDK
   - echo yes | sdkmanager "tools" &>/dev/null
   - echo yes | sdkmanager "platform-tools" &>/dev/null
-  - echo yes | sdkmanager "build-tools;28.0.3" &>/dev/null
-  - echo yes | sdkmanager "platforms;android-28" &>/dev/null
+  - echo yes | sdkmanager "build-tools;30.0.2" &>/dev/null
+  - echo yes | sdkmanager "platforms;android-30" &>/dev/null
   # Download emulator
   - echo yes | sdkmanager "platforms;android-19" &>/dev/null
   - echo yes | sdkmanager "system-images;android-19;default;armeabi-v7a" &>/dev/null
