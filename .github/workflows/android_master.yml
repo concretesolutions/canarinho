@@ -26,7 +26,7 @@ jobs:
 #        with:
 #          api-level: ${{ matrix.api-level }}
 #          script: ./gradlew connectedCheck
-  - Unit_Test:
+  - unitTest:
         name: Run Unit Tests
         runs-on: ubuntu-18.04
 
