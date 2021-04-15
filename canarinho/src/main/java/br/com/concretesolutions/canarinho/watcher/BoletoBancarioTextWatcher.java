@@ -89,15 +89,19 @@ public final class BoletoBancarioTextWatcher extends BaseCanarinhoTextWatcher {
 
                 final int bloco;
 
-                if (mensagem.startsWith("Primeiro")) {
-                    bloco = 1;
-                } else if (mensagem.startsWith("Segundo")) {
-                    bloco = 2;
-                } else if (mensagem.startsWith("Terceiro")) {
-                    bloco = 3;
-                } else if (mensagem.startsWith("Quarto")) {
-                    bloco = 4;
-                } else {
+                if(mensagem != null && !mensagem.isEmpty()) {
+                    if (mensagem.startsWith("Primeiro")) {
+                        bloco = 1;
+                    } else if (mensagem.startsWith("Segundo")) {
+                        bloco = 2;
+                    } else if (mensagem.startsWith("Terceiro")) {
+                        bloco = 3;
+                    } else if (mensagem.startsWith("Quarto")) {
+                        bloco = 4;
+                    } else {
+                        throw new IllegalArgumentException("Valor não reconhecido para bloco");
+                    }
+                }else{
                     throw new IllegalArgumentException("Valor não reconhecido para bloco");
                 }
 
