@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.0.2
+    - Atualização androidx
+    - Migração CI para Github Actions
+    - Migração jitpack.io
+
 ## 2.0.1
     - Corrige bug no formatador da API 28
     - Corrige bug do formatador numérico com símbolo
