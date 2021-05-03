@@ -8,16 +8,16 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import org.robolectric.android.controller.ActivityController;
 
 import br.com.concrete.canarinho.watcher.ValorMonetarioWatcher;
 
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.robolectric.Robolectric.buildActivity;
 
-@RunWith(RobolectricTestRunner.class)
+@RunWith(AndroidJUnit4.class)
 public class ValorMonetarioWatcherTest {
 
     private EditText editText;
