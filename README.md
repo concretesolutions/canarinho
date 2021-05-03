@@ -1,8 +1,6 @@
 # Android Canarinho
 
-[![Build](https://travis-ci.org/concretesolutions/canarinho.svg?branch=master)](https://travis-ci.org/concretesolutions/canarinho)
-[ ![Download](https://api.bintray.com/packages/concrete/concrete-maven/canarinho/images/download.svg) ](https://bintray.com/concrete/concrete-maven/canarinho/_latestVersion)
-
+![Build](https://github.com/concretesolutions/canarinho/actions/workflows/android_master.yml/badge.svg)
 
 Esta biblioteca é um conjunto de utilitários para trabalhar com padrões brasileiros no Android.
 Inspirado em: https://github.com/caelum/caelum-stella.
@@ -150,7 +148,14 @@ Para exemplos, verifique os testes na pasta sample.
 
 ## Gradle
 
-`compile 'br.com.concrete:canarinho:{latest version}'`
+`allprojects {
+ 		repositories {
+ 			...
+ 			maven { url 'https://jitpack.io' }
+ 		}
+ 	}`
+
+`implementation 'br.com.concrete:canarinho:{latest version}'`
 
 ## ATENÇÃO
 
