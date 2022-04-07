@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply from: "$rootDir/tools/linters/linters.gradle"
+apply from: "$rootDir/tools/publish.gradle"
+
 
 ext {
     bintrayRepo = 'concrete-maven'
@@ -36,15 +38,15 @@ dependencies {
 }
 
 // Configura publicação
-def localProps = project.rootProject.file('local.properties')
+//def localProps = project.rootProject.file('local.properties')
 
-if (localProps.exists()) {
-    Properties properties = new Properties()
-    properties.load(localProps.newDataInputStream())
-    def user = properties.getProperty('bintray.user')
-    def apikey = properties.getProperty('bintray.apikey')
+//if (localProps.exists()) {
+//    Properties properties = new Properties()
+//    properties.load(localProps.newDataInputStream())
+//    def user = properties.getProperty('bintray.user')
+//    def apikey = properties.getProperty('bintray.apikey')
 
-    if (user && apikey)
-        apply from: 'publica.gradle'
-}
+//    if (user && apikey)
+//        apply from: 'publica.gradle'
+//}
 

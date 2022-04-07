@@ -1,0 +1,23 @@
+apply plugin: 'maven-publish'
+
+afterEvaluate {
+    publishing {
+        publications {
+            stable(MavenPublication) {
+                groupId 'br.com.concrete'
+                artifactId 'canarinho'
+                version '2.0.3'
+                from components.release
+            }
+        }
+        repositories {
+            maven {
+                url = "https://maven.pkg.github.com/concretesolutions/canarinho"
+                credentials {
+                    username = "cs-pedrohfp"
+                    password = "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"
+                }
+            }
+        }
+    }
+}
