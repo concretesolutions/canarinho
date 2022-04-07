@@ -1,5 +1,8 @@
 # Changelog
 
+## 2.0.3
+    - Migração do bintray para Github Package Registry
+
 ## 2.0.2
     - Atualização androidx
     - Migração CI para Github Actions

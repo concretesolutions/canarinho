@@ -12,10 +12,10 @@ afterEvaluate {
         }
         repositories {
             maven {
-                url = "https://maven.pkg.github.com/concretesolutions/canarinho"
+                url = String.valueOf(System.getenv("GPR_URL"))
                 credentials {
-                    username = "cs-pedrohfp"
-                    password = "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"
+                    username = String.valueOf(System.getenv("GPR_USER"))
+                    password = String.valueOf(System.getenv("GPR_PASSWORD"))
                 }
             }
         }
