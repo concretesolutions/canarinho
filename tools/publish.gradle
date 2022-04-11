@@ -1,0 +1,23 @@
+apply plugin: 'maven-publish'
+
+afterEvaluate {
+    publishing {
+        publications {
+            stable(MavenPublication) {
+                groupId 'br.com.concrete'
+                artifactId 'canarinho'
+                version '2.0.3'
+                from components.release
+            }
+        }
+        repositories {
+            maven {
+                url = String.valueOf(System.getenv("GPR_URL"))
+                credentials {
+                    username = String.valueOf(System.getenv("GPR_USER"))
+                    password = String.valueOf(System.getenv("GPR_PASSWORD"))
+                }
+            }
+        }
+    }
+}

@@ -1,22 +1,15 @@
 apply plugin: 'com.android.library'
 apply from: "$rootDir/tools/linters/linters.gradle"
+apply from: "$rootDir/tools/publish.gradle"
+
 
 ext {
-    bintrayRepo = 'concrete-maven'
-    bintrayName = 'canarinho'
-    bintrayUserOrg = 'concrete'
-
     publishedGroupId = 'br.com.concrete'
     libraryName = 'Android Canarinho'
     artifact = 'canarinho'
 
     libraryDescription = 'Utilitários Android para padrões Brasileiros'
-    siteUrl = 'https://github.com/concretesolutions/canarinho'
-    gitUrl = 'https://github.com/concretesolutions/canarinho.git'
-    libraryVersion = '2.0.1'
-
-    developerId = 'cs-victor-nascimento'
-    developerName = 'Victor Oliveira Nascimento'
+    libraryVersion = '2.0.3'
 
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
@@ -24,27 +17,11 @@ ext {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 30
+        minSdkVersion 21
+        targetSdkVersion 31
     }
-}
-
-dependencies {
-}
-
-// Configura publicação
-def localProps = project.rootProject.file('local.properties')
-
-if (localProps.exists()) {
-    Properties properties = new Properties()
-    properties.load(localProps.newDataInputStream())
-    def user = properties.getProperty('bintray.user')
-    def apikey = properties.getProperty('bintray.apikey')
-
-    if (user && apikey)
-        apply from: 'publica.gradle'
 }
 
